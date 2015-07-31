@@ -59,6 +59,18 @@ func (user *RadUserstatus) UserPassword() []byte {
 }
 
 // IAcct
+func (user *RadUserstatus) SSID() []byte {
+	sessionid := beego.AppConfig.String("RadSeesionId")
+	return []byte(sessionid)
+}
+
+// IAcct
+func (user *RadUserstatus) DevMac() []byte {
+	sessionid := beego.AppConfig.String("RadSeesionId")
+	return []byte(sessionid)
+}
+
+// IAcct
 func (user *RadUserstatus) SessionId() []byte {
 	sessionid := beego.AppConfig.String("RadSeesionId")
 	return []byte(sessionid)
@@ -112,6 +124,12 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 	return 0 //reason
 }
 
+func (user *RadUserstatus) GetClass() []byte {
+	return nil
+}
+func (user *RadUserstatus) SetClass(class []byte) {
+
+}
 func (user *RadUserstatus) Secret() []byte {
 	//passwd for redius in configure
 	return nil
@@ -131,9 +149,7 @@ func (user *RadUserstatus) NasPort() uint32 {
 func (user *RadUserstatus) NasPortType() uint32 {
 	return 0
 }
-func (user *RadUserstatus) NasPortId() uint32 {
-	return 0
-}
+
 func (user *RadUserstatus) ServiceType() uint32 {
 	return 0
 }

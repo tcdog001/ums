@@ -12,8 +12,14 @@ type AuthRetData struct {
 	Code        int64  `json:"code"`
 	IdleTimeout uint32 `josn:"idletimeout"`
 	OnlineTime  uint32 `json:"onlinetime"`
-	FlowLimit   uint32 `json:"flowlimit"`
-	RateLimit   uint32 `json:"ratelimit"`
+
+	UpFlowLimit uint64 `json:"upflowlimit"`
+	UpRateMax   uint32 `json:"upratemax"`
+	UpRateAvg   uint32 `json:"uprateavg"`
+
+	DownFlowLimit uint64 `json:"downflowlimit"`
+	DownRateMax   uint32 `json:"downratemax"`
+	DownRateAvg   uint32 `json:"downrateavg"`
 }
 
 type UserAuthController struct {
@@ -78,10 +84,14 @@ func (this *UserAuthController) Post() {
 
 	//返回给设备处理结果
 	ret.Code = 0
-	ret.FlowLimit = policy.FlowLimit
-	ret.IdleTimeout = policy.IdleTimeout
-	ret.OnlineTime = policy.OnlineTime
-	ret.RateLimit = policy.RateLimit
+
+	ret.UpFlowLimit = policy.UpFlowLimit
+	ret.UpRateMax = policy.UpRateMax
+	ret.UpRateAvg = policy.UpRateAvg
+	ret.DownFlowLimit = policy.DownFlowLimit
+	ret.DownRateMax = policy.DownRateMax
+	ret.DownRateAvg = policy.DownRateAvg
+
 	writeContent, _ := json.Marshal(ret)
 	this.Ctx.WriteString(string(writeContent))
 
@@ -89,9 +99,12 @@ func (this *UserAuthController) Post() {
 }
 
 func setRetZero(user *AuthRetData) bool {
-	user.FlowLimit = 0
 	user.IdleTimeout = 0
-	user.OnlineTime = 0
-	user.RateLimit = 0
+	user.UpFlowLimit = 0
+	user.UpRateMax = 0
+	user.UpRateAvg = 0
+	user.DownFlowLimit = 0
+	user.DownRateMax = 0
+	user.DownRateAvg = 0
 	return true
 }
