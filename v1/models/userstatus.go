@@ -15,6 +15,7 @@ type Userstatus struct {
 	Flowup   uint64    `json:"flowup"`
 	Flowdown uint64    `json:"flowdown"`
 	AuthTime time.Time `orm:"type(datetime)";json:"-"`
+	session []byte
 }
 
 func (user *Userstatus) TableName() string {

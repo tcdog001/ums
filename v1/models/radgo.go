@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	. "asdf"
 	//"radgo"
 )
 
@@ -73,6 +74,9 @@ func (user *RadUserstatus) DevMac() []byte {
 
 // IAcct
 func (user *RadUserstatus) SessionId() []byte {
+	// return user session
+	// when new user, use ClientSessionId init session
+	
 	sessionid := beego.AppConfig.String("RadSeesionId")
 	return []byte(sessionid)
 }
@@ -89,7 +93,7 @@ func (user *RadUserstatus) UserMac() []byte {
 
 // IAcct
 func (user *RadUserstatus) UserIp() uint32 {
-	return 0
+	return uint32(IpAddressFromString("user ip"))
 }
 
 // IAcct
@@ -127,12 +131,12 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 
 // IAcct
 func (user *RadUserstatus) GetClass() []byte {
-	return nil
+	return user.User.session
 }
 
 // IAcct
 func (user *RadUserstatus) SetClass(class []byte) {
-
+	user.User.session = class
 }
 
 // IParam
