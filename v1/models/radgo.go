@@ -53,6 +53,7 @@ type RadUserstatus struct {
 	User *Userstatus
 }
 
+// IAuth
 func (user *RadUserstatus) UserPassword() []byte {
 
 	return nil
@@ -124,47 +125,69 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 	return 0 //reason
 }
 
+// IAcct
 func (user *RadUserstatus) GetClass() []byte {
 	return nil
 }
+
+// IAcct
 func (user *RadUserstatus) SetClass(class []byte) {
 
 }
+
+// IParam
 func (user *RadUserstatus) Secret() []byte {
 	//passwd for redius in configure
 	return nil
 }
+
+// IParam
 func (user *RadUserstatus) NasIdentifier() []byte {
 	//passwd for redius in configure
 	return nil
 }
+
+// IParam
 func (user *RadUserstatus) NasIpAddress() uint32 {
 	//ums ip
 	return 0
 }
+
+// IParam
 func (user *RadUserstatus) NasPort() uint32 {
 	//ums port
 	return 0
 }
+
+// IParam
 func (user *RadUserstatus) NasPortType() uint32 {
 	return 0
 }
 
+// IParam
 func (user *RadUserstatus) ServiceType() uint32 {
 	return 0
 }
+
+// IParam
 func (user *RadUserstatus) Server() string {
 	//redius 地址 from configure
 	return ""
 }
+
+// IParam
 func (user *RadUserstatus) AuthPort() string {
 	//reidus port for configure
 	return ""
 }
+
+// IParam
 func (user *RadUserstatus) AcctPort() string {
 	//reidus port for configure
 	return ""
 }
+
+// IParam
 func (user *RadUserstatus) Timeout() int {
 	return 0
 }
