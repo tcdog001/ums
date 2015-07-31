@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	. "asdf"
-	//"radgo"
+	"radgo"
 )
 
 //************************************************
@@ -126,7 +126,7 @@ func (user *RadUserstatus) AcctOutputGigawords() uint32 {
 
 // IAcct
 func (user *RadUserstatus) AcctTerminateCause() uint32 {
-	return 0 //reason
+	return radgo.DeauthReason(user.User.DeauthReason).TerminateCause()
 }
 
 // IAcct
