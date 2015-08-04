@@ -23,6 +23,7 @@ func RegisterUserinfo(account *Userinfo) bool {
 	exist := o.QueryTable(account.TableName()).Filter("username", account.Username).Exist()
 	if exist {
 		//account存在，则更新account信息
+		//ceshi
 		return UpdateUserinfo(account)
 	} else {
 		//account不存在，则插入account信息
