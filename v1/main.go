@@ -9,6 +9,7 @@ import (
 )
 
 func init() {
+//ceshi
 	//设置log格式
 	beego.SetLogger("file", `{"filename":"logs/server.log"}`)
 	beego.SetLevel(beego.LevelDebug)
