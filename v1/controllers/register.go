@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"github.com/astaxie/beego"
+	"sms/sms_fx"
 	"ums/v1/models"
 	//"strings"
 )
@@ -23,7 +24,6 @@ func (this *RegisterController) Post() {
 	//解析json
 	//insert regtable
 	//request webserver
-	//查询statmap
 
 	var ret RegisterData
 
@@ -33,24 +33,30 @@ func (this *RegisterController) Post() {
 
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, &account)
 	if err != nil {
-		ret.Code = -4
+		ret.Code = -2
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
 		return
-	} else {
-		//注册account到数据库
-		if !models.RegisterUserinfo(&account) {
-			ret.Code = -5
-			writeContent, _ := json.Marshal(ret)
-			this.Ctx.WriteString(string(writeContent))
-			return
-		}
+	}
+	//check with sms webserver
+	res, err := sms_fx.SendCreateAccount("http://116.228.184.202:88/services/Autelan", account.Username, 10)
+	if err != nil || res.Result != true {
+		beego.Debug("error:Check with sms server failed!")
+		ret.Code = -3
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
+	}
+	//注册account到数据库
+	if !models.RegisterUserinfo(&account) {
+		ret.Code = -2
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
 	}
 	beego.Info("insert table useraccount success!")
 
 	//request webserver??
-
-	//查询添加statmap??
 
 	//返回给设备处理结果
 	ret.Code = 0
