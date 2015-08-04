@@ -8,7 +8,7 @@ import (
 	"radgo"
 )
 
-var localSwitch bool = true 
+var localSwitch bool = false
 
 func init() {
 	orm.RegisterModel(new(Userinfo), new(Userstatus))
