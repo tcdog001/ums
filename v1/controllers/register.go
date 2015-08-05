@@ -39,7 +39,8 @@ func (this *RegisterController) Post() {
 		return
 	}
 	//check with sms webserver
-	res, err := sms_fx.SendCreateAccount("http://116.228.184.202:88/services/Autelan", account.Username, 10)
+	webserver := beego.AppConfig.String("WbServer")
+	res, err := sms_fx.SendCreateAccount(webserver, account.Username, 10)
 	if err != nil || res.Result != true {
 		beego.Debug("error:Check with sms server failed!")
 		ret.Code = -3
@@ -55,8 +56,6 @@ func (this *RegisterController) Post() {
 		return
 	}
 	beego.Info("insert table useraccount success!")
-
-	//request webserver??
 
 	//返回给设备处理结果
 	ret.Code = 0
