@@ -8,7 +8,7 @@ import (
 	"radgo"
 )
 
-var localSwitch bool = false
+var localSwitch bool = true
 
 func init() {
 	orm.RegisterModel(new(Userinfo), new(Userstatus))
@@ -19,7 +19,7 @@ func init() {
 	}
 	//register default database
 	if !localSwitch {
-		orm.RegisterDataBase("default", "mysql", "autelan:Autelan1202@tcp(rdsrenv7vrenv7v.mysql.rds.aliyuncs.com:3306)/lmsdb?charset=utf8&&loc=Asia%2FShanghai")
+		orm.RegisterDataBase("default", "mysql", "autelan:Autelan1202@tcp(rdsrenv7vrenv7v.mysql.rds.aliyuncs.com:3306)/umsdb?charset=utf8&&loc=Asia%2FShanghai")
 	} else {
 		dbIp := beego.AppConfig.String("DbIp")
 		dbPort := beego.AppConfig.String("DbPort")

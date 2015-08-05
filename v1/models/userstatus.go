@@ -1,22 +1,34 @@
 package models
 
 import (
-	// "asdf"
+	. "asdf"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"radgo"
 	"time"
 )
 
 type Userstatus struct {
-	Username string    `json:"username"`
-	Usermac  string    `orm:"pk";json:"usermac"`
-	Devmac   string    `json:"devmac"`
-	Authcode string    `json:"authcode"`
-	Flowup   uint64    `json:"flowup"`
-	Flowdown uint64    `json:"flowdown"`
-	AuthTime time.Time `orm:"type(datetime)";json:"-"`
-	DeauthReason int
-	session []byte
+	Username     string    `json:"username"`
+	Userip       string    `json:"userip"`
+	Usermac      string    `orm:"pk";json:"usermac"`
+	Devmac       string    `json:"devmac"`
+	Ssid         string    `json:"ssid"`
+	Authcode     string    `json:"authcode"`
+	Flowup       uint64    `json:"flowup"`
+	Flowdown     uint64    `json:"flowdown"`
+	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
+	DeauthReason int       `json:"-"`
+	radSession   [radgo.AcctSessionIdLength]byte
+	radClass     []byte
+	devmac       [6]byte
+	usermac      [6]byte
+}
+
+func (user *Userstatus) Init() {
+	Mac(user.usermac[:]).FromString(user.Usermac)
+	Mac(user.devmac[:]).FromString(user.Devmac)
+	radgo.ClientSessionId(user.usermac[:], user.radSession[:])
 }
 
 func (user *Userstatus) TableName() string {

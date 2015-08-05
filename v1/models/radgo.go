@@ -1,10 +1,12 @@
 package models
 
 import (
+	"asdf"
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	. "asdf"
 	"radgo"
+	"strconv"
 )
 
 //************************************************
@@ -17,34 +19,34 @@ type mylog struct {
 var log mylog
 
 func (me *mylog) Emerg(format string, v ...interface{}) {
-	me.log.Emergency(format, v)
+	me.log.Emergency(format, v...)
 }
 
 func (me *mylog) Alert(format string, v ...interface{}) {
-	me.log.Alert(format, v)
+	me.log.Alert(format, v...)
 }
 
 func (me *mylog) Crit(format string, v ...interface{}) {
-	me.log.Critical(format, v)
+	me.log.Critical(format, v...)
 }
 
 func (me *mylog) Error(format string, v ...interface{}) {
-	me.log.Error(format, v)
+	me.log.Error(format, v...)
 }
 
 func (me *mylog) Warning(format string, v ...interface{}) {
-	me.log.Warning(format, v)
+	me.log.Warning(format, v...)
 }
 func (me *mylog) Notice(format string, v ...interface{}) {
-	me.log.Notice(format, v)
+	me.log.Notice(format, v...)
 }
 
 func (me *mylog) Info(format string, v ...interface{}) {
-	me.log.Informational(format, v)
+	me.log.Informational(format, v...)
 }
 
 func (me *mylog) Debug(format string, v ...interface{}) {
-	me.log.Debug(format, v)
+	me.log.Debug(format, v...)
 }
 
 //************************************************************
@@ -57,28 +59,25 @@ type RadUserstatus struct {
 // IAuth
 func (user *RadUserstatus) UserPassword() []byte {
 
-	return nil
+	return []byte(user.User.Authcode)
 }
 
 // IAcct
 func (user *RadUserstatus) SSID() []byte {
-	sessionid := beego.AppConfig.String("RadSeesionId")
-	return []byte(sessionid)
+
+	return []byte(user.User.Ssid)
 }
 
 // IAcct
 func (user *RadUserstatus) DevMac() []byte {
-	sessionid := beego.AppConfig.String("RadSeesionId")
-	return []byte(sessionid)
+	return user.User.devmac[:]
 }
 
 // IAcct
 func (user *RadUserstatus) SessionId() []byte {
 	// return user session
 	// when new user, use ClientSessionId init session
-	
-	sessionid := beego.AppConfig.String("RadSeesionId")
-	return []byte(sessionid)
+	return user.User.radSession[:]
 }
 
 // IAcct
@@ -88,12 +87,12 @@ func (user *RadUserstatus) UserName() []byte {
 
 // IAcct
 func (user *RadUserstatus) UserMac() []byte {
-	return []byte(user.User.Usermac)
+	return user.User.usermac[:]
 }
 
 // IAcct
 func (user *RadUserstatus) UserIp() uint32 {
-	return uint32(IpAddressFromString("user ip"))
+	return uint32(asdf.IpAddressFromString(user.User.Userip))
 }
 
 // IAcct
@@ -131,67 +130,81 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 
 // IAcct
 func (user *RadUserstatus) GetClass() []byte {
-	return user.User.session
+	return user.User.radClass
 }
 
 // IAcct
 func (user *RadUserstatus) SetClass(class []byte) {
-	user.User.session = class
+	user.User.radClass = class
 }
 
 // IParam
 func (user *RadUserstatus) Secret() []byte {
-	//passwd for redius in configure
-	return nil
+	secret := beego.AppConfig.String("RadSecret")
+	fmt.Println("RadSecret:", secret)
+	return []byte(secret)
 }
 
 // IParam
 func (user *RadUserstatus) NasIdentifier() []byte {
 	//passwd for redius in configure
-	return nil
+	Identifier := beego.AppConfig.String("NasIdentifier")
+	return []byte(Identifier)
 }
 
 // IParam
 func (user *RadUserstatus) NasIpAddress() uint32 {
-	//ums ip
-	return 0
+	ip := beego.AppConfig.String("NasIpAddress")
+	uip := uint32(asdf.IpAddressFromString(ip))
+	return uip
 }
 
 // IParam
 func (user *RadUserstatus) NasPort() uint32 {
-	//ums port
-	return 0
+	port := beego.AppConfig.String("NasPort")
+	uport, err := strconv.Atoi(port)
+	if err == nil {
+		return uint32(uport)
+	} else {
+		return 0
+	}
 }
 
 // IParam
 func (user *RadUserstatus) NasPortType() uint32 {
-	return 0
+	return uint32(radgo.AnptIeee80211)
 }
 
 // IParam
 func (user *RadUserstatus) ServiceType() uint32 {
-	return 0
+	return uint32(radgo.AstLogin)
 }
 
 // IParam
 func (user *RadUserstatus) Server() string {
-	//redius 地址 from configure
-	return ""
+	server := beego.AppConfig.String("RadServer")
+	return server
 }
 
 // IParam
 func (user *RadUserstatus) AuthPort() string {
-	//reidus port for configure
-	return ""
+	port := beego.AppConfig.String("AuthPort")
+	return port
 }
 
 // IParam
 func (user *RadUserstatus) AcctPort() string {
-	//reidus port for configure
-	return ""
+	port := beego.AppConfig.String("AcctPort")
+	return port
 }
 
 // IParam
 func (user *RadUserstatus) Timeout() int {
-	return 0
+	time := beego.AppConfig.String("RadTimeout")
+	utime, err := strconv.Atoi(time)
+	if err == nil {
+		return utime
+	} else {
+		return 0
+	}
 }

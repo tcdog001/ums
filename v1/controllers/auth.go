@@ -47,6 +47,9 @@ func (this *UserAuthController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
+	(&user).Init()
+
+	//var policy radgo.Policy
 
 	//check with redius
 	radusr := models.RadUserstatus{
