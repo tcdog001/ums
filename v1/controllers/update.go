@@ -37,7 +37,7 @@ func (this *UpdateController) Post() {
 		Flowup:   upinfo.Flowup,
 		Flowdown: upinfo.Flowdown,
 	}
-	exist := models.FindUserstatusByMac(&user)
+	exist := models.IsFindUserstatusByMac(&user)
 	if !exist {
 		beego.Info("userstatus had been deleted when update come")
 		ret.Code = -4

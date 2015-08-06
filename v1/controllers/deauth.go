@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	"radgo"
 	"ums/v1/models"
+	"time"
 )
 
 type DeauthRet struct {
@@ -35,7 +36,7 @@ func (this *DeauthController) Post() {
 	user := models.Userstatus{
 		Usermac: locuser.Usermac,
 	}
-	exist := models.FindUserstatusByMac(&user)
+	exist := models.IsFindUserstatusByMac(&user)
 	if !exist {
 		ret.Code = -4
 		writeContent, _ := json.Marshal(ret)
@@ -43,7 +44,7 @@ func (this *DeauthController) Post() {
 		return
 	}
 
-	//stop redius??
+	//stop redius
 	radusr := models.RadUserstatus{
 		User: &user,
 	}
@@ -62,10 +63,20 @@ func (this *DeauthController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
-
+	
 	//del from listener
 	delete(Listener, user.Usermac)
-
+	
+	//生成用户记录
+	record := models.Userecord {
+		Username : user.Username,
+		Usermac : user.Usermac,
+		Devmac : user.Devmac,
+		Authtime : user.AuthTime,
+		Deauthtime : time.Now(),
+	}
+	_ = models.RegisterUserecord(&record)
+	
 	//返回成功
 	ret.Code = 0
 	writeContent, _ := json.Marshal(ret)

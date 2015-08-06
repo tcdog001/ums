@@ -91,7 +91,7 @@ func UpdateUserstatusBymac(user *Userstatus) bool {
 	}
 }
 
-func FindUserstatusByMac(user *Userstatus) bool {
+func IsFindUserstatusByMac(user *Userstatus) bool {
 	o := orm.NewOrm()
 	exist := o.QueryTable(user.TableName()).Filter("usermac", user.Usermac).Exist()
 	return exist
