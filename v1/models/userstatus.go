@@ -96,7 +96,11 @@ func IsFindUserstatusByMac(user *Userstatus) bool {
 	exist := o.QueryTable(user.TableName()).Filter("usermac", user.Usermac).Exist()
 	return exist
 }
-
+func FindUserstatusByMac(user *Userstatus) error {
+	o := orm.NewOrm()
+	err := o.QueryTable(user.TableName()).Filter("usermac", user.Usermac).One(user)
+	return err
+}
 func DelUserStatusByMac(user *Userstatus) bool {
 	o := orm.NewOrm()
 

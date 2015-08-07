@@ -6,18 +6,19 @@ import (
 	"time"
 )
 
-type Userecord struct {
-	Username   string
+type Userrecord struct {
+	Id 		   uint64 `orm:"auto"`
+	Username   string  
 	Usermac    string
 	Devmac     string
 	Authtime   time.Time
 	Deauthtime time.Time
 }
 
-func (user *Userecord) TableName() string {
-	return "userecord"
+func (user *Userrecord) TableName() string {
+	return "Userrecord"
 }
-func RegisterUserecord(user *Userecord) bool {
+func RegisterUserrecord(user *Userrecord) bool {
 	o := orm.NewOrm()
 	_, err := o.Insert(user)
 	if err != nil {

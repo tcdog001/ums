@@ -44,7 +44,14 @@ func (this *DeauthController) Post() {
 		return
 	}
 
-	//stop redius
+	//check with redius
+	erra := models.FindUserstatusByMac(&user)
+	if erra != nil {
+		ret.Code = -2
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
+	}
 	radusr := models.RadUserstatus{
 		User: &user,
 	}
@@ -55,6 +62,7 @@ func (this *DeauthController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
+	beego.Debug("Redius stop success!")
 
 	err2 := models.DelUserStatusByMac(&user)
 	if !err2 {
@@ -66,16 +74,15 @@ func (this *DeauthController) Post() {
 	
 	//del from listener
 	delete(Listener, user.Usermac)
-	
 	//生成用户记录
-	record := models.Userecord {
+	record := models.Userrecord {
 		Username : user.Username,
 		Usermac : user.Usermac,
 		Devmac : user.Devmac,
 		Authtime : user.AuthTime,
 		Deauthtime : time.Now(),
 	}
-	_ = models.RegisterUserecord(&record)
+	_ = models.RegisterUserrecord(&record)
 	
 	//返回成功
 	ret.Code = 0

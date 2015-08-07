@@ -8,10 +8,10 @@ import (
 	"radgo"
 )
 
-var localSwitch bool = false
+var localSwitch bool = true
 
 func init() {
-	orm.RegisterModel(new(Userinfo), new(Userstatus))
+	orm.RegisterModel(new(Userinfo), new(Userstatus),new(Userrecord))
 	//register mysql driver
 	err := orm.RegisterDriver("mysql", orm.DR_MySQL)
 	if err != nil {

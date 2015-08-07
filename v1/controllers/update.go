@@ -45,9 +45,14 @@ func (this *UpdateController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
-
-	//update redius??
-	//if failed return ??
+	//check with radius
+	err1 := models.FindUserstatusByMac(&user)
+	if err1 != nil {
+		ret.Code = -2
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
+	}
 	radusr := models.RadUserstatus{
 		User: &user,
 	}
@@ -58,9 +63,9 @@ func (this *UpdateController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
-
-	err1 := models.UpdateUserstatusBymac(&user)
-	if !err1 {
+	//update db
+	err3 := models.UpdateUserstatusBymac(&user)
+	if !err3 {
 		ret.Code = -2
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
