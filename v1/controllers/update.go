@@ -39,7 +39,7 @@ func (this *UpdateController) Post() {
 	}
 	exist := models.IsFindUserstatusByMac(&user)
 	if !exist {
-		beego.Info("userstatus had been deleted when update come")
+		beego.Info("Userstatus had been deleted when update come")
 		ret.Code = -4
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
@@ -56,8 +56,15 @@ func (this *UpdateController) Post() {
 	radusr := models.RadUserstatus{
 		User: &user,
 	}
-	_, err2 := radgo.ClientAcctUpdate(&radusr)
+	err2, res2 := radgo.ClientAcctUpdate(&radusr)
 	if err2 != nil {
+		beego.Debug("error:Failed when check with radius!")
+		ret.Code = -3
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
+	}else if res2 != nil {
+		beego.Debug("error:Radius failed!")
 		ret.Code = -3
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))

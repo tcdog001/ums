@@ -19,11 +19,12 @@ func RegisterUserinfo(account *Userinfo) bool {
 	o := orm.NewOrm()
 	account.LastRegisterTime = time.Now()
 	beego.Debug("regiteraccount table=", account.TableName())
-	//查找对应的phoneno是否存在
+	//查找对应的username是否存在
 	exist := o.QueryTable(account.TableName()).Filter("username", account.Username).Exist()
 	if exist {
 		//account存在，则更新account信息
-		return UpdateUserinfo(account)
+		//return UpdateUserinfo(account)
+		return true
 	} else {
 		//account不存在，则插入account信息
 		_, err := o.Insert(account)

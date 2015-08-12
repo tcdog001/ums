@@ -55,8 +55,15 @@ func (this *DeauthController) Post() {
 	radusr := models.RadUserstatus{
 		User: &user,
 	}
-	_, err1 := radgo.ClientAcctStop(&radusr)
+	err1, res1 := radgo.ClientAcctStop(&radusr)
 	if err1 != nil {
+		beego.Debug("error:Failed when check with radius!")
+		ret.Code = -3
+		writeContent, _ := json.Marshal(ret)
+		this.Ctx.WriteString(string(writeContent))
+		return
+	}else if res1 != nil {
+		beego.Debug("error:Radius failed!")
 		ret.Code = -3
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
