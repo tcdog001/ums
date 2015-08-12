@@ -58,3 +58,13 @@ func UpdateUserinfo(account *Userinfo) bool {
 		return true
 	}
 }
+func (this *Userinfo) Init_obj() {
+	len := len(this.Username)
+	var b []byte = []byte(this.Username)
+	
+	if b[len-1] == '_' {
+		b = b[:len-1]
+		this.Username = string(b)
+	}
+	return
+}

@@ -37,7 +37,7 @@ func (this *RegisterController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
-	account.init_obj()
+	account.Init_obj()
 
 	//check with sms webserver
 	webserver := beego.AppConfig.String("WbServer")
@@ -65,13 +65,4 @@ func (this *RegisterController) Post() {
 	return
 }
 
-func (this *RegisterController) init_obj() {
-	len := len(this.Username)
-	var b []byte = []byte(this.Username)
-	
-	if b[len-1] == '_' {
-		b = b[:len-1]
-		obj.Username = string(b)
-	}
-	return
-}
+
