@@ -30,17 +30,17 @@ func (this *Userstatus) Init() {
 	Mac(this.devmac[:]).FromString(this.Devmac)
 	radgo.ClientSessionId(this.usermac[:], this.radSession[:])
 	
-	len := len(this.Authcode)
+	len1 := len(this.Authcode)
 	var b []byte = []byte(this.Authcode)
-	if b[len-1] == '_' {
-		b = b[:len-1]
+	if b[len1-1] == '_' {
+		b = b[:len1-1]
 		this.Authcode = string(b)
 	}
 	
-	len = len(this.Ssid)
-	c = []byte(this.Ssid)
-	if c[len-1] == '_' {
-		c = c[:len-1]
+	len2 := len(this.Ssid)
+	var c []byte = []byte(this.Ssid)
+	if c[len2-1] == '_' {
+		c = c[:len2-1]
 		this.Ssid = string(c)
 	}
 }
