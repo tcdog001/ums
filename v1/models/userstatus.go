@@ -25,10 +25,24 @@ type Userstatus struct {
 	usermac      [6]byte
 }
 
-func (user *Userstatus) Init() {
-	Mac(user.usermac[:]).FromString(user.Usermac)
-	Mac(user.devmac[:]).FromString(user.Devmac)
-	radgo.ClientSessionId(user.usermac[:], user.radSession[:])
+func (this *Userstatus) Init() {
+	Mac(this.usermac[:]).FromString(this.Usermac)
+	Mac(this.devmac[:]).FromString(this.Devmac)
+	radgo.ClientSessionId(this.usermac[:], this.radSession[:])
+	
+	len := len(this.Authcode)
+	var b []byte = []byte(this.Authcode)
+	if b[len-1] == '_' {
+		b = b[:len-1]
+		this.Authcode = string(b)
+	}
+	
+	len = len(this.Ssid)
+	c = []byte(this.Ssid)
+	if c[len-1] == '_' {
+		c = c[:len-1]
+		this.Ssid = string(c)
+	}
 }
 
 func (user *Userstatus) TableName() string {
