@@ -48,7 +48,6 @@ func (this *UserAuthController) Post() {
 		return
 	}
 	(&user).Init()
-
 	//var policy radgo.Policy
 
 	//check with redius
@@ -57,12 +56,14 @@ func (this *UserAuthController) Post() {
 	}
 	policy, err, result:= radgo.ClientAuth(&radusr)
 	if err != nil {
+		beego.Info("ClientAuth:username/password failed!")
 		ret.Code = -3
 		setRetZero(&ret)
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}else if result != nil {
+		beego.Info("ClientAuth:Radius failed!")
 		ret.Code = -1
 		setRetZero(&ret)
 		writeContent, _ := json.Marshal(ret)
@@ -71,14 +72,14 @@ func (this *UserAuthController) Post() {
 	}
 	err1, res1 := radgo.ClientAcctStart(&radusr)
 	if err1 != nil {
-		beego.Debug("Failed when check with radius!")
+		beego.Info("ClientAcctStart:Failed when check with radius!")
 		ret.Code = -3
 		setRetZero(&ret)
 		writeContent, _ := json.Marshal(ret)
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}else if res1 != nil {
-		beego.Debug("Radius failed!")
+		beego.Info("ClientAcctStart:Radius failed!")
 		ret.Code = -3
 		setRetZero(&ret)
 		writeContent, _ := json.Marshal(ret)
