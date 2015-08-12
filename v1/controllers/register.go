@@ -19,7 +19,6 @@ type RegisterController struct {
 func (this *RegisterController) Get() {
 	this.TplNames = "home.html"
 }
-
 func (this *RegisterController) Post() {
 	//解析json
 	//insert regtable
@@ -38,6 +37,8 @@ func (this *RegisterController) Post() {
 		this.Ctx.WriteString(string(writeContent))
 		return
 	}
+	init_obj(&account)
+
 	//check with sms webserver
 	webserver := beego.AppConfig.String("WbServer")
 	res, err := sms_fx.SendCreateAccount(webserver, account.Username, 10)
@@ -61,5 +62,16 @@ func (this *RegisterController) Post() {
 	ret.Code = 0
 	writeContent, _ := json.Marshal(ret)
 	this.Ctx.WriteString(string(writeContent))
+	return
+}
+
+func init_obj(obj *models.Userinfo) {
+	len := len(obj.Username)
+	var b []byte = []byte(obj.Username)
+	
+	if b[len-1] == '_' {
+		b = b[:len-1]
+		obj.Username = string(b)
+	}
 	return
 }
