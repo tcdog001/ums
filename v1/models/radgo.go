@@ -196,13 +196,13 @@ func radParamString(name string) string {
 }
 
 func radParamUint32(name string) uint32 {
-	i, _ := strconv.Atoi(beego.AppConfig.String(name))
+	i, _ := strconv.Atoi(radParamString(name))
 	
 	return uint32(i)
 }
 
 func radParamIpAddress(name string) IpAddress {
-	return IpAddressFromString(beego.AppConfig.String(name))
+	return IpAddressFromString(radParamString(name))
 }
 
 func radParamInit() {
