@@ -92,7 +92,7 @@ func (user *RadUserstatus) UserMac() []byte {
 
 // IAcct
 func (user *RadUserstatus) UserIp() uint32 {
-	return user.User.userip
+	return uint32(user.User.userip)
 }
 
 // IAcct

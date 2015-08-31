@@ -24,14 +24,14 @@ type Userstatus struct {
 	radClass     []byte
 	devmac       [6]byte
 	usermac      [6]byte
-	userip 		 uint32
+	userip 		 IpAddress
 }
 
 func (this *Userstatus) Init() {
 	Mac(this.usermac[:]).FromString(this.Usermac)
 	Mac(this.devmac[:]).FromString(this.Devmac)
 	this.radSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
-	this.userip = uint32(IpAddressFromString(this.Userip))
+	this.userip = IpAddressFromString(this.Userip)
 	
 	Len := len(this.Authcode)
 	var b []byte = []byte(this.Authcode)
