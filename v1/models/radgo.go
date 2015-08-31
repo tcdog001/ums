@@ -197,6 +197,10 @@ func radParamUint32(name string) uint32 {
 	return uint32(i)
 }
 
+func radParamIpAddress(name string) IpAddress {
+	return IpAddressFromString(beego.AppConfig.String(name))
+}
+
 func radParamInit() {
 	param.RadSecret 	= beego.AppConfig.String("RadSecret")
 	param.NasIdentifier = beego.AppConfig.String("NasIdentifier")
@@ -204,8 +208,7 @@ func radParamInit() {
 	param.AuthPort 		= beego.AppConfig.String("AuthPort")
 	param.AcctPort 		= beego.AppConfig.String("AcctPort")
 	
-	ip := beego.AppConfig.String("NasIpAddress")
-	param.NasIpAddress 	= IpAddressFromString(ip)
+	param.NasIpAddress 	= radParamIpAddress("NasIpAddress")
 	
 	param.NasPort 		= radParamUint32("NasPort")
 	param.RadTimeout	= radParamUint32("RadTimeout")
