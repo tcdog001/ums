@@ -191,6 +191,10 @@ func (user *RadUserstatus) Timeout() uint32 {
 
 var param = &radParam{}
 
+func radParamString(name string) string {
+	return beego.AppConfig.String(name)
+}
+
 func radParamUint32(name string) uint32 {
 	i, _ := strconv.Atoi(beego.AppConfig.String(name))
 	
@@ -202,11 +206,11 @@ func radParamIpAddress(name string) IpAddress {
 }
 
 func radParamInit() {
-	param.RadSecret 	= beego.AppConfig.String("RadSecret")
-	param.NasIdentifier = beego.AppConfig.String("NasIdentifier")
-	param.RadServer 	= beego.AppConfig.String("RadServer")
-	param.AuthPort 		= beego.AppConfig.String("AuthPort")
-	param.AcctPort 		= beego.AppConfig.String("AcctPort")
+	param.RadSecret 	= radParamString("RadSecret")
+	param.NasIdentifier = radParamString("NasIdentifier")
+	param.RadServer 	= radParamString("RadServer")
+	param.AuthPort 		= radParamString("AuthPort")
+	param.AcctPort 		= radParamString("AcctPort")
 	
 	param.NasIpAddress 	= radParamIpAddress("NasIpAddress")
 	
