@@ -5,7 +5,7 @@ import (
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	"radgo"
+	. "asdf"
 )
 
 var localSwitch bool = true
@@ -41,7 +41,7 @@ func init() {
 	//初始化radgo的log
 	log.log = logs.NewLogger(10000)
 	log.log.SetLogger("console", "") // use file
-	radgo.SetLogger(&log)
+	SetLogger(&log)
 }
 
 func CheckDatabase() bool {

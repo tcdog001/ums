@@ -28,7 +28,7 @@ type Userstatus struct {
 func (this *Userstatus) Init() {
 	Mac(this.usermac[:]).FromString(this.Usermac)
 	Mac(this.devmac[:]).FromString(this.Devmac)
-	radgo.ClientSessionId(this.usermac[:], this.radSession[:])
+	radgo.ClientSessionId(this.usermac[:], this.devmac[:], this.radSession[:])
 	
 	len1 := len(this.Authcode)
 	var b []byte = []byte(this.Authcode)
