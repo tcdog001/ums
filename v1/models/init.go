@@ -11,6 +11,13 @@ import (
 var localSwitch bool = true
 
 func init() {
+	//初始化log
+	log.log = logs.NewLogger(10000)
+	log.log.SetLogger("console", "") // use file
+	SetLogger(&log)
+	
+	radParamInit()
+	
 	orm.RegisterModel(new(Userinfo), new(Userstatus),new(Userrecord))
 	//register mysql driver
 	err := orm.RegisterDriver("mysql", orm.DR_MySQL)
@@ -38,10 +45,6 @@ func init() {
 
 	orm.SetMaxIdleConns("default", 30)
 	orm.SetMaxOpenConns("default", 30)
-	//初始化radgo的log
-	log.log = logs.NewLogger(10000)
-	log.log.SetLogger("console", "") // use file
-	SetLogger(&log)
 }
 
 func CheckDatabase() bool {

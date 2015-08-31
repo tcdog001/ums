@@ -1,8 +1,7 @@
 package models
 
 import (
-	"asdf"
-	"fmt"
+	. "asdf"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"radgo"
@@ -140,34 +139,23 @@ func (user *RadUserstatus) SetClass(class []byte) {
 
 // IParam
 func (user *RadUserstatus) Secret() []byte {
-	secret := beego.AppConfig.String("RadSecret")
-	fmt.Println("RadSecret:", secret)
-	return []byte(secret)
+	return []byte(param.RadSecret)
 }
 
 // IParam
 func (user *RadUserstatus) NasIdentifier() []byte {
 	//passwd for redius in configure
-	Identifier := beego.AppConfig.String("NasIdentifier")
-	return []byte(Identifier)
+	return []byte(param.NasIdentifier)
 }
 
 // IParam
 func (user *RadUserstatus) NasIpAddress() uint32 {
-	ip := beego.AppConfig.String("NasIpAddress")
-	uip := uint32(asdf.IpAddressFromString(ip))
-	return uip
+	return uint32(param.NasIpAddress)
 }
 
 // IParam
 func (user *RadUserstatus) NasPort() uint32 {
-	port := beego.AppConfig.String("NasPort")
-	uport, err := strconv.Atoi(port)
-	if err == nil {
-		return uint32(uport)
-	} else {
-		return 0
-	}
+	return param.NasPort
 }
 
 // IParam
@@ -182,29 +170,53 @@ func (user *RadUserstatus) ServiceType() uint32 {
 
 // IParam
 func (user *RadUserstatus) Server() string {
-	server := beego.AppConfig.String("RadServer")
-	return server
+	return param.RadServer
 }
 
 // IParam
 func (user *RadUserstatus) AuthPort() string {
-	port := beego.AppConfig.String("AuthPort")
-	return port
+	return param.AuthPort
 }
 
 // IParam
 func (user *RadUserstatus) AcctPort() string {
-	port := beego.AppConfig.String("AcctPort")
-	return port
+	return param.AcctPort
+}
+
+type radParam struct {
+	RadSecret		string
+	NasIdentifier	string
+	NasIpAddress	IpAddress
+	NasPort 		uint32
+	RadTimeout		uint32
+	RadServer		string
+	AuthPort		string
+	AcctPort 		string
 }
 
 // IParam
-func (user *RadUserstatus) Timeout() int {
-	time := beego.AppConfig.String("RadTimeout")
-	utime, err := strconv.Atoi(time)
-	if err == nil {
-		return utime
-	} else {
-		return 0
-	}
+func (user *RadUserstatus) Timeout() uint32 {
+	return param.RadTimeout
+}
+
+var param = &radParam{}
+
+func radParamUint32(name string) uint32 {
+	i, _ := strconv.Atoi(beego.AppConfig.String(name))
+	
+	return uint32(i)
+}
+
+func radParamInit() {
+	param.RadSecret 	= beego.AppConfig.String("RadSecret")
+	param.NasIdentifier = beego.AppConfig.String("NasIdentifier")
+	param.RadServer 	= beego.AppConfig.String("RadServer")
+	param.AuthPort 		= beego.AppConfig.String("AuthPort")
+	param.AcctPort 		= beego.AppConfig.String("AcctPort")
+	
+	ip := beego.AppConfig.String("NasIpAddress")
+	param.NasIpAddress 	= IpAddressFromString(ip)
+	
+	param.NasPort 		= radParamUint32("NasPort")
+	param.RadTimeout	= radParamUint32("RadTimeout")
 }
