@@ -77,7 +77,7 @@ func (user *RadUserstatus) DevMac() []byte {
 func (user *RadUserstatus) SessionId() []byte {
 	// return user session
 	// when new user, use ClientSessionId init session
-	return user.User.radSession[:]
+	return []byte(user.User.radSession)
 }
 
 // IAcct
