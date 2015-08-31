@@ -33,17 +33,17 @@ func (this *Userstatus) Init() {
 	this.radSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
 	this.userip = uint32(IpAddressFromString(this.Userip))
 	
-	len1 := len(this.Authcode)
+	Len := len(this.Authcode)
 	var b []byte = []byte(this.Authcode)
-	if b[len1-1] == '_' {
-		b = b[:len1-1]
+	if b[Len-1] == '_' {
+		b = b[:Len-1]
 		this.Authcode = string(b)
 	}
 	
-	len2 := len(this.Ssid)
+	Len = len(this.Ssid)
 	var c []byte = []byte(this.Ssid)
-	if c[len2-1] == '_' {
-		c = c[:len2-1]
+	if c[Len-1] == '_' {
+		c = c[:Len-1]
 		this.Ssid = string(c)
 	}
 }
