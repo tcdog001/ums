@@ -19,16 +19,19 @@ type Userstatus struct {
 	Flowdown     uint64    `json:"flowdown"`
 	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
 	DeauthReason int       `json:"-"`
+	
 	radSession   string
 	radClass     []byte
 	devmac       [6]byte
 	usermac      [6]byte
+	userip 		 uint32
 }
 
 func (this *Userstatus) Init() {
 	Mac(this.usermac[:]).FromString(this.Usermac)
 	Mac(this.devmac[:]).FromString(this.Devmac)
 	this.radSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
+	this.userip = uint32(IpAddressFromString(this.Userip))
 	
 	len1 := len(this.Authcode)
 	var b []byte = []byte(this.Authcode)
