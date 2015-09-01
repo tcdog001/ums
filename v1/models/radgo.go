@@ -173,6 +173,11 @@ func (user *RadUserstatus) AcctPort() string {
 	return param.AcctPort
 }
 
+// IParam
+func (user *RadUserstatus) Timeout() uint32 {
+	return param.RadTimeout
+}
+
 type radParam struct {
 	RadSecret		string
 	NasIdentifier	string
@@ -182,11 +187,6 @@ type radParam struct {
 	RadServer		string
 	AuthPort		string
 	AcctPort 		string
-}
-
-// IParam
-func (user *RadUserstatus) Timeout() uint32 {
-	return param.RadTimeout
 }
 
 var param = &radParam{}
