@@ -118,13 +118,13 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 }
 
 // IAcct
-func (user *RadUserstatus) GetClass() []byte {
-	return user.User.radClass
+func (user *RadUserstatus) GetPrivate(t radgo.RadPrivate) interface{} {
+	return user.User.radPrivate[t]
 }
 
 // IAcct
-func (user *RadUserstatus) SetClass(class []byte) {
-	user.User.radClass = class
+func (user *RadUserstatus) SetPrivete(t radgo.RadPrivate, e interface{}) {
+	user.User.radPrivate[t] = e
 }
 
 // IParam
@@ -159,6 +159,11 @@ func (user *RadUserstatus) ServiceType() uint32 {
 }
 
 // IParam
+func (user *RadUserstatus) AuthType() uint32 {
+	return param.AuthType
+}
+
+// IParam
 func (user *RadUserstatus) Server() string {
 	return param.RadServer
 }
@@ -185,6 +190,7 @@ type radParam struct {
 	NasPort 		uint32
 	RadTimeout		uint32
 	RadServer		string
+	AuthType 		uint32
 	AuthPort		string
 	AcctPort 		string
 }
@@ -214,6 +220,7 @@ func radParamInit() {
 	
 	param.NasIpAddress 	= radParamIpAddress("NasIpAddress")
 	
+	param.AuthType 		= radParamUint32("AuthType")
 	param.NasPort 		= radParamUint32("NasPort")
 	param.RadTimeout	= radParamUint32("RadTimeout")
 }

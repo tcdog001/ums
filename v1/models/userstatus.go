@@ -21,7 +21,7 @@ type Userstatus struct {
 	DeauthReason int       `json:"-"`
 	
 	radSession   string
-	radClass     []byte
+	radPrivate 	 [radgo.RadPrivateEnd]interface{}
 	devmac       [6]byte
 	usermac      [6]byte
 	userip 		 IpAddress
