@@ -179,6 +179,11 @@ func (user *RadUserstatus) AcctPort() string {
 }
 
 // IParam
+func (user *RadUserstatus) DmPort() string {
+	return param.DmPort
+}
+
+// IParam
 func (user *RadUserstatus) Timeout() uint32 {
 	return param.RadTimeout
 }
