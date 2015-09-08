@@ -20,17 +20,21 @@ type Userstatus struct {
 	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
 	DeauthReason int       `json:"-"`
 	
-	radSession   string
-	radPrivate 	 [radgo.RadPrivateEnd]interface{}
-	devmac       [6]byte
-	usermac      [6]byte
-	userip 		 IpAddress
+	// radius state, save in db
+	RadSession   	[]byte	`json:"-"`
+	RadClass 		[]byte	`json:"-"`
+	RadChallenge	[]byte	`json:"-"`
+	
+	// cache
+	devmac       	[6]byte
+	usermac      	[6]byte
+	userip 		 	IpAddress
 }
 
 func (this *Userstatus) Init() {
 	Mac(this.usermac[:]).FromString(this.Usermac)
 	Mac(this.devmac[:]).FromString(this.Devmac)
-	this.radSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
+	this.RadSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
 	this.userip = IpAddressFromString(this.Userip)
 	
 	Len := len(this.Authcode)

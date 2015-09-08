@@ -8,7 +8,7 @@ import (
 
 type Userrecord struct {
 	Id 		   uint64 `orm:"auto"`
-	Username   string  
+	Username   string
 	Usermac    string
 	Devmac     string
 	Authtime   time.Time

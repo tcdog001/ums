@@ -74,7 +74,7 @@ func (user *RadUserstatus) DevMac() []byte {
 func (user *RadUserstatus) SessionId() []byte {
 	// return user session
 	// when new user, use ClientSessionId init session
-	return []byte(user.User.radSession)
+	return user.User.RadSession
 }
 
 // IAcct
@@ -118,13 +118,23 @@ func (user *RadUserstatus) AcctTerminateCause() uint32 {
 }
 
 // IAcct
-func (user *RadUserstatus) GetPrivate(t radgo.RadPrivate) interface{} {
-	return user.User.radPrivate[t]
+func (user *RadUserstatus) GetClass() []byte {
+	return user.User.RadClass
 }
 
 // IAcct
-func (user *RadUserstatus) SetPrivete(t radgo.RadPrivate, e interface{}) {
-	user.User.radPrivate[t] = e
+func (user *RadUserstatus) SetClass(c []byte) {
+	user.User.RadClass = c
+}
+
+// IAcct
+func (user *RadUserstatus) GetChapChallenge() []byte {
+	return user.User.RadChallenge
+}
+
+// IAcct
+func (user *RadUserstatus) SetChapChallenge(c []byte) {
+	user.User.RadChallenge = c
 }
 
 // IParam
@@ -191,13 +201,16 @@ func (user *RadUserstatus) Timeout() uint32 {
 type radParam struct {
 	RadSecret		string
 	NasIdentifier	string
-	NasIpAddress	IpAddress
-	NasPort 		uint32
-	RadTimeout		uint32
 	RadServer		string
-	AuthType 		uint32
 	AuthPort		string
 	AcctPort 		string
+	DmPort			string
+	
+	NasIpAddress	IpAddress
+	
+	NasPort 		uint32
+	RadTimeout		uint32
+	AuthType 		uint32
 }
 
 var param = &radParam{}
@@ -222,6 +235,7 @@ func radParamInit() {
 	param.RadServer 	= radParamString("RadServer")
 	param.AuthPort 		= radParamString("AuthPort")
 	param.AcctPort 		= radParamString("AcctPort")
+	param.DmPort 		= radParamString("DmPort")
 	
 	param.NasIpAddress 	= radParamIpAddress("NasIpAddress")
 	

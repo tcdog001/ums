@@ -50,6 +50,11 @@ func (this *UserAuthController) Post() {
 	(&user).Init()
 	//var policy radgo.Policy
 
+	// liujf:
+	//	check user state from db
+	// 		is registered: go on
+	//		not registered: error, abort it
+	
 	//check with redius
 	radusr := models.RadUserstatus{
 		User: &user,

@@ -39,6 +39,11 @@ func (this *RegisterController) Post() {
 	}
 	account.Init_obj()
 
+	// liujf
+	//	check user state from db
+	//		is registered: is error, abort it
+	//		not registered: go on
+	
 	//check with sms webserver
 	webserver := beego.AppConfig.String("WbServer")
 	res, err := sms_fx.SendCreateAccount(webserver, account.Username, 10)
