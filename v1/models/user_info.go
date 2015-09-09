@@ -19,6 +19,10 @@ func (this *UserInfo) KeyName() string {
 	return "username"
 }
 
+func (this *UserInfo) Key() string {
+	return this.UserName
+}
+
 func (this *UserInfo) Register() bool {
 	beego.Debug("regiter UserInfo table=", this.TableName())
 	
@@ -26,20 +30,18 @@ func (this *UserInfo) Register() bool {
 	this.LastRegisterTime = time.Now()
 	//查找对应的username是否存在
 	
-	if ok := o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserName).
-			Exist(); ok {
+	if ok := EntryExist(o, this); ok {
 		//account存在，则更新account信息
 		//return UpdateUserinfo(account)
-		return true
 	} else {
 		//account不存在，则插入account信息
 		if _, err := o.Insert(this); err != nil {
 			beego.Error(err)
 			return false
 		}
-		return true
 	}
+	
+	return true
 }
 
 func (this *UserInfo) Update() bool {
@@ -48,10 +50,7 @@ func (this *UserInfo) Update() bool {
 	acc := &UserInfo{}
 	o := orm.NewOrm()
 	
-	if  err := o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserName).
-			One(acc);
-		err != nil {
+	if  err := EntryOne(o, this, acc); err != nil {
 		return false
 	} else {
 		acc.UserName = this.UserName

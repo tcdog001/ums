@@ -31,10 +31,9 @@ func (this *UpdateController) Post() {
 
 	user := &models.UserStatus{
 		UserMac:  info.UserMac,
-		FlowUp:   info.FlowUp,
-		FlowDown: info.FlowDown,
 	}
 	
+	// liujf: don't check exist, just check one
 	if !user.Exist() {
 		beego.Info("UserStatus had been deleted when update come")
 		code.Write(this.Ctx, -4)
@@ -42,13 +41,16 @@ func (this *UpdateController) Post() {
 		return
 	}
 	
-	//check with radius
 	if nil != user.One() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
+	user.FlowDown 	= info.FlowDown
+	user.FlowUp		= info.FlowUp
+	
+	//check with radius
 	raduser := &models.RadUserstatus{
 		User: user,
 	}
@@ -67,8 +69,7 @@ func (this *UpdateController) Post() {
 	}
 	
 	//update db
-	err3 := user.Update()
-	if !err3 {
+	if !user.Update() {
 		code.Write(this.Ctx, -2)
 		
 		return

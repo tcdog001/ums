@@ -33,6 +33,7 @@ func (this *DeauthController) Post() {
 		UserMac: luser.UserMac,
 	}
 	
+	// liujf: don't check exist, just check one
 	if !user.Exist() {
 		code.Write(this.Ctx, -4)
 		

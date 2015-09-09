@@ -15,23 +15,26 @@ type RegisterController struct {
 func (this *RegisterController) Get() {
 	this.TplNames = "home.html"
 }
+
+var webserver = beego.AppConfig.String("WbServer")
+
 func (this *RegisterController) Post() {
 	//解析json
 	//insert regtable
 	//request webserver
+	body := this.Ctx.Input.RequestBody
 	
-	beego.Info("request body=", string(this.Ctx.Input.RequestBody))
+	beego.Info("request body=", string(body))
 
 	code := &StatusCode{}
-	account := &models.UserInfo{}
+	info := &models.UserInfo{}
 
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, account)
-	if err != nil {
+	if err := json.Unmarshal(body, info); err != nil {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
-	account.Init()
+	info.Init()
 
 	// liujf
 	//	check user state from db
@@ -39,16 +42,15 @@ func (this *RegisterController) Post() {
 	//		not registered: go on
 	
 	//check with sms webserver
-	webserver := beego.AppConfig.String("WbServer")
-	res, err := sms_fx.SendCreateAccount(webserver, account.UserName, 10)
-	if err != nil || res.Result != true {
+	res, err := sms_fx.SendCreateAccount(webserver, info.UserName, 10)
+	if err != nil || (nil!=res && !res.Result) {
 		beego.Debug("error:Check with sms server failed!")
 		code.Write(this.Ctx, -3)
 		
 		return
 	}
 	//注册account到数据库
-	if !account.Register() {
+	if !info.Register() {
 		code.Write(this.Ctx, -2)
 		return
 	}

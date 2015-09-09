@@ -41,12 +41,16 @@ func (this *UserStatus) Init() {
 	this.Ssid = cutLastChar(this.Ssid)
 }
 
-func (user *UserStatus) TableName() string {
+func (this *UserStatus) TableName() string {
 	return "userstatus"
 }
 
-func (user *UserStatus) KeyName() string {
+func (this *UserStatus) KeyName() string {
 	return "usermac"
+}
+
+func (this *UserStatus) Key() string {
+	return this.UserMac
 }
 
 func (this *UserStatus) Register() bool {
@@ -55,15 +59,11 @@ func (this *UserStatus) Register() bool {
 	beego.Debug("userstatus table=", this.TableName())
 	//查找对应的mac地址是否存在，存在的话要求状态为离线
 	
-	if 	ok := o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserMac).
-			Exist(); ok {
+	if 	ok := EntryExist(o, this); ok {
 		//用户存在，则更新用户信息
 		var u UserStatus
 		
-		if 	err := o.QueryTable(this.TableName()).
-				Filter(this.KeyName(), this.UserMac).
-				One(&u);
+		if 	err := EntryOne(o, this, &u);
 			err != nil {
 			beego.Debug("get item in userstatus failed!!")
 			
@@ -96,9 +96,7 @@ func (this *UserStatus) Update() bool {
 
 	var u UserStatus
 	
-	if 	err := o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserMac).
-			One(&u); 
+	if 	err := EntryOne(o, this, &u); 
 		err != nil {
 		return false
 	} else {
@@ -116,19 +114,11 @@ func (this *UserStatus) Update() bool {
 }
 
 func (this *UserStatus) Exist() bool {
-	o := orm.NewOrm()
-
-	return o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserMac).
-			Exist()
+	return EntryExist(orm.NewOrm(), this)
 }
 
 func (this *UserStatus) One() error {
-	o := orm.NewOrm()
-
-	return o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserMac).
-			One(this)
+	return EntryOne(orm.NewOrm(), this, this)
 }
 
 func (this *UserStatus) Delete() bool {
@@ -136,9 +126,7 @@ func (this *UserStatus) Delete() bool {
 
 	var u UserStatus
 	
-	if 	err := o.QueryTable(this.TableName()).
-			Filter(this.KeyName(), this.UserMac).
-			One(&u); 
+	if 	err := EntryOne(o, this, &u); 
 		err != nil {
 		beego.Error(err)
 		return false
