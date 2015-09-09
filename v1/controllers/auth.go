@@ -39,7 +39,7 @@ func (this *UserAuthController) Post() {
 	beego.Info("request body=", string(body))
 
 	code := &AuthCode{}
-	user := &models.Userstatus{}
+	user := &models.UserStatus{}
 	
 	if err := json.Unmarshal(body, user); err != nil {
 		code.Write(this.Ctx, -2)
@@ -95,7 +95,7 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//插入listener
-	addListener(user.Usermac)
+	addListener(user.UserMac)
 
 	//返回给设备处理结果
 	code.UpFlowLimit = policy.UpFlowLimit

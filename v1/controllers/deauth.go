@@ -22,15 +22,15 @@ func (this *DeauthController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
 
-	luser := &models.Userstatus{}
+	luser := &models.UserStatus{}
 	if err := json.Unmarshal(body, luser); nil!=err {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 
-	user := &models.Userstatus{
-		Usermac: luser.Usermac,
+	user := &models.UserStatus{
+		UserMac: luser.UserMac,
 	}
 	
 	if exist := user.IsFindUserstatusByMac(); !exist {
@@ -70,15 +70,15 @@ func (this *DeauthController) Post() {
 	}
 	
 	//del from listener
-	delListener(user.Usermac)
+	delListener(user.UserMac)
 	
 	//生成用户记录
-	record := &models.Userrecord {
-		Username : user.Username,
-		Usermac : user.Usermac,
-		Devmac : user.Devmac,
-		Authtime : user.AuthTime,
-		Deauthtime : time.Now(),
+	record := &models.UserRecord {
+		UserName : user.UserName,
+		UserMac : user.UserMac,
+		DevMac : user.DevMac,
+		AuthTime : user.AuthTime,
+		DeauthTime : time.Now(),
 	}
 	record.RegisterUserrecord()
 	

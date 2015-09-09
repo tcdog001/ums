@@ -1,7 +1,7 @@
 package models
 
-type Userupdate struct {
-	Usermac  string `json:"usermac"`
-	Flowup   uint64 `json:"flowup"`
-	Flowdown uint64 `json:"flowdown"`
+type UserUpdate struct {
+	UserMac  string `json:"usermac"`
+	FlowUp   uint64 `json:"flowup"`
+	FlowDown uint64 `json:"flowdown"`
 }

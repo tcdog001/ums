@@ -23,7 +23,7 @@ func (this *RegisterController) Post() {
 	beego.Info("request body=", string(this.Ctx.Input.RequestBody))
 
 	code := &StatusCode{}
-	account := &models.Userinfo{}
+	account := &models.UserInfo{}
 
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, account)
 	if err != nil {
@@ -40,7 +40,7 @@ func (this *RegisterController) Post() {
 	
 	//check with sms webserver
 	webserver := beego.AppConfig.String("WbServer")
-	res, err := sms_fx.SendCreateAccount(webserver, account.Username, 10)
+	res, err := sms_fx.SendCreateAccount(webserver, account.UserName, 10)
 	if err != nil || res.Result != true {
 		beego.Debug("error:Check with sms server failed!")
 		code.Write(this.Ctx, -3)

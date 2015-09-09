@@ -19,7 +19,7 @@ func (this *UpdateController) Post() {
 	beego.Debug("requestBody=", string(this.Ctx.Input.RequestBody))
 	
 	code := &StatusCode{}
-	info := &models.Userupdate{}
+	info := &models.UserUpdate{}
 	
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, info)
 	if err != nil {
@@ -29,15 +29,15 @@ func (this *UpdateController) Post() {
 	}
 	beego.Debug("update info=", info)
 
-	user := &models.Userstatus{
-		Usermac:  info.Usermac,
-		Flowup:   info.Flowup,
-		Flowdown: info.Flowdown,
+	user := &models.UserStatus{
+		UserMac:  info.UserMac,
+		FlowUp:   info.FlowUp,
+		FlowDown: info.FlowDown,
 	}
 	
 	exist := user.IsFindUserstatusByMac()
 	if !exist {
-		beego.Info("Userstatus had been deleted when update come")
+		beego.Info("UserStatus had been deleted when update come")
 		code.Write(this.Ctx, -4)
 		
 		return
@@ -76,7 +76,7 @@ func (this *UpdateController) Post() {
 	}
 
 	//插入listener
-	addListener(user.Usermac)
+	addListener(user.UserMac)
 
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)

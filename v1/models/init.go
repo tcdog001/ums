@@ -18,7 +18,7 @@ func init() {
 	
 	radParamInit()
 	
-	orm.RegisterModel(new(Userinfo), new(Userstatus),new(Userrecord))
+	orm.RegisterModel(new(UserInfo), new(UserStatus),new(UserRecord))
 	//register mysql driver
 	err := orm.RegisterDriver("mysql", orm.DR_MySQL)
 	if err != nil {

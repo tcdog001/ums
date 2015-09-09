@@ -8,15 +8,15 @@ import (
 	"time"
 )
 
-type Userstatus struct {
-	Username     string    `json:"username"`
-	Userip       string    `json:"userip"`
-	Usermac      string    `orm:"pk";json:"usermac"`
-	Devmac       string    `json:"devmac"`
+type UserStatus struct {
+	UserName     string    `json:"username"`
+	UserIp       string    `json:"userip"`
+	UserMac      string    `orm:"pk";json:"usermac"`
+	DevMac       string    `json:"devmac"`
 	Ssid         string    `json:"ssid"`
-	Authcode     string    `json:"authcode"`
-	Flowup       uint64    `json:"flowup"`
-	Flowdown     uint64    `json:"flowdown"`
+	AuthCode     string    `json:"authcode"`
+	FlowUp       uint64    `json:"flowup"`
+	FlowDown     uint64    `json:"flowdown"`
 	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
 	DeauthReason int       `json:"-"`
 	
@@ -31,44 +31,44 @@ type Userstatus struct {
 	userip 		 	IpAddress
 }
 
-func (this *Userstatus) Init() {
-	Mac(this.usermac[:]).FromString(this.Usermac)
-	Mac(this.devmac[:]).FromString(this.Devmac)
+func (this *UserStatus) Init() {
+	Mac(this.usermac[:]).FromString(this.UserMac)
+	Mac(this.devmac[:]).FromString(this.DevMac)
 	this.RadSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
-	this.userip = IpAddressFromString(this.Userip)
+	this.userip = IpAddressFromString(this.UserIp)
 	
-	this.Authcode = cutLastChar(this.Authcode)
+	this.AuthCode = cutLastChar(this.AuthCode)
 	this.Ssid = cutLastChar(this.Ssid)
 }
 
-func (user *Userstatus) TableName() string {
+func (user *UserStatus) TableName() string {
 	return "userstatus"
 }
 
-func (this *Userstatus) RegisterUserstatus() bool {
+func (this *UserStatus) RegisterUserstatus() bool {
 	o := orm.NewOrm()
 	this.AuthTime = time.Now()
 	beego.Debug("userstatus table=", this.TableName())
 	//查找对应的mac地址是否存在，存在的话要求状态为离线
 	
 	if 	ok := o.QueryTable(this.TableName()).
-			Filter("usermac", this.Usermac).
+			Filter("usermac", this.UserMac).
 			Exist(); ok {
 		//用户存在，则更新用户信息
-		var u Userstatus
+		var u UserStatus
 		
 		if 	err := o.QueryTable(this.TableName()).
-				Filter("usermac", this.Usermac).
+				Filter("usermac", this.UserMac).
 				One(&u); 
 			err != nil {
 			beego.Debug("get item in userstatus failed!!")
 			
 			return false
 		} else {
-			u.Username = this.Username
-			u.Usermac = this.Usermac
-			u.Authcode = this.Authcode
-			u.Devmac = this.Devmac
+			u.UserName = this.UserName
+			u.UserMac = this.UserMac
+			u.AuthCode = this.AuthCode
+			u.DevMac = this.DevMac
 			
 			if _, err := o.Update(&u); err != nil {
 				beego.Error(err)
@@ -86,21 +86,21 @@ func (this *Userstatus) RegisterUserstatus() bool {
 	return true
 }
 
-func (this *Userstatus) UpdateUserstatusBymac() bool {
+func (this *UserStatus) UpdateUserstatusBymac() bool {
 	beego.Debug("Update userstatus table=", this.TableName())
 	o := orm.NewOrm()
 
-	var u Userstatus
+	var u UserStatus
 	
 	if 	err := o.QueryTable(this.TableName()).
-			Filter("usermac", this.Usermac).
+			Filter("usermac", this.UserMac).
 			One(&u); 
 		err != nil {
 		return false
 	} else {
-		u.Flowup = this.Flowup
-		u.Flowdown = this.Flowdown
-		beego.Debug("Update userstatus usermac = ", u.Usermac)
+		u.FlowUp = this.FlowUp
+		u.FlowDown = this.FlowDown
+		beego.Debug("Update userstatus usermac = ", u.UserMac)
 
 		if _, err := o.Update(&u); err != nil {
 			beego.Error(err)
@@ -111,29 +111,29 @@ func (this *Userstatus) UpdateUserstatusBymac() bool {
 	}
 }
 
-func (this *Userstatus) IsFindUserstatusByMac() bool {
+func (this *UserStatus) IsFindUserstatusByMac() bool {
 	o := orm.NewOrm()
 
 	return o.QueryTable(this.TableName()).
-			Filter("usermac", this.Usermac).
+			Filter("usermac", this.UserMac).
 			Exist()
 }
 
-func (this *Userstatus) FindUserstatusByMac() error {
+func (this *UserStatus) FindUserstatusByMac() error {
 	o := orm.NewOrm()
 
 	return o.QueryTable(this.TableName()).
-			Filter("usermac", this.Usermac).
+			Filter("usermac", this.UserMac).
 			One(this)
 }
 
-func (this *Userstatus) DelUserStatusByMac() bool {
+func (this *UserStatus) DelUserStatusByMac() bool {
 	o := orm.NewOrm()
 
-	var u Userstatus
+	var u UserStatus
 	
 	if 	err := o.QueryTable(this.TableName()).
-			Filter("usermac", this.Usermac).
+			Filter("usermac", this.UserMac).
 			One(&u); 
 		err != nil {
 		beego.Error(err)

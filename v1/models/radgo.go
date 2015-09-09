@@ -52,12 +52,12 @@ func (me *mylog) Debug(format string, v ...interface{}) {
 //以下为实现radgo的IAuth IAcct IParam接口
 //************************************************************
 type RadUserstatus struct {
-	User *Userstatus
+	User *UserStatus
 }
 
 // IAuth
 func (user *RadUserstatus) UserPassword() []byte {
-	return []byte(user.User.Authcode)
+	return []byte(user.User.AuthCode)
 }
 
 // IAcct
@@ -79,7 +79,7 @@ func (user *RadUserstatus) SessionId() []byte {
 
 // IAcct
 func (user *RadUserstatus) UserName() []byte {
-	return []byte(user.User.Username)
+	return []byte(user.User.UserName)
 }
 
 // IAcct
@@ -94,22 +94,22 @@ func (user *RadUserstatus) UserIp() uint32 {
 
 // IAcct
 func (user *RadUserstatus) AcctInputOctets() uint32 {
-	return uint32(user.User.Flowup & 0xffffffff)
+	return uint32(user.User.FlowUp & 0xffffffff)
 }
 
 // IAcct
 func (user *RadUserstatus) AcctOutputOctets() uint32 {
-	return uint32(user.User.Flowdown & 0xffffffff)
+	return uint32(user.User.FlowDown & 0xffffffff)
 }
 
 // IAcct
 func (user *RadUserstatus) AcctInputGigawords() uint32 {
-	return uint32(user.User.Flowup >> 32)
+	return uint32(user.User.FlowUp >> 32)
 }
 
 // IAcct
 func (user *RadUserstatus) AcctOutputGigawords() uint32 {
-	return uint32(user.User.Flowdown >> 32)
+	return uint32(user.User.FlowDown >> 32)
 }
 
 // IAcct

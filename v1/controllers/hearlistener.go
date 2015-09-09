@@ -20,8 +20,8 @@ func run() {
 			
 			if time.Now().Sub(v) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
 				//stop redius??
-				user := &models.Userstatus{
-					Usermac: k,
+				user := &models.UserStatus{
+					UserMac: k,
 				}
 				user.DelUserStatusByMac()
 				delete(listener, k)
