@@ -8,10 +8,6 @@ import (
 	"time"
 )
 
-type DeauthRet struct {
-	Code int64 `json:"code"`
-}
-
 type DeauthController struct {
 	beego.Controller
 }
@@ -19,82 +15,74 @@ type DeauthController struct {
 func (this *DeauthController) Get() {
 	this.TplNames = "home.html"
 }
+
 func (this *DeauthController) Post() {
-	ret := DeauthRet{}
+	code := &StatusCode{}
 
-	beego.Info("request body=", string(this.Ctx.Input.RequestBody))
+	body := this.Ctx.Input.RequestBody
+	beego.Info("request body=", string(body))
 
-	locuser := models.Userstatus{}
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, &locuser)
-	if err != nil {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	luser := &models.Userstatus{}
+	if err := json.Unmarshal(body, luser); nil!=err {
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
 
-	user := models.Userstatus{
-		Usermac: locuser.Usermac,
+	user := &models.Userstatus{
+		Usermac: luser.Usermac,
 	}
-	exist := models.IsFindUserstatusByMac(&user)
-	if !exist {
-		ret.Code = -4
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	
+	if exist := user.IsFindUserstatusByMac(); !exist {
+		code.Write(this.Ctx, -4)
+		
 		return
 	}
 
 	//check with redius
-	erra := models.FindUserstatusByMac(&user)
-	if erra != nil {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	if err := user.FindUserstatusByMac(); err != nil {
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
-	radusr := models.RadUserstatus{
-		User: &user,
+	
+	raduser := &models.RadUserstatus{
+		User: user,
 	}
-	err1, res1 := radgo.ClientAcctStop(&radusr)
-	if err1 != nil {
+	
+	if err, aerr := radgo.ClientAcctStop(raduser); err != nil {
 		beego.Debug("error:Failed when check with radius!")
-		ret.Code = -3
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
-	}else if res1 != nil {
+	} else if aerr != nil {
 		beego.Debug("error:Radius failed!")
-		ret.Code = -3
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
 	}
 	beego.Debug("Redius stop success!")
 
-	err2 := models.DelUserStatusByMac(&user)
-	if !err2 {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	if ok := user.DelUserStatusByMac(); !ok {
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
 	
 	//del from listener
 	delete(Listener, user.Usermac)
 	//生成用户记录
-	record := models.Userrecord {
+	record := &models.Userrecord {
 		Username : user.Username,
 		Usermac : user.Usermac,
 		Devmac : user.Devmac,
 		Authtime : user.AuthTime,
 		Deauthtime : time.Now(),
 	}
-	_ = models.RegisterUserrecord(&record)
+	record.RegisterUserrecord()
 	
 	//返回成功
-	ret.Code = 0
-	writeContent, _ := json.Marshal(ret)
-	this.Ctx.WriteString(string(writeContent))
-	beego.Info(string(writeContent))
+	code.Write(this.Ctx, 0)
+	
 	return
 }

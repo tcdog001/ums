@@ -8,10 +8,6 @@ import (
 	//"strings"
 )
 
-type RegisterData struct {
-	Code int64 `json:"code"`
-}
-
 type RegisterController struct {
 	beego.Controller
 }
@@ -23,21 +19,19 @@ func (this *RegisterController) Post() {
 	//解析json
 	//insert regtable
 	//request webserver
-
-	var ret RegisterData
-
+	
 	beego.Info("request body=", string(this.Ctx.Input.RequestBody))
 
-	var account models.Userinfo
+	code := &StatusCode{}
+	account := &models.Userinfo{}
 
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, &account)
+	err := json.Unmarshal(this.Ctx.Input.RequestBody, account)
 	if err != nil {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
-	account.Init_obj()
+	account.Init()
 
 	// liujf
 	//	check user state from db
@@ -49,24 +43,20 @@ func (this *RegisterController) Post() {
 	res, err := sms_fx.SendCreateAccount(webserver, account.Username, 10)
 	if err != nil || res.Result != true {
 		beego.Debug("error:Check with sms server failed!")
-		ret.Code = -3
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
 	}
 	//注册account到数据库
-	if !models.RegisterUserinfo(&account) {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	if !account.RegisterUserinfo() {
+		code.Write(this.Ctx, -2)
 		return
 	}
 	beego.Info("insert table useraccount success!")
 
 	//返回给设备处理结果
-	ret.Code = 0
-	writeContent, _ := json.Marshal(ret)
-	this.Ctx.WriteString(string(writeContent))
+	code.Write(this.Ctx, 0)
+	
 	return
 }
 

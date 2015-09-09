@@ -8,9 +8,6 @@ import (
 	"ums/v1/models"
 )
 
-type UpdateRetData struct {
-	Code int64 `json:"code"`
-}
 type UpdateController struct {
 	beego.Controller
 }
@@ -18,75 +15,69 @@ type UpdateController struct {
 func (this *UpdateController) Get() {
 	this.TplNames = "home.html"
 }
-func (this *UpdateController) Post() {
-	ret := UpdateRetData{}
 
+func (this *UpdateController) Post() {
 	beego.Debug("requestBody=", string(this.Ctx.Input.RequestBody))
-	upinfo := models.Userupdate{}
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, &upinfo)
+	
+	code := &StatusCode{}
+	info := &models.Userupdate{}
+	
+	err := json.Unmarshal(this.Ctx.Input.RequestBody, info)
 	if err != nil {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
-	beego.Debug("updateinfo=", upinfo)
+	beego.Debug("update info=", info)
 
-	user := models.Userstatus{
-		Usermac:  upinfo.Usermac,
-		Flowup:   upinfo.Flowup,
-		Flowdown: upinfo.Flowdown,
+	user := &models.Userstatus{
+		Usermac:  info.Usermac,
+		Flowup:   info.Flowup,
+		Flowdown: info.Flowdown,
 	}
-	exist := models.IsFindUserstatusByMac(&user)
+	
+	exist := user.IsFindUserstatusByMac()
 	if !exist {
 		beego.Info("Userstatus had been deleted when update come")
-		ret.Code = -4
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -4)
+		
 		return
 	}
 	//check with radius
-	err1 := models.FindUserstatusByMac(&user)
+	err1 := user.FindUserstatusByMac()
 	if err1 != nil {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
-	radusr := models.RadUserstatus{
-		User: &user,
+	
+	raduser := &models.RadUserstatus{
+		User: user,
 	}
-	err2, res2 := radgo.ClientAcctUpdate(&radusr)
+	
+	err2, res2 := radgo.ClientAcctUpdate(raduser)
 	if err2 != nil {
 		beego.Debug("error:Failed when check with radius!")
-		ret.Code = -3
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
 	}else if res2 != nil {
 		beego.Debug("error:Radius failed!")
-		ret.Code = -3
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
 	}
+	
 	//update db
-	err3 := models.UpdateUserstatusBymac(&user)
+	err3 := user.UpdateUserstatusBymac()
 	if !err3 {
-		ret.Code = -2
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
 
 	//插入listener
-	usrls := UserListener{
-		LastAliveTime: time.Now(),
-	}
-	Listener[user.Usermac] = usrls
-
+	Listener[user.Usermac] = time.Now()
 	//返回给设备处理结果
-	ret.Code = 0
-	writeContent, _ := json.Marshal(ret)
-	this.Ctx.WriteString(string(writeContent))
+	code.Write(this.Ctx, 0)
 }

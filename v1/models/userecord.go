@@ -15,12 +15,13 @@ type Userrecord struct {
 	Deauthtime time.Time
 }
 
-func (user *Userrecord) TableName() string {
+func (this *Userrecord) TableName() string {
 	return "Userrecord"
 }
-func RegisterUserrecord(user *Userrecord) bool {
+
+func (this *Userrecord) RegisterUserrecord() bool {
 	o := orm.NewOrm()
-	_, err := o.Insert(user)
+	_, err := o.Insert(this)
 	if err != nil {
 		beego.Error(err)
 		return false

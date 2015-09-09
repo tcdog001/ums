@@ -8,8 +8,9 @@ import (
 	"ums/v1/models"
 )
 
-type AuthRetData struct {
-	Code        int64  `json:"code"`
+type AuthCode struct {
+	StatusCode
+	
 	IdleTimeout uint32 `josn:"idletimeout"`
 	OnlineTime  uint32 `json:"onlinetime"`
 
@@ -29,25 +30,24 @@ type UserAuthController struct {
 func (this *UserAuthController) Get() {
 	this.TplNames = "home.html"
 }
+
 func (this *UserAuthController) Post() {
 	//解析json
 	//查询redius(验证码+phoneno)
 	//insert userinfotable
 	//modify statmap
+	body := this.Ctx.Input.RequestBody
+	beego.Info("request body=", string(body))
 
-	ret := AuthRetData{}
-	beego.Info("request body=", string(this.Ctx.Input.RequestBody))
-
-	var user models.Userstatus
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, &user)
-	if err != nil {
-		ret.Code = -2
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	code := &AuthCode{}
+	user := &models.Userstatus{}
+	
+	if err := json.Unmarshal(body, user); err != nil {
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
-	(&user).Init()
+	user.Init()
 	//var policy radgo.Policy
 
 	// liujf:
@@ -56,78 +56,58 @@ func (this *UserAuthController) Post() {
 	//		not registered: error, abort it
 	
 	//check with redius
-	radusr := models.RadUserstatus{
-		User: &user,
+	radusr := &models.RadUserstatus{
+		User: user,
 	}
-	policy, err, result:= radgo.ClientAuth(&radusr)
-	if err != nil {
+	
+	var policy *radgo.Policy
+	
+	if p, err, aerr := radgo.ClientAuth(radusr); err != nil {
 		beego.Info("ClientAuth:username/password failed!")
-		ret.Code = -3
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
-	}else if result != nil {
+	} else if aerr != nil {
 		beego.Info("ClientAuth:Radius failed!")
-		ret.Code = -1
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -1)
+		
 		return
+	} else {
+		policy = p
 	}
-	err1, res1 := radgo.ClientAcctStart(&radusr)
-	if err1 != nil {
+	
+	if err, aerr := radgo.ClientAcctStart(radusr); err != nil {
 		beego.Info("ClientAcctStart:Failed when check with radius!")
-		ret.Code = -3
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
-	}else if res1 != nil {
+	}else if aerr != nil {
 		beego.Info("ClientAcctStart:Radius failed!")
-		ret.Code = -3
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+		code.Write(this.Ctx, -3)
+		
 		return
 	}
+	
 	//注册user到数据库
-	if !models.RegisterUserstatus(&user) {
-		ret.Code = -2
-		setRetZero(&ret)
-		writeContent, _ := json.Marshal(ret)
-		this.Ctx.WriteString(string(writeContent))
+	if !user.RegisterUserstatus() {
+		code.Write(this.Ctx, -2)
+		
 		return
 	}
+	
 	//插入listener
-	usrls := UserListener{
-		LastAliveTime: time.Now(),
-	}
-	Listener[user.Usermac] = usrls
+	Listener[user.Usermac] = time.Now()
 
 	//返回给设备处理结果
-	ret.Code = 0
-
-	ret.UpFlowLimit = policy.UpFlowLimit
-	ret.UpRateMax = policy.UpRateMax
-	ret.UpRateAvg = policy.UpRateAvg
-	ret.DownFlowLimit = policy.DownFlowLimit
-	ret.DownRateMax = policy.DownRateMax
-	ret.DownRateAvg = policy.DownRateAvg
-
-	writeContent, _ := json.Marshal(ret)
-	this.Ctx.WriteString(string(writeContent))
+	code.UpFlowLimit = policy.UpFlowLimit
+	code.UpRateMax = policy.UpRateMax
+	code.UpRateAvg = policy.UpRateAvg
+	code.DownFlowLimit = policy.DownFlowLimit
+	code.DownRateMax = policy.DownRateMax
+	code.DownRateAvg = policy.DownRateAvg
+	
+	code.Write(this.Ctx, 0)
 
 	return
 }
 
-func setRetZero(user *AuthRetData) bool {
-	user.IdleTimeout = 0
-	user.UpFlowLimit = 0
-	user.UpRateMax = 0
-	user.UpRateAvg = 0
-	user.DownFlowLimit = 0
-	user.DownRateMax = 0
-	user.DownRateAvg = 0
-	return true
-}
