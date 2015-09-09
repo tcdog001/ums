@@ -88,7 +88,7 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//注册user到数据库
-	if !user.RegisterUserstatus() {
+	if !user.Register() {
 		code.Write(this.Ctx, -2)
 		
 		return

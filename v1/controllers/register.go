@@ -48,7 +48,7 @@ func (this *RegisterController) Post() {
 		return
 	}
 	//注册account到数据库
-	if !account.RegisterUserinfo() {
+	if !account.Register() {
 		code.Write(this.Ctx, -2)
 		return
 	}

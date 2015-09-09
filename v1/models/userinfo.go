@@ -15,7 +15,7 @@ func (account *UserInfo) TableName() string {
 	return "userinfo"
 }
 
-func (this *UserInfo) RegisterUserinfo() bool {
+func (this *UserInfo) Register() bool {
 	o := orm.NewOrm()
 	this.LastRegisterTime = time.Now()
 	beego.Debug("regiteraccount table=", this.TableName())
@@ -37,7 +37,7 @@ func (this *UserInfo) RegisterUserinfo() bool {
 	}
 }
 
-func (this *UserInfo) UpdateUserinfo() bool {
+func (this *UserInfo) Update() bool {
 	beego.Debug("UpdateUserinfo table=", this.TableName())
 	
 	acc := &UserInfo{}

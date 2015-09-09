@@ -19,7 +19,7 @@ func (this *UserRecord) TableName() string {
 	return "Userrecord"
 }
 
-func (this *UserRecord) RegisterUserrecord() bool {
+func (this *UserRecord) Register() bool {
 	o := orm.NewOrm()
 	
 	if _, err := o.Insert(this); err != nil {

@@ -33,14 +33,14 @@ func (this *DeauthController) Post() {
 		UserMac: luser.UserMac,
 	}
 	
-	if exist := user.IsFindUserstatusByMac(); !exist {
+	if exist := user.IsFindByMac(); !exist {
 		code.Write(this.Ctx, -4)
 		
 		return
 	}
 
 	//check with redius
-	if err := user.FindUserstatusByMac(); err != nil {
+	if err := user.FindByMac(); err != nil {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -63,7 +63,7 @@ func (this *DeauthController) Post() {
 	}
 	beego.Debug("Redius stop success!")
 
-	if ok := user.DelUserStatusByMac(); !ok {
+	if ok := user.DelByMac(); !ok {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -80,7 +80,7 @@ func (this *DeauthController) Post() {
 		AuthTime : user.AuthTime,
 		DeauthTime : time.Now(),
 	}
-	record.RegisterUserrecord()
+	record.Register()
 	
 	//返回成功
 	code.Write(this.Ctx, 0)

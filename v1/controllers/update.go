@@ -35,7 +35,7 @@ func (this *UpdateController) Post() {
 		FlowDown: info.FlowDown,
 	}
 	
-	exist := user.IsFindUserstatusByMac()
+	exist := user.IsFindByMac()
 	if !exist {
 		beego.Info("UserStatus had been deleted when update come")
 		code.Write(this.Ctx, -4)
@@ -43,7 +43,7 @@ func (this *UpdateController) Post() {
 		return
 	}
 	//check with radius
-	err1 := user.FindUserstatusByMac()
+	err1 := user.FindByMac()
 	if err1 != nil {
 		code.Write(this.Ctx, -2)
 		
@@ -68,7 +68,7 @@ func (this *UpdateController) Post() {
 	}
 	
 	//update db
-	err3 := user.UpdateUserstatusBymac()
+	err3 := user.UpdateBymac()
 	if !err3 {
 		code.Write(this.Ctx, -2)
 		

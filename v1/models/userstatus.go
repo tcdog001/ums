@@ -45,7 +45,7 @@ func (user *UserStatus) TableName() string {
 	return "userstatus"
 }
 
-func (this *UserStatus) RegisterUserstatus() bool {
+func (this *UserStatus) Register() bool {
 	o := orm.NewOrm()
 	this.AuthTime = time.Now()
 	beego.Debug("userstatus table=", this.TableName())
@@ -86,7 +86,7 @@ func (this *UserStatus) RegisterUserstatus() bool {
 	return true
 }
 
-func (this *UserStatus) UpdateUserstatusBymac() bool {
+func (this *UserStatus) UpdateBymac() bool {
 	beego.Debug("Update userstatus table=", this.TableName())
 	o := orm.NewOrm()
 
@@ -111,7 +111,7 @@ func (this *UserStatus) UpdateUserstatusBymac() bool {
 	}
 }
 
-func (this *UserStatus) IsFindUserstatusByMac() bool {
+func (this *UserStatus) IsFindByMac() bool {
 	o := orm.NewOrm()
 
 	return o.QueryTable(this.TableName()).
@@ -119,7 +119,7 @@ func (this *UserStatus) IsFindUserstatusByMac() bool {
 			Exist()
 }
 
-func (this *UserStatus) FindUserstatusByMac() error {
+func (this *UserStatus) FindByMac() error {
 	o := orm.NewOrm()
 
 	return o.QueryTable(this.TableName()).
@@ -127,7 +127,7 @@ func (this *UserStatus) FindUserstatusByMac() error {
 			One(this)
 }
 
-func (this *UserStatus) DelUserStatusByMac() bool {
+func (this *UserStatus) DelByMac() bool {
 	o := orm.NewOrm()
 
 	var u UserStatus

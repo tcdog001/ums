@@ -23,7 +23,7 @@ func run() {
 				user := &models.UserStatus{
 					UserMac: k,
 				}
-				user.DelUserStatusByMac()
+				user.DelByMac()
 				delete(listener, k)
 			}
 		}
