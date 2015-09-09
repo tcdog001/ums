@@ -11,11 +11,11 @@ const (
 	TIMEOUT_INTERVAL = 10 //(Minute)超时时间为10分钟
 )
 
-var Listener map[string]time.Time
+var listener map[string]time.Time
 
 func run() {
 	for {
-		for k, v := range Listener {
+		for k, v := range listener {
 			beego.Debug("key=", k, "v=", v)
 			
 			if time.Now().Sub(v) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
@@ -24,7 +24,7 @@ func run() {
 					Usermac: k,
 				}
 				user.DelUserStatusByMac()
-				delete(Listener, k)
+				delete(listener, k)
 			}
 		}
 		
@@ -34,7 +34,15 @@ func run() {
 }
 
 func init() {
-	Listener = make(map[string]time.Time)
+	listener = make(map[string]time.Time)
 
 	go run()
+}
+
+func addListener(mac string) {
+	listener[mac] = time.Now()
+}
+
+func delListener(mac string) {
+	delete(listener, mac)
 }

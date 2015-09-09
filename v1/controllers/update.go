@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"radgo"
-	"time"
 	"ums/v1/models"
 )
 
@@ -77,7 +76,8 @@ func (this *UpdateController) Post() {
 	}
 
 	//插入listener
-	Listener[user.Usermac] = time.Now()
+	addListener(user.Usermac)
+
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)
 }

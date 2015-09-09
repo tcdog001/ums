@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"radgo"
-	"time"
 	"ums/v1/models"
 )
 
@@ -96,7 +95,7 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//插入listener
-	Listener[user.Usermac] = time.Now()
+	addListener(user.Usermac)
 
 	//返回给设备处理结果
 	code.UpFlowLimit = policy.UpFlowLimit

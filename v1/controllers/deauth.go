@@ -70,7 +70,8 @@ func (this *DeauthController) Post() {
 	}
 	
 	//del from listener
-	delete(Listener, user.Usermac)
+	delListener(user.Usermac)
+	
 	//生成用户记录
 	record := &models.Userrecord {
 		Username : user.Username,
