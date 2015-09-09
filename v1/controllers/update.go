@@ -35,16 +35,15 @@ func (this *UpdateController) Post() {
 		FlowDown: info.FlowDown,
 	}
 	
-	exist := user.IsFindByMac()
-	if !exist {
+	if !user.Exist() {
 		beego.Info("UserStatus had been deleted when update come")
 		code.Write(this.Ctx, -4)
 		
 		return
 	}
+	
 	//check with radius
-	err1 := user.FindByMac()
-	if err1 != nil {
+	if nil != user.One() {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -68,7 +67,7 @@ func (this *UpdateController) Post() {
 	}
 	
 	//update db
-	err3 := user.UpdateBymac()
+	err3 := user.Update()
 	if !err3 {
 		code.Write(this.Ctx, -2)
 		
@@ -76,7 +75,7 @@ func (this *UpdateController) Post() {
 	}
 
 	//插入listener
-	addListener(user.UserMac)
+	addAlive(user.UserMac)
 
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)

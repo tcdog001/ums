@@ -33,14 +33,14 @@ func (this *DeauthController) Post() {
 		UserMac: luser.UserMac,
 	}
 	
-	if exist := user.IsFindByMac(); !exist {
+	if !user.Exist() {
 		code.Write(this.Ctx, -4)
 		
 		return
 	}
 
 	//check with redius
-	if err := user.FindByMac(); err != nil {
+	if nil != user.One() {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -63,14 +63,14 @@ func (this *DeauthController) Post() {
 	}
 	beego.Debug("Redius stop success!")
 
-	if ok := user.DelByMac(); !ok {
+	if ok := user.Delete(); !ok {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
 	//del from listener
-	delListener(user.UserMac)
+	delAlive(user.UserMac)
 	
 	//生成用户记录
 	record := &models.UserRecord {
