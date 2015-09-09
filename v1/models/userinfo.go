@@ -20,15 +20,16 @@ func (this *Userinfo) RegisterUserinfo() bool {
 	this.LastRegisterTime = time.Now()
 	beego.Debug("regiteraccount table=", this.TableName())
 	//查找对应的username是否存在
-	exist := o.QueryTable(this.TableName()).Filter("username", this.Username).Exist()
-	if exist {
+	
+	if ok := o.QueryTable(this.TableName()).
+			Filter("username", this.Username).
+			Exist(); ok {
 		//account存在，则更新account信息
 		//return UpdateUserinfo(account)
 		return true
 	} else {
 		//account不存在，则插入account信息
-		_, err := o.Insert(this)
-		if err != nil {
+		if _, err := o.Insert(this); err != nil {
 			beego.Error(err)
 			return false
 		}
@@ -38,11 +39,14 @@ func (this *Userinfo) RegisterUserinfo() bool {
 
 func (this *Userinfo) UpdateUserinfo() bool {
 	beego.Debug("UpdateUserinfo table=", this.TableName())
+	
+	acc := &Userinfo{}
 	o := orm.NewOrm()
-
-	var acc Userinfo
-	err := o.QueryTable(this.TableName()).Filter("username", this.Username).One(&acc)
-	if err != nil {
+	
+	if  err := o.QueryTable(this.TableName()).
+			Filter("username", this.Username).
+			One(acc);
+		err != nil {
 		return false
 	} else {
 		acc.Username = this.Username
@@ -50,8 +54,7 @@ func (this *Userinfo) UpdateUserinfo() bool {
 
 		beego.Debug("UpdateUserinfo Username =", acc.Username)
 
-		_, err := o.Update(&acc)
-		if err != nil {
+		if _, err := o.Update(acc); err != nil {
 			beego.Error(err)
 			return false
 		}

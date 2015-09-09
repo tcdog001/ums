@@ -37,19 +37,8 @@ func (this *Userstatus) Init() {
 	this.RadSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
 	this.userip = IpAddressFromString(this.Userip)
 	
-	Len := len(this.Authcode)
-	var b []byte = []byte(this.Authcode)
-	if b[Len-1] == '_' {
-		b = b[:Len-1]
-		this.Authcode = string(b)
-	}
-	
-	Len = len(this.Ssid)
-	var c []byte = []byte(this.Ssid)
-	if c[Len-1] == '_' {
-		c = c[:Len-1]
-		this.Ssid = string(c)
-	}
+	this.Authcode = cutLastChar(this.Authcode)
+	this.Ssid = cutLastChar(this.Ssid)
 }
 
 func (user *Userstatus) TableName() string {
@@ -61,33 +50,39 @@ func (this *Userstatus) RegisterUserstatus() bool {
 	this.AuthTime = time.Now()
 	beego.Debug("userstatus table=", this.TableName())
 	//查找对应的mac地址是否存在，存在的话要求状态为离线
-	exist := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).Exist()
-	if exist {
+	
+	if 	ok := o.QueryTable(this.TableName()).
+			Filter("usermac", this.Usermac).
+			Exist(); ok {
 		//用户存在，则更新用户信息
 		var u Userstatus
-		err := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).One(&u)
-		if err != nil {
+		
+		if 	err := o.QueryTable(this.TableName()).
+				Filter("usermac", this.Usermac).
+				One(&u); 
+			err != nil {
 			beego.Debug("get item in userstatus failed!!")
+			
 			return false
 		} else {
 			u.Username = this.Username
 			u.Usermac = this.Usermac
 			u.Authcode = this.Authcode
 			u.Devmac = this.Devmac
-			_, err := o.Update(&u)
-			if err != nil {
+			
+			if _, err := o.Update(&u); err != nil {
 				beego.Error(err)
 				return false
 			}
 		}
 	} else {
 		//用户不存在，则插入用户信息
-		_, err := o.Insert(this)
-		if err != nil {
+		if _, err := o.Insert(this); err != nil {
 			beego.Error(err)
 			return false
 		}
 	}
+	
 	return true
 }
 
@@ -96,47 +91,54 @@ func (this *Userstatus) UpdateUserstatusBymac() bool {
 	o := orm.NewOrm()
 
 	var u Userstatus
-	err := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).One(&u)
-	if err != nil {
+	
+	if 	err := o.QueryTable(this.TableName()).
+			Filter("usermac", this.Usermac).
+			One(&u); 
+		err != nil {
 		return false
 	} else {
 		u.Flowup = this.Flowup
 		u.Flowdown = this.Flowdown
 		beego.Debug("Update userstatus usermac = ", u.Usermac)
 
-		_, err := o.Update(&u)
-		if err != nil {
+		if _, err := o.Update(&u); err != nil {
 			beego.Error(err)
 			return false
 		}
+		
 		return true
 	}
 }
 
 func (this *Userstatus) IsFindUserstatusByMac() bool {
 	o := orm.NewOrm()
-	exist := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).Exist()
-	return exist
+
+	return o.QueryTable(this.TableName()).
+			Filter("usermac", this.Usermac).
+			Exist()
 }
 
 func (this *Userstatus) FindUserstatusByMac() error {
 	o := orm.NewOrm()
-	err := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).One(this)
-	return err
+
+	return o.QueryTable(this.TableName()).
+			Filter("usermac", this.Usermac).
+			One(this)
 }
 
 func (this *Userstatus) DelUserStatusByMac() bool {
 	o := orm.NewOrm()
 
 	var u Userstatus
-	err := o.QueryTable(this.TableName()).Filter("usermac", this.Usermac).One(&u)
-	if err != nil {
+	
+	if 	err := o.QueryTable(this.TableName()).
+			Filter("usermac", this.Usermac).
+			One(&u); 
+		err != nil {
 		beego.Error(err)
 		return false
-	}
-
-	_, err = o.Delete(&u)
-	if err != nil {
+	} else if _, err := o.Delete(&u); err != nil {
 		beego.Error(err)
 		return false
 	}

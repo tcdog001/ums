@@ -21,10 +21,11 @@ func (this *Userrecord) TableName() string {
 
 func (this *Userrecord) RegisterUserrecord() bool {
 	o := orm.NewOrm()
-	_, err := o.Insert(this)
-	if err != nil {
+	
+	if _, err := o.Insert(this); err != nil {
 		beego.Error(err)
 		return false
 	}
+	
 	return true
 }
