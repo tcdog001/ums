@@ -69,44 +69,64 @@ func dbError(count int64, err error) error {
 }
 
 func DbEntryGet(e IDbOpt, one interface{}) error {
-	return ormer.QueryTable(e.TableName()).
+	beego.Debug("get", e.TableName(), "by entry", e)
+	err := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
 			One(one)
+	beego.Debug("get", e.TableName(), "new entry", one)
+	
+	return err
 }
 
 func DbEntryPull(e IDbOpt) error {
-	return ormer.QueryTable(e.TableName()).
+	beego.Debug("before pull", e.TableName(), "entry", e)
+	err := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
 			One(e)
+	beego.Debug("after pull", e.TableName(), "entry", e)
+	
+	return err
 }
 
 func DbEntryExist(e IDbOpt) bool {
-	return ormer.QueryTable(e.TableName()).
+	ok := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
 			Exist()
+	
+	beego.Debug(e.TableName(), "entry", e, "exist", ok)
+	
+	return ok
 }
 
 func DbEntryInsert(e IDbOpt) error {
-	beego.Debug("insert", e.TableName(), "entry", e)
-		
 	count, err := ormer.Insert(e)
+	
+	beego.Debug("insert", e.TableName(), 
+		"entry", e, 
+		"count", count,
+		"error", err)
 	
 	return dbError(count, err)
 }
 
-func DbEntryUpdate(e IDbOpt) error {
-	beego.Debug("update", e.TableName(), "entry", e)
-		
+func DbEntryUpdate(e IDbOpt) error {	
 	count, err := ormer.Update(e)
+	
+	beego.Debug("update", e.TableName(), 
+		"entry", e, 
+		"count", count,
+		"error", err)
 	
 	return dbError(count, err)
 }
 
 func DbEntryDelete(e IDbOpt) error {
-	beego.Debug("delete", e.TableName(), 
-		e.KeyName(), "=", e.Key())
-	
 	count, err := ormer.Delete(e)
+	
+	beego.Debug("delete", e.TableName(), 
+		"entry", e, 
+		"count", count,
+		"error", err)
 	
 	return dbError(count, err)
 }
