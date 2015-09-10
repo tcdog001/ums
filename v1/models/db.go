@@ -7,7 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type IDbOpt interface {
+type IDbEntry interface {
 	TableName() string
 	KeyName() string
 	Key() string
@@ -68,7 +68,7 @@ func dbError(count int64, err error) error {
 	return nil
 }
 
-func DbEntryGet(e IDbOpt, one interface{}) error {
+func DbEntryGet(e IDbEntry, one interface{}) error {
 	beego.Debug("get", e.TableName(), "by entry", e)
 	err := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
@@ -78,7 +78,7 @@ func DbEntryGet(e IDbOpt, one interface{}) error {
 	return err
 }
 
-func DbEntryPull(e IDbOpt) error {
+func DbEntryPull(e IDbEntry) error {
 	beego.Debug("before pull", e.TableName(), "entry", e)
 	err := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
@@ -88,7 +88,7 @@ func DbEntryPull(e IDbOpt) error {
 	return err
 }
 
-func DbEntryExist(e IDbOpt) bool {
+func DbEntryExist(e IDbEntry) bool {
 	ok := ormer.QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
 			Exist()
@@ -98,7 +98,7 @@ func DbEntryExist(e IDbOpt) bool {
 	return ok
 }
 
-func DbEntryInsert(e IDbOpt) error {
+func DbEntryInsert(e IDbEntry) error {
 	count, err := ormer.Insert(e)
 	
 	beego.Debug("insert", e.TableName(), 
@@ -109,7 +109,7 @@ func DbEntryInsert(e IDbOpt) error {
 	return dbError(count, err)
 }
 
-func DbEntryUpdate(e IDbOpt) error {	
+func DbEntryUpdate(e IDbEntry) error {	
 	count, err := ormer.Update(e)
 	
 	beego.Debug("update", e.TableName(), 
@@ -120,7 +120,7 @@ func DbEntryUpdate(e IDbOpt) error {
 	return dbError(count, err)
 }
 
-func DbEntryDelete(e IDbOpt) error {
+func DbEntryDelete(e IDbEntry) error {
 	count, err := ormer.Delete(e)
 	
 	beego.Debug("delete", e.TableName(), 
@@ -131,7 +131,7 @@ func DbEntryDelete(e IDbOpt) error {
 	return dbError(count, err)
 }
 
-func DbEntryRegister(e IDbOpt) error {
+func DbEntryRegister(e IDbEntry) error {
 	if !DbEntryExist(e) {
 		return DbEntryInsert(e)
 	}
