@@ -49,12 +49,12 @@ func (this *RegisterController) Post() {
 		
 		return
 	}
+
 	//注册account到数据库
-	if !info.Register() {
+	if nil != info.Register() {
 		code.Write(this.Ctx, -2)
 		return
 	}
-	beego.Info("insert table useraccount success!")
 
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)

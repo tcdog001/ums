@@ -59,4 +59,3 @@ func (this *UserStatus) Register() error {
 	
 	return DbEntryRegister(this)
 }
-

@@ -62,9 +62,8 @@ func (this *DeauthController) Post() {
 		
 		return
 	}
-	
 	//del from listener
-	delAlive(user.UserMac)
+	mod.DelAlive(user.UserMac)
 	
 	//生成用户记录
 	record := &mod.UserRecord {

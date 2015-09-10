@@ -25,6 +25,6 @@ func (this *UserRecord) Key() string {
 	return this.UserName
 }
 
-func (this *UserRecord) Register() bool {
-	return nil != DbEntryRegister(this)
+func (this *UserRecord) Register() error {
+	return DbEntryRegister(this)
 }

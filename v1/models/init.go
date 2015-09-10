@@ -9,6 +9,7 @@ func init() {
 	logInit()
 	radParamInit()	
 	dbInit()
+	aliveInit()
 }
 
 func logInit() {

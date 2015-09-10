@@ -75,7 +75,7 @@ func (this *UpdateController) Post() {
 	}
 
 	//插入listener
-	addAlive(user.UserMac)
+	mod.AddAlive(user.UserMac)
 
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)

@@ -1,9 +1,8 @@
-package controllers
+package models
 
 import (
 	"github.com/astaxie/beego"
 	"time"
-	mod "ums/v1/models"
 )
 
 const (
@@ -20,11 +19,11 @@ func run() {
 			
 			if time.Now().Sub(v) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
 				//stop redius??
-				user := &mod.UserStatus{
+				user := &UserStatus{
 					UserMac: k,
 				}
 
-				mod.DbEntryDelete(user)
+				DbEntryDelete(user)
 				delete(alive, k)
 			}
 		}
@@ -34,16 +33,16 @@ func run() {
 	}
 }
 
-func init() {
+func aliveInit() {
 	alive = make(map[string]time.Time)
 
 	go run()
 }
 
-func addAlive(mac string) {
+func AddAlive(mac string) {
 	alive[mac] = time.Now()
 }
 
-func delAlive(mac string) {
+func DelAlive(mac string) {
 	delete(alive, mac)
 }

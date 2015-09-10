@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/astaxie/beego"
 	"time"
 )
 
@@ -22,45 +21,10 @@ func (this *UserInfo) Key() string {
 	return this.UserName
 }
 
-func (this *UserInfo) Register() bool {
-	beego.Debug("regiter UserInfo table=", this.TableName())
-	
+func (this *UserInfo) Register() error {	
 	this.LastRegisterTime = time.Now()
-	//查找对应的username是否存在
 	
-	if ok := DbEntryExist(this); ok {
-		//account存在，则更新account信息
-		//return UpdateUserinfo(account)
-	} else {
-		//account不存在，则插入account信息
-		if _, err := ormer.Insert(this); err != nil {
-			beego.Error(err)
-			return false
-		}
-	}
-	
-	return true
-}
-
-func (this *UserInfo) Update() bool {
-	beego.Debug("Update UserInfo table=", this.TableName())
-	
-	acc := &UserInfo{}
-	
-	if  err := DbEntryGet(this, acc); err != nil {
-		return false
-	} else {
-		acc.UserName = this.UserName
-		acc.LastRegisterTime = this.LastRegisterTime
-
-		beego.Debug("Update UserInfo UserName =", acc.UserName)
-
-		if _, err := ormer.Update(acc); err != nil {
-			beego.Error(err)
-			return false
-		}
-		return true
-	}
+	return DbEntryRegister(this)
 }
 
 func (this *UserInfo) Init() {
