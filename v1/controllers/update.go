@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"radgo"
-	"ums/v1/models"
+	mod "ums/v1/models"
 )
 
 type UpdateController struct {
@@ -19,7 +19,7 @@ func (this *UpdateController) Post() {
 	beego.Debug("requestBody=", string(this.Ctx.Input.RequestBody))
 	
 	code := &StatusCode{}
-	info := &models.UserUpdate{}
+	info := &mod.UserUpdate{}
 	
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, info)
 	if err != nil {
@@ -29,19 +29,11 @@ func (this *UpdateController) Post() {
 	}
 	beego.Debug("update info=", info)
 
-	user := &models.UserStatus{
+	user := &mod.UserStatus{
 		UserMac:  info.UserMac,
 	}
 	
-	// liujf: don't check exist, just check one
-	if !user.Exist() {
-		beego.Info("UserStatus had been deleted when update come")
-		code.Write(this.Ctx, -4)
-		
-		return
-	}
-	
-	if nil != user.One() {
+	if nil != mod.DbEntryPull(user) {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -51,7 +43,7 @@ func (this *UpdateController) Post() {
 	user.FlowUp		= info.FlowUp
 	
 	//check with radius
-	raduser := &models.RadUserstatus{
+	raduser := &mod.RadUserstatus{
 		User: user,
 	}
 	
@@ -69,7 +61,7 @@ func (this *UpdateController) Post() {
 	}
 	
 	//update db
-	if !user.Update() {
+	if nil != mod.DbEntryUpdate(user) {
 		code.Write(this.Ctx, -2)
 		
 		return

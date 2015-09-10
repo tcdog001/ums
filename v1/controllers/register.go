@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"sms/sms_fx"
-	"ums/v1/models"
+	mod "ums/v1/models"
 	//"strings"
 )
 
@@ -27,7 +27,7 @@ func (this *RegisterController) Post() {
 	beego.Info("request body=", string(body))
 
 	code := &StatusCode{}
-	info := &models.UserInfo{}
+	info := &mod.UserInfo{}
 
 	if err := json.Unmarshal(body, info); err != nil {
 		code.Write(this.Ctx, -2)

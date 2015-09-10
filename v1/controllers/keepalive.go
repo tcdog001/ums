@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"time"
-	"ums/v1/models"
+	mod "ums/v1/models"
 )
 
 const (
@@ -20,10 +20,11 @@ func run() {
 			
 			if time.Now().Sub(v) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
 				//stop redius??
-				user := &models.UserStatus{
+				user := &mod.UserStatus{
 					UserMac: k,
 				}
-				user.Delete()
+
+				mod.DbEntryDelete(user)
 				delete(alive, k)
 			}
 		}

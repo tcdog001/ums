@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"radgo"
-	"ums/v1/models"
+	mod "ums/v1/models"
 )
 
 type AuthCode struct {
@@ -39,7 +39,7 @@ func (this *UserAuthController) Post() {
 	beego.Info("request body=", string(body))
 
 	code := &AuthCode{}
-	user := &models.UserStatus{}
+	user := &mod.UserStatus{}
 	
 	if err := json.Unmarshal(body, user); err != nil {
 		code.Write(this.Ctx, -2)
@@ -55,7 +55,7 @@ func (this *UserAuthController) Post() {
 	//		not registered: error, abort it
 	
 	//check with redius
-	radusr := &models.RadUserstatus{
+	radusr := &mod.RadUserstatus{
 		User: user,
 	}
 	
@@ -88,7 +88,7 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//注册user到数据库
-	if !user.Register() {
+	if nil == user.Register() {
 		code.Write(this.Ctx, -2)
 		
 		return

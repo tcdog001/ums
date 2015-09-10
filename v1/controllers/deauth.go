@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"radgo"
-	"ums/v1/models"
+	mod "ums/v1/models"
 	"time"
 )
 
@@ -22,32 +22,25 @@ func (this *DeauthController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
 
-	luser := &models.UserStatus{}
+	luser := &mod.UserStatus{}
 	if err := json.Unmarshal(body, luser); nil!=err {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 
-	user := &models.UserStatus{
+	user := &mod.UserStatus{
 		UserMac: luser.UserMac,
 	}
 	
-	// liujf: don't check exist, just check one
-	if !user.Exist() {
-		code.Write(this.Ctx, -4)
-		
-		return
-	}
-
-	//check with redius
-	if nil != user.One() {
+	if nil != mod.DbEntryPull(user) {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
-	raduser := &models.RadUserstatus{
+	//check with redius
+	raduser := &mod.RadUserstatus{
 		User: user,
 	}
 	
@@ -64,7 +57,7 @@ func (this *DeauthController) Post() {
 	}
 	beego.Debug("Redius stop success!")
 
-	if ok := user.Delete(); !ok {
+	if nil != mod.DbEntryDelete(user) {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -74,7 +67,7 @@ func (this *DeauthController) Post() {
 	delAlive(user.UserMac)
 	
 	//生成用户记录
-	record := &models.UserRecord {
+	record := &mod.UserRecord {
 		UserName : user.UserName,
 		UserMac : user.UserMac,
 		DevMac : user.DevMac,

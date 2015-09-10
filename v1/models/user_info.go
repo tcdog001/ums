@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
 	"time"
 )
 
@@ -26,16 +25,15 @@ func (this *UserInfo) Key() string {
 func (this *UserInfo) Register() bool {
 	beego.Debug("regiter UserInfo table=", this.TableName())
 	
-	o := orm.NewOrm()
 	this.LastRegisterTime = time.Now()
 	//查找对应的username是否存在
 	
-	if ok := EntryExist(o, this); ok {
+	if ok := DbEntryExist(this); ok {
 		//account存在，则更新account信息
 		//return UpdateUserinfo(account)
 	} else {
 		//account不存在，则插入account信息
-		if _, err := o.Insert(this); err != nil {
+		if _, err := ormer.Insert(this); err != nil {
 			beego.Error(err)
 			return false
 		}
@@ -48,9 +46,8 @@ func (this *UserInfo) Update() bool {
 	beego.Debug("Update UserInfo table=", this.TableName())
 	
 	acc := &UserInfo{}
-	o := orm.NewOrm()
 	
-	if  err := EntryOne(o, this, acc); err != nil {
+	if  err := DbEntryGet(this, acc); err != nil {
 		return false
 	} else {
 		acc.UserName = this.UserName
@@ -58,7 +55,7 @@ func (this *UserInfo) Update() bool {
 
 		beego.Debug("Update UserInfo UserName =", acc.UserName)
 
-		if _, err := o.Update(acc); err != nil {
+		if _, err := ormer.Update(acc); err != nil {
 			beego.Error(err)
 			return false
 		}

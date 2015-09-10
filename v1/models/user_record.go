@@ -1,8 +1,6 @@
 package models
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
 	"time"
 )
 
@@ -19,13 +17,14 @@ func (this *UserRecord) TableName() string {
 	return "Userrecord"
 }
 
+func (this *UserRecord) KeyName() string {
+	return "username"
+}
+
+func (this *UserRecord) Key() string {
+	return this.UserName
+}
+
 func (this *UserRecord) Register() bool {
-	o := orm.NewOrm()
-	
-	if _, err := o.Insert(this); err != nil {
-		beego.Error(err)
-		return false
-	}
-	
-	return true
+	return nil != DbEntryRegister(this)
 }
