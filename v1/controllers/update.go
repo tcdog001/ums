@@ -15,13 +15,20 @@ func (this *UpdateController) Get() {
 	this.TplNames = "home.html"
 }
 
+type devUserUpdate struct {
+	UserMac  string `json:"usermac"`
+	FlowUp   uint64 `json:"flowup"`
+	FlowDown uint64 `json:"flowdown"`
+}
+
 func (this *UpdateController) Post() {
-	beego.Debug("requestBody=", string(this.Ctx.Input.RequestBody))
+	body := this.Ctx.Input.RequestBody
+	beego.Debug("requestBody=", string(body))
 	
 	code := &StatusCode{}
-	info := &mod.UserUpdate{}
+	info := &devUserUpdate{}
 	
-	err := json.Unmarshal(this.Ctx.Input.RequestBody, info)
+	err := json.Unmarshal(body, info)
 	if err != nil {
 		code.Write(this.Ctx, -2)
 		
