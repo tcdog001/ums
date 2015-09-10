@@ -26,5 +26,5 @@ func (this *UserRecord) Key() string {
 }
 
 func (this *UserRecord) Register() error {
-	return DbEntryRegister(this)
+	return dbEntryRegister(nil, this)
 }

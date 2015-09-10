@@ -23,7 +23,7 @@ func run() {
 					UserMac: k,
 				}
 
-				DbEntryDelete(user)
+				dbEntryDelete(nil, user)
 				delete(alive, k)
 			}
 		}

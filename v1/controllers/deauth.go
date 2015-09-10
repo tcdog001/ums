@@ -33,14 +33,14 @@ func (this *DeauthController) Post() {
 		UserMac: luser.UserMac,
 	}
 	
-	if nil != mod.DbEntryPull(user) {
+	if nil != user.Pull() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
 	//check with redius
-	raduser := &mod.RadUserstatus{
+	raduser := &mod.RadUser{
 		User: user,
 	}
 	
@@ -57,7 +57,7 @@ func (this *DeauthController) Post() {
 	}
 	beego.Debug("Redius stop success!")
 
-	if nil != mod.DbEntryDelete(user) {
+	if nil != user.Delete() {
 		code.Write(this.Ctx, -2)
 		
 		return

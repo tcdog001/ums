@@ -51,150 +51,150 @@ func (me *mylog) Debug(format string, v ...interface{}) {
 //************************************************************
 //以下为实现radgo的IAuth IAcct IParam接口
 //************************************************************
-type RadUserstatus struct {
+type RadUser struct {
 	User *UserStatus
 }
 
 // IAuth
-func (user *RadUserstatus) UserPassword() []byte {
+func (user *RadUser) UserPassword() []byte {
 	return []byte(user.User.AuthCode)
 }
 
 // IAcct
-func (user *RadUserstatus) SSID() []byte {
+func (user *RadUser) SSID() []byte {
 	return []byte(user.User.Ssid)
 }
 
 // IAcct
-func (user *RadUserstatus) DevMac() []byte {
+func (user *RadUser) DevMac() []byte {
 	return user.User.devmac[:]
 }
 
 // IAcct
-func (user *RadUserstatus) SessionId() []byte {
+func (user *RadUser) SessionId() []byte {
 	// return user session
 	// when new user, use ClientSessionId init session
 	return user.User.RadSession
 }
 
 // IAcct
-func (user *RadUserstatus) UserName() []byte {
+func (user *RadUser) UserName() []byte {
 	return []byte(user.User.UserName)
 }
 
 // IAcct
-func (user *RadUserstatus) UserMac() []byte {
+func (user *RadUser) UserMac() []byte {
 	return user.User.usermac[:]
 }
 
 // IAcct
-func (user *RadUserstatus) UserIp() uint32 {
+func (user *RadUser) UserIp() uint32 {
 	return uint32(user.User.userip)
 }
 
 // IAcct
-func (user *RadUserstatus) AcctInputOctets() uint32 {
+func (user *RadUser) AcctInputOctets() uint32 {
 	return uint32(user.User.FlowUp & 0xffffffff)
 }
 
 // IAcct
-func (user *RadUserstatus) AcctOutputOctets() uint32 {
+func (user *RadUser) AcctOutputOctets() uint32 {
 	return uint32(user.User.FlowDown & 0xffffffff)
 }
 
 // IAcct
-func (user *RadUserstatus) AcctInputGigawords() uint32 {
+func (user *RadUser) AcctInputGigawords() uint32 {
 	return uint32(user.User.FlowUp >> 32)
 }
 
 // IAcct
-func (user *RadUserstatus) AcctOutputGigawords() uint32 {
+func (user *RadUser) AcctOutputGigawords() uint32 {
 	return uint32(user.User.FlowDown >> 32)
 }
 
 // IAcct
-func (user *RadUserstatus) AcctTerminateCause() uint32 {
+func (user *RadUser) AcctTerminateCause() uint32 {
 	return radgo.DeauthReason(user.User.DeauthReason).TerminateCause()
 }
 
 // IAcct
-func (user *RadUserstatus) GetClass() []byte {
+func (user *RadUser) GetClass() []byte {
 	return user.User.RadClass
 }
 
 // IAcct
-func (user *RadUserstatus) SetClass(c []byte) {
+func (user *RadUser) SetClass(c []byte) {
 	user.User.RadClass = c
 }
 
 // IAcct
-func (user *RadUserstatus) GetChapChallenge() []byte {
+func (user *RadUser) GetChapChallenge() []byte {
 	return user.User.RadChallenge
 }
 
 // IAcct
-func (user *RadUserstatus) SetChapChallenge(c []byte) {
+func (user *RadUser) SetChapChallenge(c []byte) {
 	user.User.RadChallenge = c
 }
 
 // IParam
-func (user *RadUserstatus) Secret() []byte {
+func (user *RadUser) Secret() []byte {
 	return []byte(param.RadSecret)
 }
 
 // IParam
-func (user *RadUserstatus) NasIdentifier() []byte {
+func (user *RadUser) NasIdentifier() []byte {
 	//passwd for redius in configure
 	return []byte(param.NasIdentifier)
 }
 
 // IParam
-func (user *RadUserstatus) NasIpAddress() uint32 {
+func (user *RadUser) NasIpAddress() uint32 {
 	return uint32(param.NasIpAddress)
 }
 
 // IParam
-func (user *RadUserstatus) NasPort() uint32 {
+func (user *RadUser) NasPort() uint32 {
 	return param.NasPort
 }
 
 // IParam
-func (user *RadUserstatus) NasPortType() uint32 {
+func (user *RadUser) NasPortType() uint32 {
 	return uint32(radgo.AnptIeee80211)
 }
 
 // IParam
-func (user *RadUserstatus) ServiceType() uint32 {
+func (user *RadUser) ServiceType() uint32 {
 	return uint32(radgo.AstLogin)
 }
 
 // IParam
-func (user *RadUserstatus) AuthType() uint32 {
+func (user *RadUser) AuthType() uint32 {
 	return param.AuthType
 }
 
 // IParam
-func (user *RadUserstatus) Server() string {
+func (user *RadUser) Server() string {
 	return param.RadServer
 }
 
 // IParam
-func (user *RadUserstatus) AuthPort() string {
+func (user *RadUser) AuthPort() string {
 	return param.AuthPort
 }
 
 // IParam
-func (user *RadUserstatus) AcctPort() string {
+func (user *RadUser) AcctPort() string {
 	return param.AcctPort
 }
 
 // IParam
-func (user *RadUserstatus) DmPort() string {
+func (user *RadUser) DmPort() string {
 	return param.DmPort
 }
 
 // IParam
-func (user *RadUserstatus) Timeout() uint32 {
+func (user *RadUser) Timeout() uint32 {
 	return param.RadTimeout
 }
 

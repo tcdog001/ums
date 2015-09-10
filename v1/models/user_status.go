@@ -51,11 +51,35 @@ func (this *UserStatus) Key() string {
 	return this.UserMac
 }
 
+func (this *UserStatus) Get(one interface{}) error {
+	return dbEntryGet(nil, this, one)
+}
+
+func (this *UserStatus) Pull() error {
+	return dbEntryPull(nil, this)
+}
+
+func (this *UserStatus) Exist() bool {
+	return dbEntryExist(nil, this)
+}
+
+func (this *UserStatus) Insert() error {
+	return dbEntryInsert(nil, this)
+}
+
+func (this *UserStatus) Update() error {
+	return dbEntryUpdate(nil, this)
+}
+
+func (this *UserStatus) Delete() error {
+	return dbEntryDelete(nil, this)
+}
+
 func (this *UserStatus) Register() error {
 	this.AuthTime = time.Now()
 	
 	//查找对应的mac地址是否存在，存在的话要求状态为离线
 	//用户不存在，则插入用户信息
 	
-	return DbEntryRegister(this)
+	return dbEntryRegister(nil, this)
 }

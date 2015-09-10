@@ -55,7 +55,7 @@ func (this *UserAuthController) Post() {
 	//		not registered: error, abort it
 	
 	//check with redius
-	radusr := &mod.RadUserstatus{
+	radusr := &mod.RadUser{
 		User: user,
 	}
 	

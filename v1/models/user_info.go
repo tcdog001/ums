@@ -24,7 +24,7 @@ func (this *UserInfo) Key() string {
 func (this *UserInfo) Register() error {	
 	this.LastRegisterTime = time.Now()
 	
-	return DbEntryRegister(this)
+	return dbEntryRegister(nil, this)
 }
 
 func (this *UserInfo) Init() {

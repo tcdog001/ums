@@ -40,7 +40,7 @@ func (this *UpdateController) Post() {
 		UserMac:  info.UserMac,
 	}
 	
-	if nil != mod.DbEntryPull(user) {
+	if nil != user.Pull() {
 		code.Write(this.Ctx, -2)
 		
 		return
@@ -50,7 +50,7 @@ func (this *UpdateController) Post() {
 	user.FlowUp		= info.FlowUp
 	
 	//check with radius
-	raduser := &mod.RadUserstatus{
+	raduser := &mod.RadUser{
 		User: user,
 	}
 	
@@ -68,7 +68,7 @@ func (this *UpdateController) Post() {
 	}
 	
 	//update db
-	if nil != mod.DbEntryUpdate(user) {
+	if nil != user.Update() {
 		code.Write(this.Ctx, -2)
 		
 		return
