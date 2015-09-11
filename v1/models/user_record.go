@@ -25,6 +25,14 @@ func (this *UserRecord) Key() string {
 	return this.UserName
 }
 
-func (this *UserRecord) Register() error {
-	return dbEntryRegister(nil, this)
+func LogUserRecord(user *UserStatus) {
+	record := &UserRecord {
+		UserName : user.UserName,
+		UserMac : user.UserMac,
+		DevMac : user.DevMac,
+		AuthTime : user.AuthTime,
+		DeauthTime : time.Now(),
+	}
+	
+	dbEntryInsert(nil, record)
 }

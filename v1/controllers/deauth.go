@@ -5,8 +5,12 @@ import (
 	"github.com/astaxie/beego"
 	"radgo"
 	mod "ums/v1/models"
-	"time"
 )
+
+type deauthInput struct {
+	UserMac  	string 	`json:"usermac"`
+	Reason   	int 	`json:"reason"`
+}
 
 type DeauthController struct {
 	beego.Controller
@@ -17,20 +21,23 @@ func (this *DeauthController) Get() {
 }
 
 func (this *DeauthController) Post() {
-	code := &StatusCode{}
-
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
-
-	juser := &mod.UserStatus{}
-	if err := json.Unmarshal(body, juser); nil!=err {
+	
+	//step 1: get input
+	code := &StatusCode{}
+	input := &deauthInput{}
+	
+	if err := json.Unmarshal(body, input); nil!=err {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
-
+	beego.Debug("deauth input", input)
+	
+	//step 2: get user from db
 	user := &mod.UserStatus{
-		UserMac: juser.UserMac,
+		UserMac: 	input.UserMac,
 	}
 	
 	if nil != user.Get() {
@@ -38,8 +45,9 @@ func (this *DeauthController) Post() {
 		
 		return
 	}
-		
-	//check with redius
+	user.Reason = input.Reason
+	
+	//step 3: radius acct stop
 	raduser := &mod.RadUser{
 		User: user,
 	}
@@ -62,20 +70,21 @@ func (this *DeauthController) Post() {
 		
 		return
 	}
-	//del from listener
+	
+	//step 4: delete user(db)
+	if err := user.Delete(); nil!=err {
+		beego.Debug("delete user", user, )
+		
+		// NOT abort, must do below
+	}
+	
+	//step 5: stop keepalive
 	mod.DelAlive(user.UserMac)
 	
-	//生成用户记录
-	record := &mod.UserRecord {
-		UserName : user.UserName,
-		UserMac : user.UserMac,
-		DevMac : user.DevMac,
-		AuthTime : user.AuthTime,
-		DeauthTime : time.Now(),
-	}
-	record.Register()
+	//step 6: log user record
+	mod.LogUserRecord(user)
 	
-	//返回成功
+	//step 7: output
 	code.Write(this.Ctx, 0)
 	
 	return

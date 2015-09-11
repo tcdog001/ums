@@ -114,7 +114,7 @@ func (user *RadUser) AcctOutputGigawords() uint32 {
 
 // IAcct
 func (user *RadUser) AcctTerminateCause() uint32 {
-	return radgo.DeauthReason(user.User.DeauthReason).TerminateCause()
+	return radgo.DeauthReason(user.User.Reason).TerminateCause()
 }
 
 // IAcct

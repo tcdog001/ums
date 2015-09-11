@@ -7,18 +7,19 @@ import (
 )
 
 type UserStatus struct {
-	UserName     string    `json:"username"`
-	UserIp       string    `json:"userip"`
-	UserMac      string    `orm:"pk";json:"usermac"`
-	DevMac       string    `json:"devmac"`
-	Ssid         string    `json:"ssid"`
-	AuthCode     string    `json:"authcode"`
-	FlowUp       uint64    `json:"flowup"`
-	FlowDown     uint64    `json:"flowdown"`
+	UserName     string
+	UserIp       string
+	UserMac      string    `orm:"pk"`
+	DevMac       string
+	Ssid         string
+	AuthCode     string
+	
+	FlowUp       uint64
+	FlowDown     uint64
 	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
 	
 	// radgo.DeauthReason
-	DeauthReason int       `json:"-"`
+	Reason 		 int
 	
 	// radius state, save in db
 	RadSession   	[]byte	`json:"-"`

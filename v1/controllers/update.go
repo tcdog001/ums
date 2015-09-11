@@ -25,17 +25,19 @@ func (this *UpdateController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Debug("requestBody=", string(body))
 	
+	//step 1: get input
 	code := &StatusCode{}
 	input := &updateInput{}
-	
+
 	err := json.Unmarshal(body, input)
 	if err != nil {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
-	beego.Debug("update info=", input)
+	beego.Debug("update input", input)
 
+	//step 2: get and update user(local)
 	user := &mod.UserStatus{
 		UserMac: input.UserMac,
 	}
@@ -49,7 +51,7 @@ func (this *UpdateController) Post() {
 	user.FlowDown 	= input.FlowDown
 	user.FlowUp		= input.FlowUp
 	
-	//check with radius
+	//step 3: radius acct update
 	raduser := &mod.RadUser{
 		User: user,
 	}
@@ -67,16 +69,17 @@ func (this *UpdateController) Post() {
 		return
 	}
 	
-	//update db
-	if nil != user.Update() {
-		code.Write(this.Ctx, -2)
+	//step 4: update user(db)
+	if err := user.Update(); nil!=err {
+		beego.Debug("update", user, err)
 		
-		return
+		// NOT abort when update error
+		// because not keepalive, wait timeout
+	} else {
+		//keepalive(just update ok)
+		mod.AddAlive(user.UserName, user.UserMac)
 	}
 
-	//插入listener
-	mod.AddAlive(user.UserName, user.UserMac)
-
-	//返回给设备处理结果
+	//step 5: output
 	code.Write(this.Ctx, 0)
 }

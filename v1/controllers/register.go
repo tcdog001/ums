@@ -69,7 +69,7 @@ func (this *RegisterController) Post() {
 	if nil != info.Register(exist) {
 		code.Write(this.Ctx, -5)
 		
-		return
+		return // yes, abort
 	}
 	
 	//step 5: output

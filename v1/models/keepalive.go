@@ -32,7 +32,7 @@ func run() {
 				user.Delete()
 				
 				//step 2: stop radius
-				user.DeauthReason = int(radgo.DeauthReasonAging)
+				user.Reason = int(radgo.DeauthReasonAging)
 				radusr := &RadUser{
 					User: user,
 				}
