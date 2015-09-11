@@ -7,6 +7,12 @@ import (
 	mod "ums/v1/models"
 )
 
+type updateInput struct {
+	UserMac  string `json:"usermac"`
+	FlowUp   uint64 `json:"flowup"`
+	FlowDown uint64 `json:"flowdown"`
+}
+
 type UpdateController struct {
 	beego.Controller
 }
@@ -15,39 +21,33 @@ func (this *UpdateController) Get() {
 	this.TplNames = "home.html"
 }
 
-type devUserUpdate struct {
-	UserMac  string `json:"usermac"`
-	FlowUp   uint64 `json:"flowup"`
-	FlowDown uint64 `json:"flowdown"`
-}
-
 func (this *UpdateController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Debug("requestBody=", string(body))
 	
 	code := &StatusCode{}
-	info := &devUserUpdate{}
+	input := &updateInput{}
 	
-	err := json.Unmarshal(body, info)
+	err := json.Unmarshal(body, input)
 	if err != nil {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
-	beego.Debug("update info=", info)
+	beego.Debug("update info=", input)
 
 	user := &mod.UserStatus{
-		UserMac:  info.UserMac,
+		UserMac: input.UserMac,
 	}
 	
-	if nil != user.Pull() {
+	if nil != user.Get() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
-	user.FlowDown 	= info.FlowDown
-	user.FlowUp		= info.FlowUp
+	user.FlowDown 	= input.FlowDown
+	user.FlowUp		= input.FlowUp
 	
 	//check with radius
 	raduser := &mod.RadUser{
@@ -75,7 +75,7 @@ func (this *UpdateController) Post() {
 	}
 
 	//插入listener
-	mod.AddAlive(user.UserMac)
+	mod.AddAlive(user.UserName, user.UserMac)
 
 	//返回给设备处理结果
 	code.Write(this.Ctx, 0)

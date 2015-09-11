@@ -22,23 +22,23 @@ func (this *DeauthController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
 
-	luser := &mod.UserStatus{}
-	if err := json.Unmarshal(body, luser); nil!=err {
+	juser := &mod.UserStatus{}
+	if err := json.Unmarshal(body, juser); nil!=err {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 
 	user := &mod.UserStatus{
-		UserMac: luser.UserMac,
+		UserMac: juser.UserMac,
 	}
 	
-	if nil != user.Pull() {
+	if nil != user.Get() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
-	
+		
 	//check with redius
 	raduser := &mod.RadUser{
 		User: user,

@@ -10,19 +10,31 @@ const (
 	TIMEOUT_INTERVAL = 10 //(Minute)超时时间为10分钟
 )
 
-var alive map[string]time.Time
+type aliveCache struct {
+	HitTime 	time.Time
+	UserName	string
+}
+
+var alive map[string]*aliveCache
 
 func run() {
 	for {
 		for k, v := range alive {
 			beego.Debug("key=", k, "v=", v)
 			
-			if time.Now().Sub(v) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
-				//stop redius??
+			if time.Now().Sub(v.HitTime) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
+				//step 1: unregister user
+				info := &UserInfo{
+					UserName: v.UserName,
+				}
+				info.UnRegister()
+				
+				//step 2: stop redius
+				
+				//step 3: delete user
 				user := &UserStatus{
 					UserMac: k,
-				}
-
+				}				
 				dbEntryDelete(nil, user)
 				delete(alive, k)
 			}
@@ -34,13 +46,26 @@ func run() {
 }
 
 func aliveInit() {
-	alive = make(map[string]time.Time)
+	alive = make(map[string]*aliveCache)
 
 	go run()
 }
 
-func AddAlive(mac string) {
-	alive[mac] = time.Now()
+func getAlive(mac string) *aliveCache {
+	cache := alive[mac]
+	if nil == cache {
+		cache = &aliveCache{}
+		alive[mac] = cache
+	}
+	
+	return cache
+}
+
+func AddAlive(name string, mac string) {
+	cache := getAlive(mac)
+	
+	cache.HitTime = time.Now()
+	cache.UserName = name
 }
 
 func DelAlive(mac string) {

@@ -35,8 +35,8 @@ func (this *UserStatus) Init() {
 	this.RadSession = radgo.NewSessionId(this.usermac[:], this.devmac[:])
 	this.userip = IpAddressFromString(this.UserIp)
 	
-	this.AuthCode = cutLastChar(this.AuthCode)
-	this.Ssid = cutLastChar(this.Ssid)
+	this.AuthCode = CutLastChar(this.AuthCode)
+	this.Ssid = CutLastChar(this.Ssid)
 }
 
 func (this *UserStatus) TableName() string {
@@ -51,12 +51,8 @@ func (this *UserStatus) Key() string {
 	return this.UserMac
 }
 
-func (this *UserStatus) Get(one interface{}) error {
-	return dbEntryGet(nil, this, one)
-}
-
-func (this *UserStatus) Pull() error {
-	return dbEntryPull(nil, this)
+func (this *UserStatus) Get() error {
+	return dbEntryGet(nil, this)
 }
 
 func (this *UserStatus) Exist() bool {

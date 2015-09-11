@@ -1,6 +1,6 @@
 package models
 
-func cutLastChar(s string) string {
+func CutLastChar(s string) string {
 	c := []byte(s)
 	
 	Len := len(s)

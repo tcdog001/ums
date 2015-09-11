@@ -95,7 +95,7 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//插入listener
-	mod.AddAlive(user.UserMac)
+	mod.AddAlive(user.UserName, user.UserMac)
 
 	//返回给设备处理结果
 	code.UpFlowLimit = policy.UpFlowLimit

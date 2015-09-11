@@ -78,17 +78,7 @@ func dbOrmer(o orm.Ormer) orm.Ormer {
 	}
 }
 
-func dbEntryGet(orm orm.Ormer, e IDbEntry, one interface{}) error {
-	beego.Debug("get", e.TableName(), "by entry", e)
-	err := dbOrmer(orm).QueryTable(e.TableName()).
-			Filter(e.KeyName(), e.Key()).
-			One(one)
-	beego.Debug("get", e.TableName(), "new entry", one)
-	
-	return err
-}
-
-func dbEntryPull(orm orm.Ormer, e IDbEntry) error {	
+func dbEntryGet(orm orm.Ormer, e IDbEntry) error {	
 	beego.Debug("before pull", e.TableName(), "entry", e)
 	err := dbOrmer(orm).QueryTable(e.TableName()).
 			Filter(e.KeyName(), e.Key()).
