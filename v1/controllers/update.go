@@ -42,7 +42,7 @@ func (this *UpdateController) Post() {
 
 	err := json.Unmarshal(body, input)
 	if err != nil {
-		code.Write(this.Ctx, -2)
+		code.Write(this.Ctx, ErrUmsInputError)
 		
 		return
 	}
@@ -51,7 +51,7 @@ func (this *UpdateController) Post() {
 	//step 2: get and update user(local)
 	user := input.UserStatus()
 	if nil != user.Get() {
-		code.Write(this.Ctx, -2)
+		code.Write(this.Ctx, ErrUmsUserStatusNotExist)
 		
 		return
 	}
@@ -64,12 +64,12 @@ func (this *UpdateController) Post() {
 	err2, res2 := radgo.ClientAcctUpdate(raduser)
 	if err2 != nil {
 		beego.Debug("error:Failed when check with radius!")
-		code.Write(this.Ctx, -3)
+		code.Write(this.Ctx, ErrUmsRadAcctUpdateError)
 		
 		return
 	}else if res2 != nil {
 		beego.Debug("error:Radius failed!")
-		code.Write(this.Ctx, -3)
+		code.Write(this.Ctx, ErrUmsRadError)
 		
 		return
 	}

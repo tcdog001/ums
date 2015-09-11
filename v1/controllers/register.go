@@ -40,7 +40,7 @@ func (this *RegisterController) Post() {
 	code := &StatusCode{}
 	input := &registerInput{}
 	if err := json.Unmarshal(body, input); err != nil {
-		code.Write(this.Ctx, -2)
+		code.Write(this.Ctx, ErrUmsInputError)
 		
 		return
 	}
@@ -54,7 +54,7 @@ func (this *RegisterController) Post() {
 		exist = true
 		
 		if info.Registered { // have registered
-			code.Write(this.Ctx, -3)
+			code.Write(this.Ctx, ErrUmsUserInfoRegistered)
 		
 			return
 		}
@@ -64,14 +64,14 @@ func (this *RegisterController) Post() {
 	res, err := sms_fx.SendCreateAccount(webserver, input.UserName, 10)
 	if err != nil || (nil!=res && !res.Result) {
 		beego.Debug("error:Check with sms server failed!")
-		code.Write(this.Ctx, -4)
+		code.Write(this.Ctx, ErrUmsSmsError)
 		
 		return
 	}
 	
 	//step 4: register to db
 	if nil != info.Register(exist) {
-		code.Write(this.Ctx, -5)
+		code.Write(this.Ctx, ErrUmsUserInfoRegisterError)
 		
 		return // yes, abort
 	}
