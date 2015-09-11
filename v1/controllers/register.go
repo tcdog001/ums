@@ -16,6 +16,12 @@ func (this *registerInput) Init() {
 	this.UserName = mod.CutLastChar(this.UserName)
 }
 
+func (this *registerInput) UserInfo() *mod.UserInfo {
+	return &mod.UserInfo{
+		UserName: this.UserName,
+	}
+}
+
 type RegisterController struct {
 	beego.Controller
 }
@@ -41,9 +47,7 @@ func (this *RegisterController) Post() {
 	input.Init()
 	
 	//step 2: have registered ?
-	info := &mod.UserInfo{
-		UserName: input.UserName,
-	}
+	info := input.UserInfo()
 
 	exist := false
 	if nil == info.Get() { // exist

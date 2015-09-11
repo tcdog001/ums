@@ -13,6 +13,17 @@ type updateInput struct {
 	FlowDown uint64 `json:"flowdown"`
 }
 
+func (this *updateInput) UserStatus() *mod.UserStatus {
+	return &mod.UserStatus{
+		UserMac: this.UserMac,
+	}
+}
+
+func (this *updateInput) UpdateUserStatus(user *mod.UserStatus) {
+	user.FlowDown 	= this.FlowDown
+	user.FlowUp		= this.FlowUp
+}
+
 type UpdateController struct {
 	beego.Controller
 }
@@ -38,23 +49,17 @@ func (this *UpdateController) Post() {
 	beego.Debug("update input", input)
 
 	//step 2: get and update user(local)
-	user := &mod.UserStatus{
-		UserMac: input.UserMac,
-	}
-	
+	user := input.UserStatus()
 	if nil != user.Get() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
-	user.FlowDown 	= input.FlowDown
-	user.FlowUp		= input.FlowUp
+	input.UpdateUserStatus(user)
 	
 	//step 3: radius acct update
-	raduser := &mod.RadUser{
-		User: user,
-	}
+	raduser := user.RadUser()
 	
 	err2, res2 := radgo.ClientAcctUpdate(raduser)
 	if err2 != nil {

@@ -47,6 +47,23 @@ func (this *authInput) Init() {
 	this.UserName = mod.CutLastChar(this.UserName)
 }
 
+func (this *authInput) UserInfo() *mod.UserInfo {
+	return &mod.UserInfo{
+		UserName: this.UserName,
+	}
+}
+
+func (this *authInput) UserStatus() *mod.UserStatus {
+	return &mod.UserStatus{
+		UserName:	this.UserName,
+		UserIp:		this.UserIp,
+		UserMac:	this.UserMac,
+		DevMac:		this.DevMac,
+		Ssid:		this.Ssid,
+		AuthCode:	this.AuthCode,
+	}
+}
+
 type UserAuthController struct {
 	beego.Controller
 }
@@ -76,10 +93,7 @@ func (this *UserAuthController) Post() {
 	beego.Debug("auth input", input)
 	
 	//step 2: check registered
-	info := &mod.UserInfo{
-		UserName: input.UserName,
-	}
-	
+	info := input.UserInfo()	
 	if !info.IsRegistered() {
 		code.Write(this.Ctx, -3)
 		
@@ -87,18 +101,8 @@ func (this *UserAuthController) Post() {
 	}
 	
 	//step 3: radius auth and acct start
-	user := &mod.UserStatus{
-		UserName:	input.UserName,
-		UserIp:		input.UserIp,
-		UserMac:	input.UserMac,
-		DevMac:		input.DevMac,
-		Ssid:		input.Ssid,
-		AuthCode:	input.AuthCode,
-	}
-	
-	raduser := &mod.RadUser{
-		User: user,
-	}
+	user := input.UserStatus()
+	raduser := user.RadUser()
 	
 	policy, err, aerr := radgo.ClientAuth(raduser)
 	if nil != err {

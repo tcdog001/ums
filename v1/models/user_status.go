@@ -82,3 +82,9 @@ func (this *UserStatus) Register() error {
 	
 	return dbEntryRegister(nil, this)
 }
+
+func (this *UserStatus) RadUser() *RadUser {
+	return &RadUser{
+		User: this,
+	}
+}

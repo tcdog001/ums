@@ -12,6 +12,12 @@ type deauthInput struct {
 	Reason   	int 	`json:"reason"`
 }
 
+func (this *deauthInput) UserStatus() *mod.UserStatus {
+	return &mod.UserStatus{
+		UserMac: this.UserMac,
+	}
+}
+
 type DeauthController struct {
 	beego.Controller
 }
@@ -36,10 +42,7 @@ func (this *DeauthController) Post() {
 	beego.Debug("deauth input", input)
 	
 	//step 2: get user from db
-	user := &mod.UserStatus{
-		UserMac: 	input.UserMac,
-	}
-	
+	user := input.UserStatus()	
 	if nil != user.Get() {
 		code.Write(this.Ctx, -2)
 		
@@ -48,10 +51,7 @@ func (this *DeauthController) Post() {
 	user.Reason = input.Reason
 	
 	//step 3: radius acct stop
-	raduser := &mod.RadUser{
-		User: user,
-	}
-	
+	raduser := user.RadUser()
 	if err, aerr := radgo.ClientAcctStop(raduser); err != nil {
 		beego.Debug("error:Failed when check with radius!")
 		code.Write(this.Ctx, -3)
