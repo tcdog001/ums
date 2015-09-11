@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 	"radgo"
 	mod "ums/v1/models"
 )
@@ -22,6 +23,17 @@ type AuthCode struct {
 	DownRateAvg   uint32 `json:"downrateavg"`
 }
 
+func (me *AuthCode) WritePolicy(ctx *context.Context, policy *radgo.Policy) {
+	me.UpFlowLimit 		= policy.UpFlowLimit
+	me.UpRateMax 		= policy.UpRateMax
+	me.UpRateAvg 		= policy.UpRateAvg
+	me.DownFlowLimit 	= policy.DownFlowLimit
+	me.DownRateMax 		= policy.DownRateMax
+	me.DownRateAvg 		= policy.DownRateAvg
+	
+	me.Write(ctx, 0)
+}
+
 type UserAuthController struct {
 	beego.Controller
 }
@@ -38,28 +50,33 @@ func (this *UserAuthController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
 
+	//step 1: get input
 	code := &AuthCode{}
 	user := &mod.UserStatus{}
-	
 	if err := json.Unmarshal(body, user); err != nil {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	user.Init()
-	//var policy radgo.Policy
-
-	// liujf:
-	//	check user state from db
-	// 		is registered: go on
-	//		not registered: error, abort it
 	
-	//check with redius
+	//step 2: check registered
+	info := &mod.UserInfo{
+		UserName: user.UserName,
+	}
+	
+	if !info.IsRegistered() {
+		code.Write(this.Ctx, -3)
+		
+		return
+	}
+	
+	//step 3: radius auth and acct start
+	var policy *radgo.Policy
+	
 	radusr := &mod.RadUser{
 		User: user,
 	}
-	
-	var policy *radgo.Policy
 	
 	if p, err, aerr := radgo.ClientAuth(radusr); err != nil {
 		beego.Info("ClientAuth:username/password failed!")
@@ -80,32 +97,25 @@ func (this *UserAuthController) Post() {
 		code.Write(this.Ctx, -3)
 		
 		return
-	}else if aerr != nil {
+	} else if aerr != nil {
 		beego.Info("ClientAcctStart:Radius failed!")
 		code.Write(this.Ctx, -3)
 		
 		return
 	}
 	
-	//注册user到数据库
+	//step 4: register user status
 	if nil == user.Register() {
 		code.Write(this.Ctx, -2)
 		
 		return
 	}
 	
-	//插入listener
+	//step 5: keepalive
 	mod.AddAlive(user.UserName, user.UserMac)
 
-	//返回给设备处理结果
-	code.UpFlowLimit = policy.UpFlowLimit
-	code.UpRateMax = policy.UpRateMax
-	code.UpRateAvg = policy.UpRateAvg
-	code.DownFlowLimit = policy.DownFlowLimit
-	code.DownRateMax = policy.DownRateMax
-	code.DownRateAvg = policy.DownRateAvg
-	
-	code.Write(this.Ctx, 0)
+	//step 6: output
+	code.WritePolicy(this.Ctx, policy)
 
 	return
 }

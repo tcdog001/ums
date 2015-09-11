@@ -21,7 +21,7 @@ var alive map[string]*aliveCache
 func run() {
 	for {
 		for k, v := range alive {
-			beego.Debug("key=", k, "v=", v)
+			beego.Debug("keepalive", k, v)
 			
 			if time.Now().Sub(v.HitTime) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
 				//step 1: get and delete user status

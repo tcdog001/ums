@@ -27,12 +27,10 @@ func (this *RegisterController) Get() {
 var webserver = beego.AppConfig.String("WbServer")
 
 func (this *RegisterController) Post() {
-	//解析json
-	//insert regtable
-	//request webserver
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
-
+	
+	//step 1: get input
 	code := &StatusCode{}
 	input := &registerInput{}
 	if err := json.Unmarshal(body, input); err != nil {
@@ -40,8 +38,9 @@ func (this *RegisterController) Post() {
 		
 		return
 	}
-	
 	input.Init()
+	
+	//step 2: have registered ?
 	info := &mod.UserInfo{
 		UserName: input.UserName,
 	}
@@ -57,7 +56,7 @@ func (this *RegisterController) Post() {
 		}
 	}
 	
-	//check with sms webserver
+	//step 3: register to sms webserver
 	res, err := sms_fx.SendCreateAccount(webserver, input.UserName, 10)
 	if err != nil || (nil!=res && !res.Result) {
 		beego.Debug("error:Check with sms server failed!")
@@ -66,15 +65,14 @@ func (this *RegisterController) Post() {
 		return
 	}
 	
-	//注册account到数据库
+	//step 4: register to db
 	if nil != info.Register(exist) {
 		code.Write(this.Ctx, -5)
 		
 		return
-		
 	}
 	
-	//返回给设备处理结果
+	//step 5: output
 	code.Write(this.Ctx, 0)
 	
 	return
