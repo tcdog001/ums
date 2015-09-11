@@ -42,6 +42,10 @@ func (this *UserInfo) Update() error {
 	return dbEntryUpdate(nil, this)
 }
 
+func (this *UserInfo) Delete() error {
+	return dbEntryDelete(nil, this)
+}
+
 func (this *UserInfo) Register(exist bool) error {
 	this.Registered = true
 	this.LastRegisterTime = time.Now()

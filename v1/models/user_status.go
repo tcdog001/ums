@@ -16,6 +16,8 @@ type UserStatus struct {
 	FlowUp       uint64    `json:"flowup"`
 	FlowDown     uint64    `json:"flowdown"`
 	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
+	
+	// radgo.DeauthReason
 	DeauthReason int       `json:"-"`
 	
 	// radius state, save in db

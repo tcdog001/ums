@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego"
+	"radgo"
 	"time"
 )
 
@@ -23,19 +24,27 @@ func run() {
 			beego.Debug("key=", k, "v=", v)
 			
 			if time.Now().Sub(v.HitTime) >= time.Duration(TIMEOUT_INTERVAL)*time.Minute {
-				//step 1: unregister user
+				//step 1: get and delete user status
+				user := &UserStatus{
+					UserMac: k,
+				}
+				user.Get() // first get for stop radius
+				user.Delete()
+				
+				//step 2: stop radius
+				user.DeauthReason = int(radgo.DeauthReasonAging)
+				radusr := &RadUser{
+					User: user,
+				}
+				radgo.ClientAcctStop(radusr)
+				
+				//step 3: unregister user info
 				info := &UserInfo{
 					UserName: v.UserName,
 				}
 				info.UnRegister()
 				
-				//step 2: stop redius
-				
-				//step 3: delete user
-				user := &UserStatus{
-					UserMac: k,
-				}				
-				dbEntryDelete(nil, user)
+				//step 4: delete alive
 				delete(alive, k)
 			}
 		}
