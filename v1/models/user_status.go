@@ -16,15 +16,15 @@ type UserStatus struct {
 	
 	FlowUp       uint64
 	FlowDown     uint64
-	AuthTime     time.Time `orm:"type(datetime)";json:"-"`
+	AuthTime     time.Time `orm:"type(datetime)"`
 	
 	// radgo.DeauthReason
 	Reason 		 int
 	
 	// radius state, save in db
-	RadSession   	[]byte	`json:"-"`
-	RadClass 		[]byte	`json:"-"`
-	RadChallenge	[]byte	`json:"-"`
+	RadSession   	[]byte
+	RadClass 		[]byte
+	RadChallenge	[]byte
 	
 	// cache
 	devmac       	[6]byte
@@ -76,9 +76,6 @@ func (this *UserStatus) Delete() error {
 
 func (this *UserStatus) Register() error {
 	this.AuthTime = time.Now()
-	
-	//查找对应的mac地址是否存在，存在的话要求状态为离线
-	//用户不存在，则插入用户信息
 	
 	return dbEntryRegister(nil, this)
 }
