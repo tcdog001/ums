@@ -40,9 +40,8 @@ func (this *UpdateController) Post() {
 	code := &StatusCode{}
 	input := &updateInput{}
 
-	err := json.Unmarshal(body, input)
-	if err != nil {
-		code.Write(this.Ctx, ErrUmsInputError)
+	if err := json.Unmarshal(body, input); nil != err {
+		code.Write(this.Ctx, ErrUmsInputError, err)
 		
 		return
 	}
@@ -51,7 +50,7 @@ func (this *UpdateController) Post() {
 	//step 2: get and update user(local)
 	user := input.UserStatus()
 	if nil != user.Get() {
-		code.Write(this.Ctx, ErrUmsUserStatusNotExist)
+		code.Write(this.Ctx, ErrUmsUserStatusNotExist, nil)
 		
 		return
 	}
@@ -61,15 +60,13 @@ func (this *UpdateController) Post() {
 	//step 3: radius acct update
 	raduser := user.RadUser()
 	
-	err2, res2 := radgo.ClientAcctUpdate(raduser)
-	if err2 != nil {
-		beego.Debug("error:Failed when check with radius!")
-		code.Write(this.Ctx, ErrUmsRadAcctUpdateError)
+	
+	if err, aerr := radgo.ClientAcctUpdate(raduser); nil != err {
+		code.Write(this.Ctx, ErrUmsRadAcctUpdateError, err)
 		
 		return
-	}else if res2 != nil {
-		beego.Debug("error:Radius failed!")
-		code.Write(this.Ctx, ErrUmsRadError)
+	}else if nil != aerr {
+		code.Write(this.Ctx, ErrUmsRadError, aerr)
 		
 		return
 	}
@@ -86,5 +83,5 @@ func (this *UpdateController) Post() {
 	}
 
 	//step 5: output
-	code.Write(this.Ctx, 0)
+	code.Write(this.Ctx, 0, nil)
 }

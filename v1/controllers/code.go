@@ -7,15 +7,15 @@ import (
 )
 
 type StatusCode struct {
-	Code int64 `json:"code"`
+	Code int `json:"code"`
 }
 
-func (me *StatusCode) Write(ctx *context.Context, code int64) {
-	me.Code = code
+func (me *StatusCode) Write(ctx *context.Context, code EUmsError, err error) {
+	me.Code = int(code)
 	
-	wc, _ := json.Marshal(me)
+	j, _ := json.Marshal(me)
 	
-	ctx.WriteString(string(wc))
+	ctx.WriteString(string(j))
 	
-	beego.Info(string(wc))
+	beego.Info(string(j), code.ToString(), err)
 }

@@ -35,7 +35,7 @@ func (this *DeauthController) Post() {
 	input := &deauthInput{}
 	
 	if err := json.Unmarshal(body, input); nil!=err {
-		code.Write(this.Ctx, ErrUmsInputError)
+		code.Write(this.Ctx, ErrUmsInputError, err)
 		
 		return
 	}
@@ -44,7 +44,7 @@ func (this *DeauthController) Post() {
 	//step 2: get user from db
 	user := input.UserStatus()	
 	if nil != user.Get() {
-		code.Write(this.Ctx, ErrUmsUserStatusNotExist)
+		code.Write(this.Ctx, ErrUmsUserStatusNotExist, nil)
 		
 		return
 	}
@@ -53,20 +53,18 @@ func (this *DeauthController) Post() {
 	//step 3: radius acct stop
 	raduser := user.RadUser()
 	if err, aerr := radgo.ClientAcctStop(raduser); err != nil {
-		beego.Debug("error:Failed when check with radius!")
-		code.Write(this.Ctx, ErrUmsRadAcctStopError)
+		code.Write(this.Ctx, ErrUmsRadAcctStopError, err)
 		
 		return
 	} else if aerr != nil {
-		beego.Debug("error:Radius failed!")
-		code.Write(this.Ctx, ErrUmsRadError)
+		code.Write(this.Ctx, ErrUmsRadError, aerr)
 		
 		return
 	}
 	beego.Debug("Redius stop success!")
 
 	if nil != user.Delete() {
-		code.Write(this.Ctx, ErrUmsUserStatusDeleteError)
+		code.Write(this.Ctx, ErrUmsUserStatusDeleteError, nil)
 		
 		return
 	}
@@ -85,7 +83,7 @@ func (this *DeauthController) Post() {
 	mod.LogUserRecord(user)
 	
 	//step 7: output
-	code.Write(this.Ctx, 0)
+	code.Write(this.Ctx, 0, nil)
 	
 	return
 }

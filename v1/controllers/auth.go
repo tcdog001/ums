@@ -31,7 +31,7 @@ func (me *AuthStatusCode) WritePolicy(ctx *context.Context, policy *radgo.Policy
 	me.DownRateMax 		= policy.DownRateMax
 	me.DownRateAvg 		= policy.DownRateAvg
 	
-	me.Write(ctx, 0)
+	me.Write(ctx, 0, nil)
 }
 
 type authInput struct {
@@ -85,7 +85,7 @@ func (this *UserAuthController) Post() {
 	input := &authInput{}
 	
 	if err := json.Unmarshal(body, input); err != nil {
-		code.Write(this.Ctx, ErrUmsInputError)
+		code.Write(this.Ctx, ErrUmsInputError, err)
 		
 		return
 	}
@@ -95,7 +95,7 @@ func (this *UserAuthController) Post() {
 	//step 2: check registered
 	info := input.UserInfo()	
 	if !info.IsRegistered() {
-		code.Write(this.Ctx, ErrUmsUserInfoNotRegistered)
+		code.Write(this.Ctx, ErrUmsUserInfoNotRegistered, nil)
 		
 		return
 	}
@@ -106,26 +106,22 @@ func (this *UserAuthController) Post() {
 	
 	policy, err, aerr := radgo.ClientAuth(raduser)
 	if nil != err {
-		beego.Info("ClientAuth:username/password failed!")
-		code.Write(this.Ctx, ErrUmsRadAuthError)
+		code.Write(this.Ctx, ErrUmsRadAuthError, err)
 		
 		return
 	} else if nil != aerr {
-		beego.Info("ClientAuth:Radius failed!")
-		code.Write(this.Ctx, ErrUmsRadError)
+		code.Write(this.Ctx, ErrUmsRadError, aerr)
 		
 		return
 	}
 	
 	err, aerr = radgo.ClientAcctStart(raduser)
 	if nil != err {
-		beego.Info("ClientAcctStart:Failed when check with radius!")
-		code.Write(this.Ctx, ErrUmsRadAcctStartError)
+		code.Write(this.Ctx, ErrUmsRadAcctStartError, err)
 		
 		return
 	} else if nil != aerr {
-		beego.Info("ClientAcctStart:Radius failed!")
-		code.Write(this.Ctx, ErrUmsRadError)
+		code.Write(this.Ctx, ErrUmsRadError, aerr)
 		
 		return
 	}
@@ -138,7 +134,7 @@ func (this *UserAuthController) Post() {
 		user.Reason = int(radgo.DeauthReasonNasError)
 		radgo.ClientAcctStop(raduser)
 		
-		code.Write(this.Ctx, ErrUmsUserStatusRegisterError)
+		code.Write(this.Ctx, ErrUmsUserStatusRegisterError, err)
 		return
 	}
 	
