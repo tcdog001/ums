@@ -60,12 +60,11 @@ func (this *UpdateController) Post() {
 	//step 3: radius acct update
 	raduser := user.RadUser()
 	
-	
 	if err, aerr := radgo.ClientAcctUpdate(raduser); nil != err {
 		code.Write(this.Ctx, ErrUmsRadAcctUpdateError, err)
 		
 		return
-	}else if nil != aerr {
+	} else if nil != aerr {
 		code.Write(this.Ctx, ErrUmsRadError, aerr)
 		
 		return

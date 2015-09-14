@@ -73,10 +73,6 @@ func (this *UserAuthController) Get() {
 }
 
 func (this *UserAuthController) Post() {
-	//解析json
-	//查询redius(验证码+phoneno)
-	//insert userinfotable
-	//modify statmap
 	body := this.Ctx.Input.RequestBody
 	beego.Info("request body=", string(body))
 
