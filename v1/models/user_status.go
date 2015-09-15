@@ -31,7 +31,7 @@ type UserStatus struct {
 	devmac       	[6]byte
 	usermac      	[6]byte
 	userip 		 	IpAddress
-	challenge 		[radgo.ChapChallengeSize]byte
+	challenge 		[]byte
 }
 
 func (this *UserStatus) Init() {
@@ -57,13 +57,11 @@ func (this *UserStatus) Key() string {
 }
 
 func (this *UserStatus) encode() {
-	this.RadChallenge = hex.EncodeToString(this.challenge[:])
+	this.RadChallenge = hex.EncodeToString(this.challenge)
 }
 
 func (this *UserStatus) decode() {
-	b, _ := hex.DecodeString(this.RadChallenge)
-	
-	copy(this.challenge[:], b)
+	this.challenge, _ = hex.DecodeString(this.RadChallenge)
 }
 
 func (this *UserStatus) Get() error {

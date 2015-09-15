@@ -129,12 +129,12 @@ func (user *RadUser) SetClass(c []byte) {
 
 // IAcct
 func (user *RadUser) GetChapChallenge() []byte {
-	return user.User.challenge[:]
+	return user.User.challenge
 }
 
 // IAcct
 func (user *RadUser) SetChapChallenge(c []byte) {
-	copy(user.User.challenge[:], c)
+	user.User.challenge = c
 	
 	user.User.encode()
 }
