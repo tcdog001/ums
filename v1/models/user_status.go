@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/hex"
 	. "asdf"
 	"radgo"
 	"time"
@@ -22,14 +23,15 @@ type UserStatus struct {
 	Reason 		 int
 	
 	// radius state, save in db
-	RadSession   	[]byte
-	RadClass 		[]byte
-	RadChallenge	[]byte
+	RadSession   	string
+	RadClass 		string
+	RadChallenge	string	// hex
 	
 	// cache
 	devmac       	[6]byte
 	usermac      	[6]byte
 	userip 		 	IpAddress
+	challenge 		[radgo.ChapChallengeSize]byte
 }
 
 func (this *UserStatus) Init() {
@@ -54,8 +56,23 @@ func (this *UserStatus) Key() string {
 	return this.UserMac
 }
 
+func (this *UserStatus) encode() {
+	this.RadChallenge = hex.EncodeToString(this.challenge[:])
+}
+
+func (this *UserStatus) decode() {
+	b, _ := hex.DecodeString(this.RadChallenge)
+	
+	copy(this.challenge[:], b)
+}
+
 func (this *UserStatus) Get() error {
-	return dbEntryGet(nil, this)
+	err := dbEntryGet(nil, this)
+	if nil == err {
+		this.decode()
+	}
+	
+	return err
 }
 
 func (this *UserStatus) Exist() bool {

@@ -74,7 +74,7 @@ func (user *RadUser) DevMac() []byte {
 func (user *RadUser) SessionId() []byte {
 	// return user session
 	// when new user, use ClientSessionId init session
-	return user.User.RadSession
+	return []byte(user.User.RadSession)
 }
 
 // IAcct
@@ -119,22 +119,24 @@ func (user *RadUser) AcctTerminateCause() uint32 {
 
 // IAcct
 func (user *RadUser) GetClass() []byte {
-	return user.User.RadClass
+	return []byte(user.User.RadClass)
 }
 
 // IAcct
 func (user *RadUser) SetClass(c []byte) {
-	user.User.RadClass = c
+	user.User.RadClass = string(c)
 }
 
 // IAcct
 func (user *RadUser) GetChapChallenge() []byte {
-	return user.User.RadChallenge
+	return user.User.challenge[:]
 }
 
 // IAcct
 func (user *RadUser) SetChapChallenge(c []byte) {
-	user.User.RadChallenge = c
+	copy(user.User.challenge[:], c)
+	
+	user.User.encode()
 }
 
 // IParam
