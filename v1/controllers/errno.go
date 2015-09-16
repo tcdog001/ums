@@ -4,29 +4,29 @@ import (
 	. "asdf"
 )
 
-type EUmsError 	int
+type EUmsError int
 
 const (
-	ErrUmsBegin						EUmsError = 0
-	
-	ErrUmsOk						EUmsError = 0
-	ErrUmsSmsError					EUmsError = 1
-	ErrUmsInputError 				EUmsError = 2
-	ErrUmsUserInfoRegistered		EUmsError = 3
-	ErrUmsUserInfoNotRegistered 	EUmsError = 4
-	ErrUmsUserInfoRegisterError		EUmsError = 5
-	ErrUmsUserStatusNotExist 		EUmsError = 6
-	ErrUmsUserStatusDeleteError 	EUmsError = 7
-	ErrUmsUserStatusRegisterError 	EUmsError = 8
-	ErrUmsRadError					EUmsError = 9
-	ErrUmsRadAuthError				EUmsError = 10
-	ErrUmsRadAcctStartError			EUmsError = 11
-	ErrUmsRadAcctUpdateError		EUmsError = 12
-	ErrUmsRadAcctStopError			EUmsError = 13
-	
-	ErrUmsEnd 						EUmsError = 14
-)
+	ErrUmsBegin EUmsError = 0
 
+	ErrUmsOk                      EUmsError = 0
+	ErrUmsSmsError                EUmsError = 1
+	ErrUmsInputError              EUmsError = 2
+	ErrUmsUserInfoRegistered      EUmsError = 3
+	ErrUmsUserInfoNotRegistered   EUmsError = 4
+	ErrUmsUserInfoRegisterError   EUmsError = 5
+	ErrUmsUserStatusNotExist      EUmsError = 6
+	ErrUmsUserHaveBeenDeauthed    EUmsError = 7
+	ErrUmsUserStatusDeleteError   EUmsError = 8
+	ErrUmsUserStatusRegisterError EUmsError = 9
+	ErrUmsRadError                EUmsError = 10
+	ErrUmsRadAuthError            EUmsError = 11
+	ErrUmsRadAcctStartError       EUmsError = 12
+	ErrUmsRadAcctUpdateError      EUmsError = 13
+	ErrUmsRadAcctStopError        EUmsError = 14
+
+	ErrUmsEnd EUmsError = 15
+)
 
 func (me EUmsError) Tag() string {
 	return "Ums Error"
@@ -65,18 +65,19 @@ func (me EUmsError) ToString() string {
 }
 
 var errUmsBind = [ErrUmsEnd]string{
-	ErrUmsOk:						"ok",
-	ErrUmsSmsError:					"sms error",
-	ErrUmsInputError:				"input error",
-	ErrUmsUserInfoRegistered:		"user info have registered",
-	ErrUmsUserInfoNotRegistered:	"user info NOT registered",
-	ErrUmsUserInfoRegisterError:	"user info register error",
-	ErrUmsUserStatusNotExist:		"user status NOT exist",
-	ErrUmsUserStatusDeleteError:	"user status delete error",
-	ErrUmsUserStatusRegisterError:	"user status register error",
-	ErrUmsRadError:					"radius error",
-	ErrUmsRadAuthError:				"radius auth error",
-	ErrUmsRadAcctStartError:		"radius acct start error",
-	ErrUmsRadAcctUpdateError:		"radius acct update error",
-	ErrUmsRadAcctStopError:			"radius acct stop error",
+	ErrUmsOk:                      "ok",
+	ErrUmsSmsError:                "sms error",
+	ErrUmsInputError:              "input error",
+	ErrUmsUserInfoRegistered:      "user info have registered",
+	ErrUmsUserInfoNotRegistered:   "user info NOT registered",
+	ErrUmsUserInfoRegisterError:   "user info register error",
+	ErrUmsUserStatusNotExist:      "user status NOT exist",
+	ErrUmsUserHaveBeenDeauthed:    "user status have been deleted",
+	ErrUmsUserStatusDeleteError:   "user status delete error",
+	ErrUmsUserStatusRegisterError: "user status register error",
+	ErrUmsRadError:                "radius error",
+	ErrUmsRadAuthError:            "radius auth error",
+	ErrUmsRadAcctStartError:       "radius acct start error",
+	ErrUmsRadAcctUpdateError:      "radius acct update error",
+	ErrUmsRadAcctStopError:        "radius acct stop error",
 }

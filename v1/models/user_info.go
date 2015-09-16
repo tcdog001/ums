@@ -5,9 +5,9 @@ import (
 )
 
 type UserInfo struct {
-	UserName         	string    `orm:"pk"`
-	Registered 			bool
-	LastRegisterTime 	time.Time
+	UserName string `orm:"pk"`
+	//Registered       bool
+	LastRegisterTime time.Time
 }
 
 func (this *UserInfo) TableName() string {
@@ -26,11 +26,11 @@ func (this *UserInfo) Init() {
 	this.UserName = CutLastChar(this.UserName)
 }
 
-func (this *UserInfo) Get() error {	
+func (this *UserInfo) Get() error {
 	return dbEntryGet(nil, this)
 }
 
-func (this *UserInfo) Exist() bool {	
+func (this *UserInfo) Exist() bool {
 	return dbEntryExist(nil, this)
 }
 
@@ -47,26 +47,21 @@ func (this *UserInfo) Delete() error {
 }
 
 func (this *UserInfo) IsRegistered() bool {
-	return nil==this.Get() && this.Registered
+	return nil == this.Get()
 }
 
-func (this *UserInfo) Register(exist bool) error {
-	this.Registered = true
+func (this *UserInfo) Register() error {
+	//this.Registered = true
 	this.LastRegisterTime = time.Now()
-	
-	if exist {
-		return this.Update()
-	} else {
-		return this.Insert()
-	}
+	return dbEntryRegister(nil, this)
 }
 
 func (this *UserInfo) UnRegister() error {
-	if err := this.Get(); nil!=err {
+	if err := this.Get(); nil != err {
 		return err
 	}
-	
-	this.Registered = false
-	
+
+	//this.Registered = false
+
 	return this.Update()
 }

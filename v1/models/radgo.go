@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/logs"
 	"radgo"
 	"strconv"
+	"strings"
 )
 
 //************************************************
@@ -79,7 +80,10 @@ func (user *RadUser) SessionId() []byte {
 
 // IAcct
 func (user *RadUser) UserName() []byte {
-	return []byte(user.User.UserName)
+	a := []string{user.User.UserName, "@windfind.static@ish"}
+	b := strings.Join(a, "")
+	beego.Debug("radgo.go.85 username=", b)
+	return []byte(b)
 }
 
 // IAcct
@@ -135,7 +139,7 @@ func (user *RadUser) GetChapChallenge() []byte {
 // IAcct
 func (user *RadUser) SetChapChallenge(c []byte) {
 	user.User.challenge = c
-	
+
 	user.User.encode()
 }
 
@@ -201,18 +205,18 @@ func (user *RadUser) Timeout() uint32 {
 }
 
 type radParam struct {
-	RadSecret		string
-	NasIdentifier	string
-	RadServer		string
-	AuthPort		string
-	AcctPort 		string
-	DmPort			string
-	
-	NasIpAddress	IpAddress
-	
-	NasPort 		uint32
-	RadTimeout		uint32
-	AuthType 		uint32
+	RadSecret     string
+	NasIdentifier string
+	RadServer     string
+	AuthPort      string
+	AcctPort      string
+	DmPort        string
+
+	NasIpAddress IpAddress
+
+	NasPort    uint32
+	RadTimeout uint32
+	AuthType   uint32
 }
 
 var param = &radParam{}
@@ -223,7 +227,7 @@ func radParamString(name string) string {
 
 func radParamUint32(name string) uint32 {
 	i, _ := strconv.Atoi(radParamString(name))
-	
+
 	return uint32(i)
 }
 
@@ -232,16 +236,16 @@ func radParamIpAddress(name string) IpAddress {
 }
 
 func radParamInit() {
-	param.RadSecret 	= radParamString("RadSecret")
+	param.RadSecret = radParamString("RadSecret")
 	param.NasIdentifier = radParamString("NasIdentifier")
-	param.RadServer 	= radParamString("RadServer")
-	param.AuthPort 		= radParamString("AuthPort")
-	param.AcctPort 		= radParamString("AcctPort")
-	param.DmPort 		= radParamString("DmPort")
-	
-	param.NasIpAddress 	= radParamIpAddress("NasIpAddress")
-	
-	param.AuthType 		= radParamUint32("AuthType")
-	param.NasPort 		= radParamUint32("NasPort")
-	param.RadTimeout	= radParamUint32("RadTimeout")
+	param.RadServer = radParamString("RadServer")
+	param.AuthPort = radParamString("AuthPort")
+	param.AcctPort = radParamString("AcctPort")
+	param.DmPort = radParamString("DmPort")
+
+	param.NasIpAddress = radParamIpAddress("NasIpAddress")
+
+	param.AuthType = radParamUint32("AuthType")
+	param.NasPort = radParamUint32("NasPort")
+	param.RadTimeout = radParamUint32("RadTimeout")
 }

@@ -17,14 +17,14 @@ var ormer orm.Ormer
 var localSwitch = true
 
 func dbInit() {
-	orm.RegisterModel(new(UserInfo), new(UserStatus),new(UserRecord))
-	
+	orm.RegisterModel(new(UserInfo), new(UserStatus), new(UserRecord))
+
 	//register mysql driver
 	err := orm.RegisterDriver("mysql", orm.DR_MySQL)
 	if err != nil {
 		beego.Critical(err)
 	}
-	
+
 	//register default database
 	if !localSwitch {
 		orm.RegisterDataBase("default", "mysql", "autelan:Autelan1202@tcp(rdsrenv7vrenv7v.mysql.rds.aliyuncs.com:3306)/umsdb?charset=utf8&&loc=Asia%2FShanghai")
@@ -35,8 +35,8 @@ func dbInit() {
 		dbUser := beego.AppConfig.String("DbUser")
 		dbPassword := beego.AppConfig.String("DbPassword")
 
-		dbUrl := dbUser + ":" + dbPassword + 
-			"@tcp(" + dbIp + ":" + dbPort + ")/" + 
+		dbUrl := dbUser + ":" + dbPassword +
+			"@tcp(" + dbIp + ":" + dbPort + ")/" +
 			dbName + "?charset=utf8&loc=Asia%2FShanghai"
 		beego.Debug("dbUrl=", dbUrl)
 
@@ -45,89 +45,92 @@ func dbInit() {
 			beego.Critical(err)
 		}
 	}
-	
+
 	orm.SetMaxIdleConns("default", 30)
 	orm.SetMaxOpenConns("default", 30)
-	
+
 	ormer = orm.NewOrm()
 }
 
 func dbError(count int64, err error) error {
-	if 0==count {
+	beego.Debug("count", count, "err", err)
+	
+	if 0 == count {
 		beego.Error(ErrNoExist)
-		
+
 		return ErrNoExist
 	} else if count > 1 {
 		beego.Error(ErrTooMore)
-		
+
 		return ErrTooMore
 	} else if nil != err {
 		beego.Error(err)
-		
+
 		return err
 	}
-	
+
 	return nil
 }
 
 func dbOrmer(o orm.Ormer) orm.Ormer {
-	if nil==o {
+	if nil == o {
 		return ormer
 	} else {
 		return o
 	}
 }
 
-func dbEntryGet(orm orm.Ormer, e IDbEntry) error {	
+func dbEntryGet(orm orm.Ormer, e IDbEntry) error {
 	beego.Debug("before pull", e.TableName(), "entry", e)
+	beego.Debug("keyname=", e.KeyName(), "keyvalue=", e.Key())
 	err := dbOrmer(orm).QueryTable(e.TableName()).
-			Filter(e.KeyName(), e.Key()).
-			One(e)
+		Filter(e.KeyName(), e.Key()).
+		One(e)
 	beego.Debug("after pull", e.TableName(), "entry", e)
-	
+
 	return err
 }
 
 func dbEntryExist(orm orm.Ormer, e IDbEntry) bool {
 	ok := dbOrmer(orm).QueryTable(e.TableName()).
-			Filter(e.KeyName(), e.Key()).
-			Exist()
-	
+		Filter(e.KeyName(), e.Key()).
+		Exist()
+
 	beego.Debug(e.TableName(), "entry", e, "exist", ok)
-	
+
 	return ok
 }
 
 func dbEntryInsert(orm orm.Ormer, e IDbEntry) error {
-	count, err := dbOrmer(orm).Insert(e)
-	
-	beego.Debug("insert", e.TableName(), 
-		"entry", e, 
-		"count", count,
+	id, err := dbOrmer(orm).Insert(e)
+
+	beego.Debug("insert", e.TableName(),
+		"entry", e,
+		"id", id,
 		"error", err)
-	
-	return dbError(count, err)
+
+	return err
 }
 
 func dbEntryUpdate(orm orm.Ormer, e IDbEntry) error {
 	count, err := dbOrmer(orm).Update(e)
-	
-	beego.Debug("update", e.TableName(), 
-		"entry", e, 
+
+	beego.Debug("update", e.TableName(),
+		"entry", e,
 		"count", count,
 		"error", err)
-	
+
 	return dbError(count, err)
 }
 
 func dbEntryDelete(orm orm.Ormer, e IDbEntry) error {
 	count, err := dbOrmer(orm).Delete(e)
-	
-	beego.Debug("delete", e.TableName(), 
-		"entry", e, 
+
+	beego.Debug("delete", e.TableName(),
+		"entry", e,
 		"count", count,
 		"error", err)
-	
+
 	return dbError(count, err)
 }
 
@@ -135,6 +138,6 @@ func dbEntryRegister(orm orm.Ormer, e IDbEntry) error {
 	if !dbEntryExist(orm, e) {
 		return dbEntryInsert(orm, e)
 	}
-	
+
 	return dbEntryUpdate(orm, e)
 }

@@ -20,8 +20,8 @@ func (this *updateInput) UserStatus() *mod.UserStatus {
 }
 
 func (this *updateInput) UpdateUserStatus(user *mod.UserStatus) {
-	user.FlowDown 	= this.FlowDown
-	user.FlowUp		= this.FlowUp
+	user.FlowDown = this.FlowDown
+	user.FlowUp = this.FlowUp
 }
 
 type UpdateController struct {
@@ -35,14 +35,14 @@ func (this *UpdateController) Get() {
 func (this *UpdateController) Post() {
 	body := this.Ctx.Input.RequestBody
 	beego.Debug("requestBody=", string(body))
-	
+
 	//step 1: get input
 	code := &StatusCode{}
 	input := &updateInput{}
 
 	if err := json.Unmarshal(body, input); nil != err {
 		code.Write(this.Ctx, ErrUmsInputError, err)
-		
+
 		return
 	}
 	beego.Debug("update input", input)
@@ -50,30 +50,30 @@ func (this *UpdateController) Post() {
 	//step 2: get and update user(local)
 	user := input.UserStatus()
 	if nil != user.Get() {
-		code.Write(this.Ctx, ErrUmsUserStatusNotExist, nil)
-		
+		code.Write(this.Ctx, ErrUmsUserHaveBeenDeauthed, nil)
+
 		return
 	}
-	
+
 	input.UpdateUserStatus(user)
-	
+
 	//step 3: radius acct update
 	raduser := user.RadUser()
-	
+
 	if err, aerr := radgo.ClientAcctUpdate(raduser); nil != err {
 		code.Write(this.Ctx, ErrUmsRadAcctUpdateError, err)
-		
+
 		return
 	} else if nil != aerr {
 		code.Write(this.Ctx, ErrUmsRadError, aerr)
-		
+
 		return
 	}
-	
+
 	//step 4: update user(db)
-	if err := user.Update(); nil!=err {
+	if err := user.Update(); nil != err {
 		beego.Debug("update", user, err)
-		
+
 		// NOT abort when update error
 		// because not keepalive, wait timeout
 	} else {
