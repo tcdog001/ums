@@ -17,7 +17,7 @@ const (
 	ErrUmsUserInfoRegisterError   EUmsError = 5
 	ErrUmsUserStatusNotExist      EUmsError = 6
 	ErrUmsUserHaveBeenDeauthed    EUmsError = 7
-	ErrUmsUserHaveAuthed 		  EUmsError = 8
+	ErrUmsUserHaveAuthed          EUmsError = 8
 	ErrUmsUserStatusDeleteError   EUmsError = 9
 	ErrUmsUserStatusRegisterError EUmsError = 10
 	ErrUmsRadError                EUmsError = 11
@@ -74,7 +74,7 @@ var errUmsBind = [ErrUmsEnd]string{
 	ErrUmsUserInfoRegisterError:   "user info register error",
 	ErrUmsUserStatusNotExist:      "user status NOT exist",
 	ErrUmsUserHaveBeenDeauthed:    "user status have been deleted",
-	ErrUmsUserHaveAuthed           "user status have authed"
+	ErrUmsUserHaveAuthed:          "user status have authed",
 	ErrUmsUserStatusDeleteError:   "user status delete error",
 	ErrUmsUserStatusRegisterError: "user status register error",
 	ErrUmsRadError:                "radius error",
