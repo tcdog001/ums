@@ -102,17 +102,14 @@ func (this *UserAuthController) Post() {
 	}
 
 	//step 3: have authed ?
-	user := &mod.UserStatus{
-		UserMac: input.UserMac,
-	}
-	if nil==user.Get() {
+	user := input.UserStatus()
+	if user.Exist() {
 		code.Write(this.Ctx, ErrUmsUserHaveAuthed, nil)
 
 		return
 	}
 	
 	//step 4: radius auth and acct start
-	user = input.UserStatus()
 	raduser := user.RadUser()
 
 	policy, err, aerr := radgo.ClientAuth(raduser)
