@@ -9,7 +9,7 @@ import (
 
 type deauthInput struct {
 	UserMac  	string 	`json:"usermac"`
-	Reason   	int 	`json:"reason"`
+	Reason   	string 	`json:"reason"`
 }
 
 func (this *deauthInput) UserStatus() *mod.UserStatus {
@@ -48,7 +48,8 @@ func (this *DeauthController) Post() {
 		
 		return
 	}
-	user.Reason = input.Reason
+	
+	user.Reason = int(radgo.GetDeauthReason(input.Reason))
 	
 	//step 3: radius acct stop
 	raduser := user.RadUser()
