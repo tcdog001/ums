@@ -74,6 +74,7 @@ var errUmsBind = [ErrUmsEnd]string{
 	ErrUmsUserInfoRegisterError:   "user info register error",
 	ErrUmsUserStatusNotExist:      "user status NOT exist",
 	ErrUmsUserHaveBeenDeauthed:    "user status have been deleted",
+	ErrUmsUserHaveAuthed           "user status have authed"
 	ErrUmsUserStatusDeleteError:   "user status delete error",
 	ErrUmsUserStatusRegisterError: "user status register error",
 	ErrUmsRadError:                "radius error",
