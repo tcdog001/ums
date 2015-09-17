@@ -101,8 +101,18 @@ func (this *UserAuthController) Post() {
 		return
 	}
 
-	//step 3: radius auth and acct start
-	user := input.UserStatus()
+	//step 3: have authed ?
+	user := &mod.UserStatus{
+		UserMac: input.UserMac,
+	}
+	if nil==user.Get() {
+		code.Write(this.Ctx, ErrUmsUserHaveAuthed, nil)
+
+		return
+	}
+	
+	//step 4: radius auth and acct start
+	user = input.UserStatus()
 	raduser := user.RadUser()
 
 	policy, err, aerr := radgo.ClientAuth(raduser)
@@ -127,7 +137,7 @@ func (this *UserAuthController) Post() {
 		return
 	}
 
-	//step 4: register user status
+	//step 5: register user status
 	beego.Debug("user.UserName=", user.UserName)
 	if err := user.Register(); nil != err {
 		beego.Info("auth", user, err)
@@ -140,10 +150,10 @@ func (this *UserAuthController) Post() {
 		return
 	}
 
-	//step 5: keepalive(when register ok/fail)
+	//step 6: keepalive(when register ok/fail)
 	mod.AddAlive(user.UserName, user.UserMac)
 
-	//step 6: output
+	//step 7: output
 	code.WritePolicy(this.Ctx, policy)
 
 	return

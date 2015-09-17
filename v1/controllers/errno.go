@@ -17,15 +17,16 @@ const (
 	ErrUmsUserInfoRegisterError   EUmsError = 5
 	ErrUmsUserStatusNotExist      EUmsError = 6
 	ErrUmsUserHaveBeenDeauthed    EUmsError = 7
-	ErrUmsUserStatusDeleteError   EUmsError = 8
-	ErrUmsUserStatusRegisterError EUmsError = 9
-	ErrUmsRadError                EUmsError = 10
-	ErrUmsRadAuthError            EUmsError = 11
-	ErrUmsRadAcctStartError       EUmsError = 12
-	ErrUmsRadAcctUpdateError      EUmsError = 13
-	ErrUmsRadAcctStopError        EUmsError = 14
+	ErrUmsUserHaveAuthed 		  EUmsError = 8
+	ErrUmsUserStatusDeleteError   EUmsError = 9
+	ErrUmsUserStatusRegisterError EUmsError = 10
+	ErrUmsRadError                EUmsError = 11
+	ErrUmsRadAuthError            EUmsError = 12
+	ErrUmsRadAcctStartError       EUmsError = 13
+	ErrUmsRadAcctUpdateError      EUmsError = 14
+	ErrUmsRadAcctStopError        EUmsError = 15
 
-	ErrUmsEnd EUmsError = 15
+	ErrUmsEnd EUmsError = 16
 )
 
 func (me EUmsError) Tag() string {
