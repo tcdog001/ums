@@ -14,7 +14,7 @@ type IDbEntry interface {
 }
 
 var ormer orm.Ormer
-var localSwitch = true
+var localSwitch = true 
 
 func dbInit() {
 	orm.RegisterModel(new(UserInfo), new(UserStatus), new(UserRecord))

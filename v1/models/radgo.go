@@ -123,12 +123,15 @@ func (user *RadUser) AcctTerminateCause() uint32 {
 
 // IAcct
 func (user *RadUser) GetClass() []byte {
+	beego.Debug("Recived Radclass =", user.User.RadClass)
 	return []byte(user.User.RadClass)
 }
 
 // IAcct
 func (user *RadUser) SetClass(c []byte) {
 	user.User.RadClass = string(c)
+	beego.Debug("Recived Radclass =", user.User.RadClass)
+	beego.Debug("Recived Radclass =", user.User.RadClass)
 }
 
 // IAcct

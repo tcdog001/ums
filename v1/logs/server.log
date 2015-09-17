@@ -1,0 +1,763 @@
+2015/09/15 13:54:14 [main.go:42] [D] UMS start running... 
+2015/09/15 13:54:14 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 13:54:14 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 13:54:15 [asm_386.s:2287] [C] ListenAndServeTLS: %!(EXTRA *net.OpError=listen tcp :8585: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.)
+2015/09/15 14:02:52 [main.go:42] [D] UMS start running... 
+2015/09/15 14:02:52 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 14:02:52 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 14:02:57 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 14:02:57 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:02:57 [db.go:86] [D] after pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:02:58 [db.go:107] [D] insert userinfo entry &{13552635245 true 2015-09-15 14:02:58.109375 +0800 CST} count 0 error <nil> 
+2015/09/15 14:02:58 [db.go:57] [E] no exist 
+2015/09/15 14:02:58 [code.go:20] [I] {"code":5} user info register error <nil> 
+2015/09/15 14:02:58 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 468.75ms         | match      | /UMS/UserRegister.do                     | 
+2015/09/15 14:03:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:03:53 [auth.go:77] [I] request body= {  "username": "10000000000@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:03:53 [auth.go:89] [D] auth input &{10000000000@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:03:53 [db.go:82] [D] before pull userinfo entry &{10000000000@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:03:53 [db.go:86] [D] after pull userinfo entry &{10000000000@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:03:53 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:03:53 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:04:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:05:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:06:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:07:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:08:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:09:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:10:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:11:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:12:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:13:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:14:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:15:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:16:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:17:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:18:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:19:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:20:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:21:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:22:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:23:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:24:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:25:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:26:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:27:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:28:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:29:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:30:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:31:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:32:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:33:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:34:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:35:44 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 14:35:44 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:35:44 [db.go:86] [D] after pull userinfo entry &{13552635245 true 2015-09-15 14:02:58 +0800 CST} 
+2015/09/15 14:35:44 [code.go:20] [I] {"code":3} user info have registered <nil> 
+2015/09/15 14:35:44 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 31.25ms          | match      | /UMS/UserRegister.do                     | 
+2015/09/15 14:35:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:36:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:37:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:38:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:39:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:40:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:40:56 [auth.go:77] [I] request body= {  "username": "10000000000@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:40:56 [auth.go:89] [D] auth input &{10000000000@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:40:56 [db.go:82] [D] before pull userinfo entry &{10000000000@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:40:56 [db.go:86] [D] after pull userinfo entry &{10000000000@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:40:56 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:40:56 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:41:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:42:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:43:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:44:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:45:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:46:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:47:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:48:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:49:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:50:23 [auth.go:77] [I] request body= {  "username": "13552635245@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:50:23 [auth.go:89] [D] auth input &{13552635245@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:50:23 [db.go:82] [D] before pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:50:23 [db.go:86] [D] after pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:50:23 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:50:23 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:50:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:51:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:52:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:53:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:54:51 [auth.go:77] [I] request body= {  "username": "13552635245@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:54:51 [auth.go:89] [D] auth input &{13552635245@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:54:51 [db.go:82] [D] before pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:54:51 [db.go:86] [D] after pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:54:51 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:54:51 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:54:52 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:55:56 [main.go:42] [D] UMS start running... 
+2015/09/15 14:55:56 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 14:55:56 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 14:55:56 [asm_386.s:2287] [C] ListenAndServeTLS: %!(EXTRA *net.OpError=listen tcp :8585: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.)
+2015/09/15 14:56:24 [main.go:42] [D] UMS start running... 
+2015/09/15 14:56:24 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 14:56:24 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 14:56:38 [auth.go:77] [I] request body= {  "username": "13552635245@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:56:38 [auth.go:89] [D] auth input &{13552635245@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:56:38 [db.go:82] [D] before pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:56:38 [db.go:83] [D] keyname= username keyvalue= 13552635245@windfind.static@ish 
+2015/09/15 14:56:38 [db.go:87] [D] after pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:56:38 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:56:38 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:57:01 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 14:57:01 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:57:01 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 14:57:01 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 14:02:58 +0800 CST} 
+2015/09/15 14:57:01 [code.go:20] [I] {"code":3} user info have registered <nil> 
+2015/09/15 14:57:01 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 31.25ms          | match      | /UMS/UserRegister.do                     | 
+2015/09/15 14:57:12 [auth.go:77] [I] request body= {  "username": "13552635245@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "705454_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 14:57:12 [auth.go:89] [D] auth input &{13552635245@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 705454_} 
+2015/09/15 14:57:12 [db.go:82] [D] before pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:57:12 [db.go:83] [D] keyname= username keyvalue= 13552635245@windfind.static@ish 
+2015/09/15 14:57:12 [db.go:87] [D] after pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 14:57:12 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 14:57:12 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 14:57:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:58:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 14:59:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:00:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:01:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:02:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:03:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:04:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:05:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:06:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:07:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:08:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:09:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:10:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:11:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:12:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:13:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:14:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:15:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:16:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:17:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:18:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:19:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:20:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:21:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:21:55 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 15:21:55 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 15:21:55 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 15:21:55 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 14:02:58 +0800 CST} 
+2015/09/15 15:21:55 [code.go:20] [I] {"code":3} user info have registered <nil> 
+2015/09/15 15:21:55 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 0                | match      | /UMS/UserRegister.do                     | 
+2015/09/15 15:22:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:23:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:24:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 15:25:24 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:31:12 [main.go:42] [D] UMS start running... 
+2015/09/15 16:31:12 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 16:31:12 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 16:31:31 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 16:31:31 [db.go:97] [D] userinfo entry &{13552635245 true 2015-09-15 16:31:31.25 +0800 CST} exist true 
+2015/09/15 16:31:31 [db.go:119] [D] update userinfo entry &{13552635245 true 2015-09-15 16:31:31.25 +0800 CST} count 1 error <nil> 
+2015/09/15 16:31:31 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 16:31:31 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 234.375ms        | match      | /UMS/UserRegister.do                     | 
+2015/09/15 16:32:12 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:32:14 [auth.go:77] [I] request body= {  "username": "13552635245@windfind.static@ish",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "862137_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 16:32:14 [auth.go:89] [D] auth input &{13552635245@windfind.static@ish 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 862137_} 
+2015/09/15 16:32:14 [db.go:82] [D] before pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 16:32:14 [db.go:83] [D] keyname= username keyvalue= 13552635245@windfind.static@ish 
+2015/09/15 16:32:14 [db.go:87] [D] after pull userinfo entry &{13552635245@windfind.static@ish false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 16:32:14 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 16:32:14 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 16:33:12 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:33:29 [auth.go:77] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "862137_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 16:33:29 [auth.go:89] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai_ 862137_} 
+2015/09/15 16:33:29 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 16:33:29 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 16:33:29 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 16:31:31 +0800 CST} 
+2015/09/15 16:33:29 [code.go:20] [I] {"code":10} radius auth error  
+2015/09/15 16:33:29 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 93.75ms          | match      | /UMS/UserAuth.do                         | 
+2015/09/15 16:34:12 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:35:12 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:35:53 [main.go:42] [D] UMS start running... 
+2015/09/15 16:35:54 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 16:35:54 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 16:36:07 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "862137_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 16:36:07 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 862137} 
+2015/09/15 16:36:07 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 16:36:07 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 16:36:07 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 16:31:31 +0800 CST} 
+2015/09/15 16:36:08 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 16:36:08 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 109.375ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 16:36:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:37:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:38:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:39:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:40:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:41:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:43:02 [main.go:42] [D] UMS start running... 
+2015/09/15 16:43:02 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 16:43:02 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 16:43:16 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "862137_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 16:43:16 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 862137} 
+2015/09/15 16:43:16 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 16:43:16 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 16:43:16 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 16:31:31 +0800 CST} 
+2015/09/15 16:43:16 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 16:43:16 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 16:43:16 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 16:43:16 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 109.375ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 16:44:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:45:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:46:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:47:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:48:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:49:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:50:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:51:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:52:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:53:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:54:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:55:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:56:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:57:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:58:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 16:59:02 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:00:00 [main.go:42] [D] UMS start running... 
+2015/09/15 17:00:00 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:00:00 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:00:22 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 17:00:22 [db.go:97] [D] userinfo entry &{13552635245 true 2015-09-15 17:00:22.875 +0800 CST} exist true 
+2015/09/15 17:00:22 [db.go:119] [D] update userinfo entry &{13552635245 true 2015-09-15 17:00:22.875 +0800 CST} count 1 error <nil> 
+2015/09/15 17:00:22 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:00:22 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 171.875ms        | match      | /UMS/UserRegister.do                     | 
+2015/09/15 17:00:30 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "862137_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:00:30 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 862137} 
+2015/09/15 17:00:30 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:00:30 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:00:30 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:00:30 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:00:30 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:00:30 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:00:30 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 93.75ms          | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:00:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:01:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:02:16 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:02:16 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:02:16 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:02:16 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:02:16 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:02:16 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:02:16 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:02:16 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:02:16 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 171.875ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:02:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:03:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:04:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:06:01 [main.go:42] [D] UMS start running... 
+2015/09/15 17:06:01 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:06:01 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:06:10 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:06:10 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:06:10 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:06:10 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:06:10 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:06:10 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:06:10 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:06:10 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:06:10 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 125ms            | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:07:01 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:08:01 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:09:01 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:10:01 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:11:01 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:11:39 [main.go:42] [D] UMS start running... 
+2015/09/15 17:11:39 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:11:39 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:11:47 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:11:47 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:11:47 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:11:47 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:11:47 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:11:47 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:11:47 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:11:47 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:11:47 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 78.125ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:12:39 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:13:39 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:14:39 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:17:42 [main.go:42] [D] UMS start running... 
+2015/09/15 17:17:42 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:17:42 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:17:46 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:17:46 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:17:46 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:17:46 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:17:46 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:17:46 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:17:46 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:17:46 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:17:46 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 109.375ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:18:42 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:19:39 [main.go:42] [D] UMS start running... 
+2015/09/15 17:19:39 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:19:39 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:19:42 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:19:42 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:19:42 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:19:42 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:19:42 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:19:42 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:19:42 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:19:42 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:19:42 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 78.125ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:20:34 [main.go:42] [D] UMS start running... 
+2015/09/15 17:20:34 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:20:34 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:20:37 [auth.go:79] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:20:37 [auth.go:91] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:20:37 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:20:37 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:20:37 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:20:37 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:20:37 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:20:37 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:20:37 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 78.125ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:21:34 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:22:34 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:23:34 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:23:57 [main.go:42] [D] UMS start running... 
+2015/09/15 17:23:57 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:23:57 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:24:01 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:24:01 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:24:01 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:24:01 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:24:01 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:24:01 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:24:01 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:24:01 [code.go:20] [I] {"code":11} radius acct start error  
+2015/09/15 17:24:01 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 156.25ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:24:57 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:25:57 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:26:48 [main.go:42] [D] UMS start running... 
+2015/09/15 17:26:48 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:26:48 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:26:51 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:26:51 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:26:51 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:26:51 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:26:51 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:26:51 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:26:51 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:26:51 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:26:51 [db.go:97] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:26:51.21875 +0800 CST 0 f895c7d9377400000000000020150915172651   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:26:51 [db.go:108] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:26:51.21875 +0800 CST 0 f895c7d9377400000000000020150915172651   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 0 error <nil> 
+2015/09/15 17:26:51 [db.go:57] [E] no exist 
+2015/09/15 17:26:51 [auth.go:133] [I] auth &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:26:51.21875 +0800 CST 0 f895c7d9377400000000000020150915172651   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} no exist 
+2015/09/15 17:26:51 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:26:51 [code.go:20] [I] {"code":8} user status register error no exist 
+2015/09/15 17:26:51 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 359.375ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:27:48 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:28:48 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:29:48 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:30:48 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:31:31 [main.go:42] [D] UMS start running... 
+2015/09/15 17:31:32 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:31:32 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:31:36 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:31:36 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:31:36 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:31:36 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:31:36 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:31:36 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:31:36 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:31:36 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:31:36 [db.go:136] [D] dbEntryRegister 
+2015/09/15 17:31:36 [db.go:97] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:31:36.40625 +0800 CST 0 f895c7d9377400000000000020150915173136   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist true 
+2015/09/15 17:31:36 [db.go:119] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:31:36.40625 +0800 CST 0 f895c7d9377400000000000020150915173136   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 1 error <nil> 
+2015/09/15 17:31:36 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:31:36 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 218.75ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:32:31 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:31:36.4375 +0800 CST 13552635245} 
+2015/09/15 17:32:31 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:32:53 [main.go:42] [D] UMS start running... 
+2015/09/15 17:32:53 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:32:53 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:32:56 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:32:56 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:32:56 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:32:56 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:32:56 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:32:56 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:32:56 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:32:56 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:32:56 [db.go:97] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:32:56.25 +0800 CST 0 f895c7d9377400000000000020150915173256   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist true 
+2015/09/15 17:32:56 [db.go:119] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:32:56.25 +0800 CST 0 f895c7d9377400000000000020150915173256   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 1 error <nil> 
+2015/09/15 17:32:56 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:32:56 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 234.375ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:33:42 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:33:42 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:33:42 [db.go:82] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:33:42 [db.go:83] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:33:42 [db.go:87] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:33:42 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:33:43 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:33:43 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:33:43 [db.go:97] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:33:43.15625 +0800 CST 0 f895c7d9377400000000000020150915173342   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:33:43 [db.go:108] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:33:43.15625 +0800 CST 0 f895c7d9377400000000000020150915173342   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 0 error <nil> 
+2015/09/15 17:33:43 [db.go:57] [E] no exist 
+2015/09/15 17:33:43 [auth.go:133] [I] auth &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:33:43.15625 +0800 CST 0 f895c7d9377400000000000020150915173342   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} no exist 
+2015/09/15 17:33:43 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:33:43 [code.go:20] [I] {"code":8} user status register error no exist 
+2015/09/15 17:33:43 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 328.125ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:33:53 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:32:56.28125 +0800 CST 13552635245} 
+2015/09/15 17:33:53 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:34:54 [main.go:42] [D] UMS start running... 
+2015/09/15 17:34:54 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:34:54 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:34:59 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:34:59 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:34:59 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:34:59 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:34:59 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:34:59 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:35:00 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:35:00 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:35:00 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:35:00.4375 +0800 CST 0 f895c7d9377400000000000020150915173459   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:35:00 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:35:00.4375 +0800 CST 0 f895c7d9377400000000000020150915173459   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 0 error <nil> 
+2015/09/15 17:35:00 [db.go:56] [E] count 0 err <nil> 
+2015/09/15 17:35:00 [db.go:59] [E] no exist 
+2015/09/15 17:35:00 [auth.go:133] [I] auth &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:35:00.4375 +0800 CST 0 f895c7d9377400000000000020150915173459   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} no exist 
+2015/09/15 17:35:00 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:35:00 [code.go:20] [I] {"code":8} user status register error no exist 
+2015/09/15 17:35:00 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 640.625ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:38:55 [main.go:42] [D] UMS start running... 
+2015/09/15 17:38:56 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:38:56 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:38:59 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:38:59 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:38:59 [db.go:85] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:38:59 [db.go:86] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:38:59 [db.go:90] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:38:59 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:38:59 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:38:59 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:38:59 [db.go:100] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:38:59.5 +0800 CST 0 f895c7d9377400000000000020150915173859   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:38:59 [db.go:111] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:38:59.5 +0800 CST 0 f895c7d9377400000000000020150915173859   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 0 error <nil> 
+2015/09/15 17:38:59 [db.go:57] [D] count 0 err <nil> 
+2015/09/15 17:38:59 [db.go:60] [E] no exist 
+2015/09/15 17:38:59 [auth.go:133] [I] auth &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:38:59.5 +0800 CST 0 f895c7d9377400000000000020150915173859   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} no exist 
+2015/09/15 17:38:59 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:38:59 [code.go:20] [I] {"code":8} user status register error no exist 
+2015/09/15 17:38:59 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 406.25ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:39:55 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:40:17 [main.go:42] [D] UMS start running... 
+2015/09/15 17:40:17 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:40:17 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:40:20 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:40:20 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:40:20 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:40:20 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:40:20 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:40:20 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:40:20 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:40:20 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:40:20 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:40:20.359375 +0800 CST 0 f895c7d9377400000000000020150915174020   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist true 
+2015/09/15 17:40:20 [db.go:121] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:40:20.359375 +0800 CST 0 f895c7d9377400000000000020150915174020   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 1 error <nil> 
+2015/09/15 17:40:20 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 17:40:20 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:40:20 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 218.75ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:40:34 [main.go:42] [D] UMS start running... 
+2015/09/15 17:40:34 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:40:34 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:40:36 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:40:36 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:40:36 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:40:36 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:40:36 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:40:36 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:40:36 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:40:36 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:40:36 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:40:36.578125 +0800 CST 0 f895c7d9377400000000000020150915174036   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:40:36 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:40:36.578125 +0800 CST 0 f895c7d9377400000000000020150915174036   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 0 error <nil> 
+2015/09/15 17:40:36 [db.go:56] [D] count 0 err <nil> 
+2015/09/15 17:40:36 [db.go:59] [E] no exist 
+2015/09/15 17:40:36 [auth.go:133] [I] auth &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:40:36.578125 +0800 CST 0 f895c7d9377400000000000020150915174036   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} no exist 
+2015/09/15 17:40:36 [code.go:20] [I] {"code":8} user status register error no exist 
+2015/09/15 17:40:36 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 250ms            | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:43:54 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:44:14 [main.go:42] [D] UMS start running... 
+2015/09/15 17:44:14 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 17:44:14 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 17:44:17 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:44:17 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:44:17 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:44:17 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:44:17 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:44:17 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:44:18 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:44:18 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:44:18 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:44:18.265625 +0800 CST 0 f895c7d9377400000000000020150915174417   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 17:44:18 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:44:18.265625 +0800 CST 0 f895c7d9377400000000000020150915174417   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} id 0 error <nil> 
+2015/09/15 17:44:18 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:44:18 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 781.25ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:45:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:44:18.296875 +0800 CST 13552635245} 
+2015/09/15 17:45:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:46:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:44:18.296875 +0800 CST 13552635245} 
+2015/09/15 17:46:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:47:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:44:18.296875 +0800 CST 13552635245} 
+2015/09/15 17:47:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:47:41 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 17:47:41 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 17:47:41 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 17:47:41 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 17:47:41 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 17:47:41 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:47:41 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:47:41 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 17:47:41 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:47:41.703125 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist true 
+2015/09/15 17:47:41 [db.go:121] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:47:41.703125 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} count 1 error <nil> 
+2015/09/15 17:47:41 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 17:47:41 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:47:41 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 281.25ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 17:48:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:47:41.734375 +0800 CST 13552635245} 
+2015/09/15 17:48:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:49:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:47:41.734375 +0800 CST 13552635245} 
+2015/09/15 17:49:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:50:05 [update.go:37] [D] requestBody= {  "usermac": "F8:95:C7:D9:37:74",  "flowup": 4000,  "flowdown": 4000} 
+2015/09/15 17:50:05 [update.go:48] [D] update input &{F8:95:C7:D9:37:74 4000 4000} 
+2015/09/15 17:50:05 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 17:50:05 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 17:50:05 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 0 0 2015-09-15 17:47:42 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 17:50:05 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 17:50:05 [db.go:121] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 4000 4000 2015-09-15 17:47:42 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 17:50:05 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 17:50:05 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 17:50:05 [router.go:854] [D] | POST       | /UMS/UserInfoUpdate.do                   | 171.875ms        | match      | /UMS/UserInfoUpdate.do                   | 
+2015/09/15 17:50:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:50:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:51:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:51:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:52:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:52:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:53:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:53:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:54:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:54:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:55:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:55:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:56:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:56:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:57:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:57:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:58:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:58:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 17:59:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 17:59:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:00:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 17:50:05.3125 +0800 CST 13552635245} 
+2015/09/15 18:00:14 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:00:14 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 18:00:14 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 4000 4000 2015-09-15 17:47:42 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:00:14 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870 4000 4000 2015-09-15 17:47:42 +0800 CST 0 f895c7d9377400000000000020150915174741   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 18:00:14 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:00:14 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:00:14 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 18:00:14 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 18:00:14 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 18:00:14 [db.go:121] [D] update userinfo entry &{13552635245 false 2015-09-15 17:00:23 +0800 CST} count 1 error <nil> 
+2015/09/15 18:00:14 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:00:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:01:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:02:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:03:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:04:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:04:51 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "079870_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 18:04:51 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 079870} 
+2015/09/15 18:04:51 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 18:04:51 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 18:04:51 [db.go:89] [D] after pull userinfo entry &{13552635245 false 2015-09-15 17:00:23 +0800 CST} 
+2015/09/15 18:04:51 [code.go:20] [I] {"code":4} user info NOT registered <nil> 
+2015/09/15 18:04:51 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 0                | match      | /UMS/UserAuth.do                         | 
+2015/09/15 18:05:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:06:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:07:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:08:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:09:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:10:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:11:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:12:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:12:24 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 18:12:24 [db.go:99] [D] userinfo entry &{13552635245 true 2015-09-15 18:12:24.640625 +0800 CST} exist true 
+2015/09/15 18:12:24 [db.go:121] [D] update userinfo entry &{13552635245 true 2015-09-15 18:12:24.640625 +0800 CST} count 1 error <nil> 
+2015/09/15 18:12:24 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:12:24 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:12:24 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 265.625ms        | match      | /UMS/UserRegister.do                     | 
+2015/09/15 18:13:05 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "015373_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 18:13:05 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373} 
+2015/09/15 18:13:05 [db.go:84] [D] before pull userinfo entry &{13552635245 false 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 18:13:05 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 18:13:05 [db.go:89] [D] after pull userinfo entry &{13552635245 true 2015-09-15 18:12:25 +0800 CST} 
+2015/09/15 18:13:05 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:13:05 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:13:06 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 18:13:06 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 0 0 2015-09-15 18:13:06.0625 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 18:13:06 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 0 0 2015-09-15 18:13:06.0625 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} id 0 error <nil> 
+2015/09/15 18:13:06 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:13:06 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 218.75ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 18:13:14 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 18:13:06.078125 +0800 CST 13552635245} 
+2015/09/15 18:13:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:13:19 [update.go:37] [D] requestBody= {  "usermac": "F8:95:C7:D9:37:74",  "flowup": 4000,  "flowdown": 4000} 
+2015/09/15 18:13:19 [update.go:48] [D] update input &{F8:95:C7:D9:37:74 4000 4000} 
+2015/09/15 18:13:19 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:13:19 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 18:13:19 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 0 0 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:13:19 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:13:19 [db.go:121] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 4000 4000 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 18:13:19 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:13:19 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:13:19 [router.go:854] [D] | POST       | /UMS/UserInfoUpdate.do                   | 125ms            | match      | /UMS/UserInfoUpdate.do                   | 
+2015/09/15 18:13:27 [deauth.go:31] [I] request body= {    "usermac": "F8:95:C7:D9:37:74"}  
+2015/09/15 18:13:27 [deauth.go:42] [D] deauth input &{F8:95:C7:D9:37:74 0} 
+2015/09/15 18:13:27 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:13:27 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 18:13:27 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 4000 4000 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:13:27 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:13:27 [deauth.go:64] [D] Redius stop success! 
+2015/09/15 18:13:27 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 4000 4000 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 18:13:27 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:13:27 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 4000 4000 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 0 error <nil> 
+2015/09/15 18:13:27 [db.go:56] [D] count 0 err <nil> 
+2015/09/15 18:13:27 [db.go:59] [E] no exist 
+2015/09/15 18:13:27 [deauth.go:74] [D] delete user &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 015373 4000 4000 2015-09-15 18:13:06 +0800 CST 0 f895c7d9377400000000000020150915181305   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:13:27 [db.go:110] [D] insert Userrecord entry &{1 13552635245 F8:95:C7:D9:37:74 22:22:22:22:22 2015-09-15 18:13:06 +0800 CST 2015-09-15 18:13:27.40625 +0800 CST} id 1 error <nil> 
+2015/09/15 18:13:27 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:13:27 [router.go:854] [D] | POST       | /UMS/UserDeauth.do                       | 156.25ms         | match      | /UMS/UserDeauth.do                       | 
+2015/09/15 18:14:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:15:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:16:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:17:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:18:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:19:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:20:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:21:14 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:21:59 [main.go:42] [D] UMS start running... 
+2015/09/15 18:21:59 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 18:21:59 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 18:22:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:23:50 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/15 18:23:50 [db.go:99] [D] userinfo entry &{13552635245 2015-09-15 18:23:50.21875 +0800 CST} exist true 
+2015/09/15 18:23:50 [db.go:121] [D] update userinfo entry &{13552635245 2015-09-15 18:23:50.21875 +0800 CST} count 1 error <nil> 
+2015/09/15 18:23:50 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:23:50 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:23:50 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 218.75ms         | match      | /UMS/UserRegister.do                     | 
+2015/09/15 18:23:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:24:26 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "957711_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/15 18:24:26 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711} 
+2015/09/15 18:24:26 [db.go:84] [D] before pull userinfo entry &{13552635245 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/15 18:24:26 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/15 18:24:26 [db.go:89] [D] after pull userinfo entry &{13552635245 2015-09-15 18:23:50 +0800 CST} 
+2015/09/15 18:24:26 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:24:26 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:24:26 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/15 18:24:26 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 0 0 2015-09-15 18:24:26.75 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/15 18:24:26 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 0 0 2015-09-15 18:24:26.75 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} id 0 error <nil> 
+2015/09/15 18:24:26 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:24:26 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 281.25ms         | match      | /UMS/UserAuth.do                         | 
+2015/09/15 18:24:35 [update.go:37] [D] requestBody= {  "usermac": "F8:95:C7:D9:37:74",  "flowup": 4000,  "flowdown": 4000} 
+2015/09/15 18:24:35 [update.go:48] [D] update input &{F8:95:C7:D9:37:74 4000 4000} 
+2015/09/15 18:24:35 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:24:35 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 18:24:35 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 0 0 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:24:35 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:24:35 [db.go:121] [D] update userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 4000 4000 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 18:24:35 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:24:35 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:24:35 [router.go:854] [D] | POST       | /UMS/UserInfoUpdate.do                   | 140.625ms        | match      | /UMS/UserInfoUpdate.do                   | 
+2015/09/15 18:24:59 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-15 18:24:35.703125 +0800 CST 13552635245} 
+2015/09/15 18:24:59 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/15 18:25:17 [deauth.go:31] [I] request body= {    "usermac": "F8:95:C7:D9:37:74"}  
+2015/09/15 18:25:17 [deauth.go:42] [D] deauth input &{F8:95:C7:D9:37:74 0} 
+2015/09/15 18:25:17 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:25:17 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/15 18:25:17 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 4000 4000 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:25:17 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/15 18:25:18 [deauth.go:64] [D] Redius stop success! 
+2015/09/15 18:25:18 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 4000 4000 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/15 18:25:18 [db.go:56] [D] count 1 err <nil> 
+2015/09/15 18:25:18 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 4000 4000 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 0 error <nil> 
+2015/09/15 18:25:18 [db.go:56] [D] count 0 err <nil> 
+2015/09/15 18:25:18 [db.go:59] [E] no exist 
+2015/09/15 18:25:18 [deauth.go:74] [D] delete user &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 957711 4000 4000 2015-09-15 18:24:27 +0800 CST 0 f895c7d9377400000000000020150915182426   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/15 18:25:18 [db.go:110] [D] insert Userrecord entry &{2 13552635245 F8:95:C7:D9:37:74 22:22:22:22:22 2015-09-15 18:24:27 +0800 CST 2015-09-15 18:25:18.0625 +0800 CST} id 2 error <nil> 
+2015/09/15 18:25:18 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/15 18:25:18 [router.go:854] [D] | POST       | /UMS/UserDeauth.do                       | 171.875ms        | match      | /UMS/UserDeauth.do                       | 
+2015/09/15 18:25:46 [main.go:42] [D] UMS start running... 
+2015/09/15 18:25:46 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/15 18:25:46 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/15 18:26:46 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:29:24 [main.go:42] [D] UMS start running... 
+2015/09/16 15:29:24 [asm_386.s:2287] [I] http server Running on :8484
+2015/09/16 15:29:24 [asm_386.s:2287] [I] https server Running on :8585
+2015/09/16 15:29:45 [register.go:37] [I] request body= {  "username": "13552635245_"}  
+2015/09/16 15:29:45 [db.go:99] [D] userinfo entry &{13552635245 2015-09-16 15:29:45.203125 +0800 CST} exist false 
+2015/09/16 15:29:45 [db.go:110] [D] insert userinfo entry &{13552635245 2015-09-16 15:29:45.203125 +0800 CST} id 0 error <nil> 
+2015/09/16 15:29:45 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/16 15:29:45 [router.go:854] [D] | POST       | /UMS/UserRegister.do                     | 281.25ms         | match      | /UMS/UserRegister.do                     | 
+2015/09/16 15:30:22 [auth.go:82] [I] request body= {  "username": "13552635245_",  "usermac": "F8:95:C7:D9:37:74",  "devmac": "22:22:22:22:22",  "authcode": "761975_",   "ssid": "i-shanghai_",  "userip": "116.228.184.202"} 
+2015/09/16 15:30:22 [auth.go:94] [D] auth input &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975} 
+2015/09/16 15:30:22 [db.go:84] [D] before pull userinfo entry &{13552635245 0001-01-01 00:00:00 +0000 UTC} 
+2015/09/16 15:30:22 [db.go:85] [D] keyname= username keyvalue= 13552635245 
+2015/09/16 15:30:22 [db.go:89] [D] after pull userinfo entry &{13552635245 2015-09-16 15:29:45 +0800 CST} 
+2015/09/16 15:30:22 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/16 15:30:22 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/16 15:30:22 [auth.go:131] [D] user.UserName= 13552635245 
+2015/09/16 15:30:22 [db.go:99] [D] userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:22.71875 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} exist false 
+2015/09/16 15:30:22 [db.go:110] [D] insert userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:22.71875 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [248 149 199 217 55 116] 1961146570 []} id 0 error <nil> 
+2015/09/16 15:30:22 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/16 15:30:22 [router.go:854] [D] | POST       | /UMS/UserAuth.do                         | 328.125ms        | match      | /UMS/UserAuth.do                         | 
+2015/09/16 15:30:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:30:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:31:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:31:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:32:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:32:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:33:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:33:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:34:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:34:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:35:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:35:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:36:23 [keepalive.go:24] [D] keepalive F8:95:C7:D9:37:74 &{2015-09-16 15:30:22.75 +0800 CST 13552635245} 
+2015/09/16 15:36:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:36:55 [deauth.go:31] [I] request body= {    "usermac": "F8:95:C7:D9:37:74"}  
+2015/09/16 15:36:55 [deauth.go:42] [D] deauth input &{F8:95:C7:D9:37:74 0} 
+2015/09/16 15:36:55 [db.go:84] [D] before pull userstatus entry &{  F8:95:C7:D9:37:74    0 0 0001-01-01 00:00:00 +0000 UTC 0    [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/16 15:36:55 [db.go:85] [D] keyname= usermac keyvalue= F8:95:C7:D9:37:74 
+2015/09/16 15:36:55 [db.go:89] [D] after pull userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:23 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/16 15:36:55 [radgo.go:85] [D] radgo.go.85 username= 13552635245@windfind.static@ish 
+2015/09/16 15:36:55 [deauth.go:64] [D] Redius stop success! 
+2015/09/16 15:36:55 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:23 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 1 error <nil> 
+2015/09/16 15:36:55 [db.go:56] [D] count 1 err <nil> 
+2015/09/16 15:36:55 [db.go:132] [D] delete userstatus entry &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:23 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} count 0 error <nil> 
+2015/09/16 15:36:55 [db.go:56] [D] count 0 err <nil> 
+2015/09/16 15:36:55 [db.go:59] [E] no exist 
+2015/09/16 15:36:55 [deauth.go:74] [D] delete user &{13552635245 116.228.184.202 F8:95:C7:D9:37:74 22:22:22:22:22 i-shanghai 761975 0 0 2015-09-16 15:30:23 +0800 CST 0 f895c7d9377400000000000020150916153022   [0 0 0 0 0 0] [0 0 0 0 0 0] 0 []} 
+2015/09/16 15:36:55 [db.go:110] [D] insert Userrecord entry &{3 13552635245 F8:95:C7:D9:37:74 22:22:22:22:22 2015-09-16 15:30:23 +0800 CST 2015-09-16 15:36:55.625 +0800 CST} id 3 error <nil> 
+2015/09/16 15:36:55 [code.go:20] [I] {"code":0} ok <nil> 
+2015/09/16 15:36:55 [router.go:854] [D] | POST       | /UMS/UserDeauth.do                       | 234.375ms        | match      | /UMS/UserDeauth.do                       | 
+2015/09/16 15:37:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:38:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:39:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:40:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:41:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:42:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:43:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:44:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:45:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:46:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:47:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:48:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:49:23 [keepalive.go:52] [D] Listener Gc running... 
+2015/09/16 15:50:23 [keepalive.go:52] [D] Listener Gc running... 
