@@ -24,6 +24,9 @@ type AuthStatusCode struct {
 }
 
 func (me *AuthStatusCode) WritePolicy(ctx *context.Context, policy *radgo.Policy) {
+
+	me.IdleTimeout = policy.IdleTimeout
+	me.OnlineTime = policy.OnlineTime
 	me.UpFlowLimit = policy.UpFlowLimit
 	me.UpRateMax = policy.UpRateMax
 	me.UpRateAvg = policy.UpRateAvg
@@ -32,6 +35,17 @@ func (me *AuthStatusCode) WritePolicy(ctx *context.Context, policy *radgo.Policy
 	me.DownRateAvg = policy.DownRateAvg
 
 	me.Write(ctx, 0, nil)
+}
+
+func (me *AuthStatusCode) Write(ctx *context.Context, code EUmsError, err error) {
+
+	me.Code = int(code)
+
+	j, _ := json.Marshal(me)
+
+	ctx.WriteString(string(j))
+
+	beego.Info(string(j), code.ToString(), err)
 }
 
 type authInput struct {
@@ -65,7 +79,7 @@ func (this *authInput) UserStatus() *mod.UserStatus {
 		AuthCode: this.AuthCode,
 	}
 	user.Init()
-	
+
 	return user
 }
 
@@ -108,7 +122,7 @@ func (this *UserAuthController) Post() {
 
 		return
 	}
-	
+
 	//step 4: radius auth and acct start
 	raduser := user.RadUser()
 
@@ -122,6 +136,7 @@ func (this *UserAuthController) Post() {
 
 		return
 	}
+	beego.Debug("auth received policy:[", policy, "]")
 
 	err, aerr = radgo.ClientAcctStart(raduser)
 	if nil != err {

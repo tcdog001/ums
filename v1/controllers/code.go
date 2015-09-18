@@ -12,10 +12,10 @@ type StatusCode struct {
 
 func (me *StatusCode) Write(ctx *context.Context, code EUmsError, err error) {
 	me.Code = int(code)
-	
+
 	j, _ := json.Marshal(me)
-	
+
 	ctx.WriteString(string(j))
-	
+
 	beego.Info(string(j), code.ToString(), err)
 }
